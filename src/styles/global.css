@@ -4,6 +4,8 @@
   --color-primary: #d5fb00;
   --color-secondary: #f7f7f7;
   --color-accent: #006400;
-  --color-background: #f9f5f1;
+  --color-background: #0d0e11;
   --background-image-hero-pattern: url("/fondo.jpg");
+
+  --font-sans: "Montserrat Variable", sans-serif;
 }

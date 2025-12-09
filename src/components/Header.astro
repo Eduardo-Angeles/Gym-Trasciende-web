@@ -1,5 +1,8 @@
 ---
 import Menuamburgesa from "./Menuamburgesa.astro";
+import Facebook from "./icons/Facebook.astro";
+import Instagram from "./icons/Instagram.astro";
+import Tiktok from "./icons/Tiktok.astro";
 ---
 
 <header
@@ -31,11 +34,31 @@ translateX(-50%);"
       Reviews
     </a>
   </nav>
-  <a
-    class="hidden rounded-full bg-yellow-500 px-4 py-2 text-lg font-medium text-white hover:saturate-150 md:block"
-    href=""
-  >
-    Contactanos
-  </a>
+  <div class="hidden items-center gap-3 md:flex">
+    <a
+      href="https://facebook.com/tu-pagina"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="border-primary flex h-10 w-10 items-center justify-center rounded-lg border-2 transition-all hover:scale-110 hover:shadow-lg"
+    >
+      <Facebook class="h-5 w-5 text-white" />
+    </a>
+    <a
+      href="https://instagram.com/tu-cuenta"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="border-primary flex h-10 w-10 items-center justify-center rounded-lg border-2 transition-all hover:scale-110 hover:shadow-lg"
+    >
+      <Instagram class="h-5 w-5 text-white" />
+    </a>
+    <a
+      href="https://tiktok.com/@tu-cuenta"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="border-primary flex h-10 w-10 items-center justify-center rounded-lg border-2 transition-all hover:scale-110 hover:shadow-lg"
+    >
+      <Tiktok class="h-5 w-5 text-white" />
+    </a>
+  </div>
   <Menuamburgesa />
 </header>

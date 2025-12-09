@@ -1,0 +1,111 @@
+---
+import SectionContainer from "@components/SectionContainer.astro";
+import Subtitle from "@components/Subtitle.astro";
+---
+
+<SectionContainer>
+  <Subtitle>Acerca de Nosotros</Subtitle>
+  <div class="grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-2 md:p-0">
+    <!-- Artículo 1: Pesas -->
+    <a
+      href="/"
+      class="group relative aspect-square h-full w-full overflow-hidden rounded-2xl bg-gradient-to-r from-[#fef6db] to-[#fce197] font-bold text-white md:col-span-2 md:row-span-1 md:aspect-[16/8]"
+      data-track="blog_selection_process"
+    >
+      <div class="absolute inset-0 overflow-hidden">
+        <img
+          src="/bento-info/bentopesas.jpg"
+          alt=""
+          class="h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
+        />
+      </div>
+      <div
+        class="absolute inset-0 z-10 flex flex-col items-start justify-start p-4"
+      >
+        <span
+          class="tracking-separated pr-3 text-left text-3xl font-medium text-pretty md:max-w-64"
+        >
+          Area de Pesas y Fuerza
+        </span>
+      </div>
+    </a>
+
+    <!-- Artículo 2: Spinning -->
+    <a
+      href="/"
+      class="group relative aspect-square h-full w-full overflow-hidden rounded-2xl bg-gradient-to-r from-[#ffd2d2] to-[#f9b395] text-white md:col-start-3 md:row-span-2 md:h-full"
+      data-track="blog_emerging_jobs"
+    >
+      <div
+        class="absolute inset-0 flex items-start overflow-hidden p-0 md:items-center"
+      >
+        <img
+          src="/bento-info/bentospin.jpg"
+          alt=""
+          class="h-full w-full object-cover object-[center_30%] transition-transform duration-300 ease-in-out group-hover:scale-110 md:object-center"
+        />
+      </div>
+      <div
+        class="absolute inset-0 z-10 flex flex-col items-start justify-start p-4"
+      >
+        <span
+          class="tracking-separated pr-3 text-left text-3xl font-medium text-pretty md:max-w-64"
+        >
+          Descubre nuestros productos
+        </span>
+      </div>
+    </a>
+
+    <!-- Artículo 3: Opinión de las empresas -->
+    <a
+      href="/"
+      class="group md:h-row-span-1 relative aspect-square h-full w-full overflow-hidden rounded-2xl bg-sky-800 text-sky-100"
+      data-track="blog_companies_opinions"
+    >
+      <div
+        class="absolute inset-0 flex items-end justify-end overflow-hidden p-0"
+      >
+        <img
+          src="/bento-info/company-opinion.webp"
+          alt=""
+          class="h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
+        />
+      </div>
+      <div
+        class="absolute inset-0 z-10 flex flex-col items-start justify-start p-4"
+      >
+        <span
+          class="tracking-separated pr-3 text-left text-3xl font-medium text-pretty md:max-w-64"
+        >
+          Lo que Dicen Nuestros Clientes
+        </span>
+      </div>
+    </a>
+
+    <!-- Artículo 4: Sin experiencia -->
+    <a
+      href="/"
+      class="group md:h-row-span-1 relative aspect-square h-full w-full overflow-hidden rounded-2xl bg-gradient-to-r from-[#e6f6ee] to-[#8bcfad] text-green-800 md:h-full"
+      data-track="blog_interview_tips"
+    >
+      <div
+        class="absolute inset-0 flex items-end justify-center overflow-hidden p-0"
+      >
+        <img
+          src="/bento-info/comida.png"
+          alt=""
+          class="mb-4 h-auto w-3/4 object-contain transition-transform duration-300 ease-in-out group-hover:scale-110"
+        />
+      </div>
+      <div
+        class="absolute inset-0 z-10 flex flex-col items-start justify-start p-4"
+      >
+        <span
+          class="tracking-separated pr-3 text-left text-3xl font-medium text-pretty md:max-w-64"
+        >
+          Ideas Dulces: Recetas y Usos de la Miel
+        </span>
+      </div>
+    </a>
+  </div>
+</SectionContainer>
