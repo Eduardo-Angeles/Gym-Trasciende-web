@@ -1,0 +1,41 @@
+---
+import Menuamburgesa from "./Menuamburgesa.astro";
+---
+
+<header
+  class="text-secondary fixed top-0 z-50 mx-auto flex w-full max-w-7xl items-center justify-between px-8 py-4 font-bold backdrop-blur-xl"
+  style="left: 50%; transform:
+translateX(-50%);"
+>
+  <a href="/" class="transition-opacity hover:opacity-80">
+    <img src="/logo2.svg" alt="Gym Trasciende Logo" class="h-[50px] w-auto" />
+  </a>
+
+  <nav class="hidden items-center gap-6 md:flex">
+    <a
+      href="#conocenos"
+      class="text-lg font-medium transition-opacity hover:opacity-80"
+    >
+      Conócenos
+    </a>
+    <a
+      href="#tienda"
+      class="text-lg font-medium transition-opacity hover:opacity-80"
+    >
+      Tienda
+    </a>
+    <a
+      href="#reviews"
+      class="text-lg font-medium transition-opacity hover:opacity-80"
+    >
+      Reviews
+    </a>
+  </nav>
+  <a
+    class="hidden rounded-full bg-yellow-500 px-4 py-2 text-lg font-medium text-white hover:saturate-150 md:block"
+    href=""
+  >
+    Contactanos
+  </a>
+  <Menuamburgesa />
+</header>

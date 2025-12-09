@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Header from "@components/Header.astro";
 ---
 
 <!doctype html>
@@ -7,11 +8,12 @@ import "../styles/global.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 
-    <title>Astro Basics</title>
+    <title>Gym Trasciende | Supera tus limites</title>
   </head>
   <body>
+    <Header />
     <slot />
   </body>
 </html>
