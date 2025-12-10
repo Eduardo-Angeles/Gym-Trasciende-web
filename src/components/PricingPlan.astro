@@ -1,0 +1,44 @@
+---
+/**
+ * PricingPlan - Wrapper Astro para el selector de precios
+ *
+ * Este componente usa Preact para la interactividad.
+ * client:load = Se hidrata inmediatamente al cargar la página
+ * client:visible = Se hidrata cuando entra en viewport (más eficiente)
+ */
+
+import SectionContainer from "./SectionContainer.astro";
+import Subtitle from "./Subtitle.astro";
+import PricingSelector from "./PricingSelector";
+---
+
+<SectionContainer class="py-12 lg:py-16">
+  <Subtitle>Nuestros Planes</Subtitle>
+
+  <div class="mt-8">
+    <!-- 
+      client:visible = Solo se hidrata cuando es visible (mejor rendimiento)
+      Cambia a client:load si quieres que se hidrate inmediatamente
+    -->
+    <PricingSelector client:visible />
+  </div>
+</SectionContainer>
+
+<style>
+  /* Animación personalizada para las tarjetas */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  :global(.animate-fade-in) {
+    animation: fade-in 0.5s ease-out forwards;
+    opacity: 0;
+  }
+</style>
