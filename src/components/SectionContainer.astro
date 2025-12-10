@@ -1,6 +1,58 @@
-<div class="bg-background">
+---
+/**
+ * SectionContainer - Contenedor de secciones flexible con soporte para fondos personalizados
+ *
+ * EJEMPLOS DE USO:
+ *
+ * 1. Fondo por defecto (bg-background):
+ *    <SectionContainer>
+ *      Contenido
+ *    </SectionContainer>
+ *
+ * 2. Fondo de color personalizado:
+ *    <SectionContainer background="bg-white">
+ *      Contenido
+ *    </SectionContainer>
+ *
+ * 3. Fondo con gradiente:
+ *    <SectionContainer background="bg-gradient-to-r from-blue-500 to-purple-600">
+ *      Contenido
+ *    </SectionContainer>
+ *
+ * 4. Fondo con imagen:
+ *    <SectionContainer backgroundImage="/mi-imagen.jpg">
+ *      Contenido
+ *    </SectionContainer>
+ *
+ * 5. Imagen con overlay oscuro:
+ *    <SectionContainer backgroundImage="linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/imagen.jpg')">
+ *      Contenido
+ *    </SectionContainer>
+ */
+
+interface Props {
+  background?: string;
+  backgroundImage?: string;
+  class?: string;
+}
+
+const {
+  background = "bg-background",
+  backgroundImage,
+  class: className,
+} = Astro.props;
+
+const backgroundClass = backgroundImage
+  ? "bg-cover bg-center bg-no-repeat"
+  : background;
+---
+
+<div
+  class={backgroundClass}
+  style={backgroundImage ? { backgroundImage } : undefined}
+>
   <section class="mx-auto w-full max-w-7xl">
-    <div class:list={["mx-auto w-full px-4", Astro.props.class]}>
+    <div class:list={["mx-auto w-full px-4", className]}>
       <slot />
     </div>
   </section>
