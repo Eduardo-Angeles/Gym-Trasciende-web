@@ -192,9 +192,9 @@ export default function PricingSelector() {
       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
 
       {/* Contenido */}
-      <div className="relative z-10 p-6 md:p-12">
+      <div className="relative z-10 p-4 md:p-12">
         {/* Selector de Áreas - Diseño moderno compacto */}
-        <div className="mb-10">
+        <div className="mb-8 md:mb-10">
           <div className="mx-auto max-w-3xl">
             <div className="grid grid-cols-2 gap-3 md:flex md:flex-wrap md:justify-center">
               {areas.map((area) => (
@@ -218,11 +218,11 @@ export default function PricingSelector() {
 
         {/* Tarjetas de Precios - Scroll horizontal en móvil */}
         <div className="relative">
-          <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4 md:grid md:grid-cols-3 md:overflow-visible">
+          <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible">
             {pricingData[selectedArea].map((card, index) => (
               <div
                 key={`${selectedArea}-${index}`}
-                className="group min-w-[280px] flex-shrink-0 snap-center rounded-2xl bg-white/70 p-6 shadow-lg backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:scale-[1.03] hover:bg-gradient-to-br hover:from-emerald-500 hover:to-teal-600 hover:shadow-2xl md:min-w-0"
+                className="group min-w-[250px] max-w-[250px] flex-shrink-0 snap-center rounded-2xl bg-white/70 p-5 shadow-lg backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:scale-[1.03] hover:bg-gradient-to-br hover:from-emerald-500 hover:to-teal-600 hover:shadow-2xl md:min-w-0 md:max-w-none"
                 style={{
                   animation: "fadeInUp 0.8s ease-out",
                   animationDelay: `${index * 100}ms`,

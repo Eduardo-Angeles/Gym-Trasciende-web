@@ -7,60 +7,61 @@ import Tiktok from "./icons/Tiktok.astro";
 
 <header
   id="header-nav"
-  class="text-secondary fixed top-0 z-50 mx-auto flex w-full max-w-7xl items-center justify-between px-8 py-4 font-bold"
-  style="left: 50%; transform: translateX(-50%);"
+  class="text-secondary fixed top-0 z-50 flex w-full items-center justify-between px-8 py-4 font-bold"
 >
-  <a href="/" class="transition-opacity hover:opacity-80">
-    <img src="/logo2.svg" alt="Gym Trasciende Logo" class="h-[50px] w-auto" />
-  </a>
+  <div class="mx-auto flex w-full max-w-7xl items-center justify-between">
+    <a href="/" class="transition-opacity hover:opacity-80">
+      <img src="/logo2.svg" alt="Gym Trasciende Logo" class="h-[50px] w-auto" />
+    </a>
 
-  <nav class="hidden items-center gap-6 md:flex">
-    <a
-      href="#conocenos"
-      class="text-lg font-medium transition-opacity hover:opacity-80"
-    >
-      Conócenos
-    </a>
-    <a
-      href="#tienda"
-      class="text-lg font-medium transition-opacity hover:opacity-80"
-    >
-      Tienda
-    </a>
-    <a
-      href="#reviews"
-      class="text-lg font-medium transition-opacity hover:opacity-80"
-    >
-      Reviews
-    </a>
-  </nav>
-  <div class="hidden items-center gap-3 md:flex">
-    <a
-      href="https://www.facebook.com/profile.php?id=61583792785523"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="border-primary flex h-10 w-10 items-center justify-center rounded-lg border-2 transition-all hover:scale-110 hover:shadow-lg"
-    >
-      <Facebook class="h-5 w-5 text-white" />
-    </a>
-    <a
-      href="https://www.instagram.com/trasciendegym?igsh=MmJxaHRjM2w2cG1p"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="border-primary flex h-10 w-10 items-center justify-center rounded-lg border-2 transition-all hover:scale-110 hover:shadow-lg"
-    >
-      <Instagram class="h-5 w-5 text-white" />
-    </a>
-    <a
-      href="https://www.tiktok.com/@trasciende.gym"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="border-primary flex h-10 w-10 items-center justify-center rounded-lg border-2 transition-all hover:scale-110 hover:shadow-lg"
-    >
-      <Tiktok class="h-5 w-5 text-white" />
-    </a>
+    <nav class="hidden items-center gap-6 md:flex">
+      <a
+        href="#conocenos"
+        class="text-lg font-medium transition-opacity hover:opacity-80"
+      >
+        Conócenos
+      </a>
+      <a
+        href="#tienda"
+        class="text-lg font-medium transition-opacity hover:opacity-80"
+      >
+        Tienda
+      </a>
+      <a
+        href="#reviews"
+        class="text-lg font-medium transition-opacity hover:opacity-80"
+      >
+        Reviews
+      </a>
+    </nav>
+    <div class="hidden items-center gap-3 md:flex">
+      <a
+        href="https://www.facebook.com/profile.php?id=61583792785523"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="border-primary flex h-10 w-10 items-center justify-center rounded-lg border-2 transition-all hover:scale-110 hover:shadow-lg"
+      >
+        <Facebook class="h-5 w-5 text-white" />
+      </a>
+      <a
+        href="https://www.instagram.com/trasciendegym?igsh=MmJxaHRjM2w2cG1p"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="border-primary flex h-10 w-10 items-center justify-center rounded-lg border-2 transition-all hover:scale-110 hover:shadow-lg"
+      >
+        <Instagram class="h-5 w-5 text-white" />
+      </a>
+      <a
+        href="https://www.tiktok.com/@trasciende.gym"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="border-primary flex h-10 w-10 items-center justify-center rounded-lg border-2 transition-all hover:scale-110 hover:shadow-lg"
+      >
+        <Tiktok class="h-5 w-5 text-white" />
+      </a>
+    </div>
+    <Menuamburgesa />
   </div>
-  <Menuamburgesa />
 </header>
 
 <style>
