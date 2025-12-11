@@ -222,7 +222,7 @@ export default function PricingSelector() {
             {pricingData[selectedArea].map((card, index) => (
               <div
                 key={`${selectedArea}-${index}`}
-                className="group min-w-[250px] max-w-[250px] flex-shrink-0 snap-center rounded-2xl bg-white/70 p-5 shadow-lg backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:scale-[1.03] hover:bg-gradient-to-br hover:from-emerald-500 hover:to-teal-600 hover:shadow-2xl md:min-w-0 md:max-w-none"
+                className="group max-w-[250px] min-w-[250px] flex-shrink-0 snap-center rounded-2xl bg-white/70 p-5 shadow-lg backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:scale-[1.03] hover:bg-gradient-to-br hover:from-emerald-500 hover:to-teal-600 hover:shadow-2xl active:scale-[0.98] md:max-w-none md:min-w-0 md:hover:-translate-y-2 md:hover:scale-[1.03]"
                 style={{
                   animation: "fadeInUp 0.8s ease-out",
                   animationDelay: `${index * 100}ms`,
@@ -278,7 +278,7 @@ export default function PricingSelector() {
                 </ul>
 
                 {/* Botón CTA */}
-                <button className="w-full rounded-lg bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-3 font-semibold text-white transition-all duration-300 group-hover:bg-white group-hover:from-white group-hover:to-white group-hover:text-emerald-700 hover:scale-105 hover:shadow-lg">
+                <button className="w-full rounded-lg bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-3 font-semibold text-white transition-all duration-300 group-hover:bg-white group-hover:from-white group-hover:to-white group-hover:text-emerald-700 hover:scale-105 hover:shadow-lg active:scale-95">
                   Inscribirme
                 </button>
               </div>
