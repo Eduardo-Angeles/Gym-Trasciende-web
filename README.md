@@ -1,46 +1,67 @@
-# Astro Starter Kit: Basics
+# 💪 Gym Trasciende - Website
 
-```sh
-pnpm create astro@latest -- --template basics
+> Sitio web moderno para Gym Trasciende. Construido con Astro 5, Tailwind CSS 4, y Preact para máxima performance y experiencia de usuario.
+
+[![Astro 5](https://img.shields.io/badge/Astro-5.16.4-FF5D01?style=flat&logo=astro&logoColor=white)](https://astro.build)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.1.17-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![Preact](https://img.shields.io/badge/Preact-10.28.0-673AB8?style=flat&logo=preact&logoColor=white)](https://preactjs.com)
+
+## ✨ Características
+
+- **🚀 Performance Optimizada** - Astro 5 con renderizado estático para carga ultrarrápida
+- **🎨 Diseño Moderno** - Tailwind CSS 4 con tema personalizado y gradientes dinámicos
+- **📱 100% Responsive** - Diseño mobile-first con unidades `dvh` para mejor experiencia móvil
+- **⚡ View Transitions** - Navegación SPA suave con `<ClientRouter />` de Astro
+- **🎯 Interactividad Selectiva** - Islands Architecture con componentes Preact hidratados bajo demanda
+- **♿ Accesible** - Route announcer automático y respeto por `prefers-reduced-motion`
+- **🎭 Efectos Visuales** - Parallax backgrounds, clip-paths personalizados, y tap effects
+- **🌗 Dark Mode Only** - Diseño consistente con colores de marca
+
+## 🚀 Comandos
+
+```bash
+# Instalar dependencias
+pnpm install
+
+# Desarrollo local en localhost:4321
+pnpm dev
+
+# Build de producción
+pnpm build
+
+# Preview del build
+pnpm preview
+
+# Verificar el proyecto
+pnpm astro check
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🔧 Stack Tecnológico
 
-## 🚀 Project Structure
+### Core
+- **Astro 5.16.4** - Framework SSG con Islands Architecture
+- **Tailwind CSS 4.1.17** - Utility-first CSS framework
+- **Preact 10.28.0** - Alternativa ligera a React (3KB)
 
-Inside of your Astro project, you'll see the following folders and files:
+### Librerías
+- **@fontsource-variable/montserrat** - Tipografía variable
+- **keen-slider 6.8.6** - Carrusel de reviews
+- **countup.js** - Animación de contadores
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+## 🎨 Tema
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+### Colores de Marca
+- **Primary**: `#d5fb00` - Verde lima vibrante
+- **Secondary**: `#f7f7f7` - Gris claro
+- **Accent**: `#006400` - Verde oscuro
 
-## 🧞 Commands
+### Tipografía
+- **Font**: Montserrat Variable
 
-All commands are run from the root of the project, from a terminal:
+## 📄 Licencia
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+© 2025 Gym Trasciende. Todos los derechos reservados.
 
-## 👀 Want to learn more?
+---
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+**Desarrollado con** ❤️ **usando Astro, Tailwind CSS y Preact**
