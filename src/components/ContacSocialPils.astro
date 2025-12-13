@@ -1,0 +1,72 @@
+---
+import SocialPil from "../components/SocialPil.astro";
+import Gmail from "../components/icons/Gmail.astro";
+import Facebook from "./icons/Facebook.astro";
+import Instagram from "./icons/Instagram.astro";
+import Phone from "./icons/Phone.astro";
+import Tiktok from "./icons/Tiktok.astro";
+import Yelp from "./icons/Yelp.astro";
+---
+
+<nav class="mt-8 flex flex-wrap justify-center gap-x-4 gap-y-4">
+  <SocialPil
+    href="https://www.facebook.com/profile.php?id=61583792785523"
+    class={` 
+              border border-blue-400 rounded-full 
+              flex justify-center items-center gap-x-2 
+              py-2 px-4
+              transition 
+              hover:scale-110
+              bg-blue-400 hover:bg-blue-600
+            `}
+  >
+    <Facebook class="size-6" />
+    Facebook
+  </SocialPil>
+
+  <SocialPil
+    href="https://www.instagram.com/trasciendegym?igsh=MmJxaHRjM2w2cG1p"
+    class={` 
+              border border-orange-400 rounded-full 
+              flex justify-center items-center gap-x-2 
+              py-2 px-4
+              transition 
+              hover:scale-110
+              bg-orange-400 hover:bg-orange-600
+            `}
+  >
+    <Instagram class="size-6" />
+    Instagram
+  </SocialPil>
+
+  <SocialPil
+    href="https://www.tiktok.com/@trasciende.gym"
+    class={` 
+              border border-black rounded-full 
+              flex justify-center items-center gap-x-2 
+              py-2 px-4
+              transition 
+              hover:scale-110
+              bg-gray-700 hover:bg-gray-400
+              text-white
+            `}
+  >
+    <Tiktok class="size-6" />
+    Tiktok
+  </SocialPil>
+
+  <SocialPil
+    href="tel:+18623184425"
+    class={` 
+              border border-green-400 rounded-full 
+              flex justify-center items-center gap-x-2 
+              py-2 px-4
+              transition 
+              hover:scale-110
+              bg-green-400 hover:bg-green-600
+            `}
+  >
+    <Phone class="size-6" />
+    Whatsapp
+  </SocialPil>
+</nav>
