@@ -3,6 +3,20 @@ import "../styles/global.css";
 import "@fontsource-variable/montserrat";
 
 import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Gym Trasciende | Supera tus limites",
+  description = "No solo somos un gimnasio; somos tu socio en la transformación. Nuestra meta principal es que alcances tus objetivos de fitness de la mejor forma posible y sin riesgos. Creemos que el verdadero progreso es sostenible y seguro.",
+} = Astro.props;
+
+const image = "https://strong-nasturtium-2ec0f6.netlify.app/logo.jpg";
+const url = "https://strong-nasturtium-2ec0f6.netlify.app/";
 ---
 
 <!doctype html>
@@ -12,40 +26,27 @@ import Header from "@components/Header.astro";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 
-    <title>Gym Trasciende | Supera tus limites</title>
+    <title>{title}</title>
+    <meta name="description" content={description} />
 
     <meta name="theme-color" content="#232900" />
 
     <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="Gym Trasciende | Supera tus limites" />
-    <meta
-      property="og:description"
-      content="No solo somos un gimnasio; somos tu socio en la transformación. Nuestra meta principal es que alcances tus objetivos de fitness de la mejor forma posible y sin riesgos. Creemos que el verdadero progreso es sostenible y seguro."
-    />
-    <meta
-      property="og:image"
-      content="https://strong-nasturtium-2ec0f6.netlify.app/logo.jpg"
-    />
-    <meta
-      property="og:url"
-      content="https://strong-nasturtium-2ec0f6.netlify.app/"
-    />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={url} />
     <meta property="og:type" content="website" />
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Gym Trasciende | Supera tus limites" />
-    <meta
-      name="twitter:description"
-      content="No solo somos un gimnasio; somos tu socio en la transformación. Nuestra meta principal es que alcances tus objetivos de fitness de la mejor forma posible y sin riesgos."
-    />
-    <meta
-      name="twitter:image"
-      content="https://strong-nasturtium-2ec0f6.netlify.app/logo.jpg"
-    />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
   </head>
   <body>
     <Header />
     <slot />
+    <Footer />
   </body>
 </html>

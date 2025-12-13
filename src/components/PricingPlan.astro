@@ -12,7 +12,11 @@ import Subtitle from "./Subtitle.astro";
 import PricingSelector from "./PricingSelector";
 ---
 
-<SectionContainer class="py-12 lg:py-16">
+<SectionContainer
+  backgroundImage="linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('/precios.jpg')"
+  fixedBackground={true}
+  class="py-12 lg:py-16"
+>
   <Subtitle>Nuestros Planes y Precios</Subtitle>
 
   <div class="mt-8">

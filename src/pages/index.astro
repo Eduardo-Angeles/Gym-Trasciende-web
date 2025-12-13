@@ -2,19 +2,20 @@
 import BentoInfo from "@components/BentoInfo.astro";
 import Hero from "@components/Hero.astro";
 import Layout from "@layouts/Layout.astro";
-import Footer from "@components/Footer.astro";
 import About from "@components/About.astro";
 import Reviews from "@components/Reviews.astro";
 import PrecingPlan from "@components/PricingPlan.astro";
 import TrustMetrics from "@components/TrustMetrics.astro";
 ---
 
-<Layout>
+<Layout
+  title="Gym Trasciende | Supera tus límites"
+  description="No solo somos un gimnasio; somos tu socio en la transformación. Nuestra meta principal es que alcances tus objetivos de fitness de la mejor forma posible y sin riesgos. Creemos que el verdadero progreso es sostenible y seguro."
+>
   <Hero />
   <BentoInfo />
   <TrustMetrics />
   <About />
   <Reviews />
   <PrecingPlan />
-  <Footer />
 </Layout>

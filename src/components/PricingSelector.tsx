@@ -33,27 +33,27 @@ interface PricingCard {
   features: string[];
 }
 
-// Configuración de áreas - Gradientes más oscuros para mejor contraste
+// Configuración de áreas - Degradados vivos y transparentes
 const areas: Area[] = [
   {
     id: "area1",
     name: "Área de Pesas",
-    gradient: "from-emerald-800 via-teal-900 to-cyan-950",
+    gradient: "from-gray-900/50 via-emerald-600/60 to-gray-900/50",
   },
   {
     id: "area2",
     name: "Área de Spinning",
-    gradient: "from-teal-800 via-cyan-900 to-blue-950",
+    gradient: "from-gray-900/50 via-teal-600/60 to-gray-900/50",
   },
   {
     id: "area3",
     name: "Adultos Mayores",
-    gradient: "from-cyan-800 via-teal-900 to-emerald-950",
+    gradient: "from-gray-900/50 via-cyan-600/60 to-gray-900/50",
   },
   {
     id: "area4",
     name: "Promociones Fin de Año",
-    gradient: "from-green-800 via-emerald-900 to-teal-950",
+    gradient: "from-emerald-600/60 via-teal-600/60 to-cyan-600/60",
   },
 ];
 
@@ -203,8 +203,8 @@ export default function PricingSelector() {
                   onClick={() => setSelectedArea(area.id)}
                   className={`group relative overflow-hidden rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-500 md:px-6 md:py-3 md:text-base ${
                     selectedArea === area.id
-                      ? "bg-white text-gray-900 shadow-lg"
-                      : "bg-white/15 text-white backdrop-blur-sm hover:bg-white/25"
+                      ? "bg-primary shadow-primary/50 scale-105 text-gray-900 shadow-lg"
+                      : "bg-white/80 text-gray-900 backdrop-blur-sm hover:bg-white/90"
                   }`}
                 >
                   {/* Efecto de brillo en hover */}
@@ -222,7 +222,7 @@ export default function PricingSelector() {
             {pricingData[selectedArea].map((card, index) => (
               <div
                 key={`${selectedArea}-${index}`}
-                className="group max-w-[250px] min-w-[250px] flex-shrink-0 snap-center rounded-2xl bg-white/70 p-5 shadow-lg backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:scale-[1.03] hover:bg-gradient-to-br hover:from-emerald-500 hover:to-teal-600 hover:shadow-2xl active:scale-[0.98] md:max-w-none md:min-w-0 md:hover:-translate-y-2 md:hover:scale-[1.03]"
+                className="group max-w-[250px] min-w-[250px] flex-shrink-0 snap-center rounded-2xl bg-white/85 p-5 shadow-lg backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:scale-[1.03] hover:bg-gradient-to-br hover:from-emerald-500/90 hover:to-teal-600/90 hover:shadow-2xl active:scale-[0.98] md:max-w-none md:min-w-0 md:hover:-translate-y-2 md:hover:scale-[1.03]"
                 style={{
                   animation: "fadeInUp 0.8s ease-out",
                   animationDelay: `${index * 100}ms`,
