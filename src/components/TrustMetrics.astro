@@ -1,0 +1,36 @@
+---
+import { CountUp } from "./CountUp.tsx";
+import Subtitle from "./Subtitle.astro";
+import SectionContainer from "./SectionContainer.astro";
+---
+
+<SectionContainer class="py-16 md:py-20">
+  <Subtitle>Experiencia y Resultados</Subtitle>
+
+  <div class="grid grid-cols-1 gap-y-10 lg:grid-cols-3">
+    <div class="text-primary flex flex-col items-center justify-center">
+      <span class="number text-7xl font-bold tracking-tighter tabular-nums">
+        <CountUp client:visible initial={0} final={5.0} decimals={1} />
+      </span>
+      <span class="text-secondary items-center uppercase opacity-70"
+        >Stars Reviews!</span
+      >
+    </div>
+
+    <div class="text-primary flex flex-col items-center justify-center">
+      <span class="number text-7xl font-bold tracking-tighter tabular-nums">
+        +<CountUp client:visible initial={0} final={450} />
+      </span>
+      <span class="text-secondary uppercase opacity-70">Miembros Activos</span>
+    </div>
+
+    <div class="text-primary flex flex-col items-center justify-center">
+      <span class="number text-7xl font-bold tracking-tighter tabular-nums">
+        +<CountUp client:visible initial={0} final={5} />
+      </span>
+      <span class="text-secondary uppercase opacity-70"
+        >Años de Experiencia</span
+      >
+    </div>
+  </div>
+</SectionContainer>
