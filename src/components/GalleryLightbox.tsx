@@ -21,6 +21,7 @@ export default function GalleryLightbox({
   images,
 }: GalleryLightboxProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false); // Para controlar animaciones
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
@@ -34,6 +35,8 @@ export default function GalleryLightbox({
       if (index !== undefined) {
         setCurrentIndex(parseInt(index, 10));
         setIsOpen(true);
+        // Activar animación después de que el DOM se actualice
+        setTimeout(() => setIsAnimating(true), 10);
         document.body.style.overflow = "hidden"; // Bloquea scroll del body
       }
     };
@@ -52,10 +55,14 @@ export default function GalleryLightbox({
     };
   }, []);
 
-  // CERRAR LIGHTBOX
+  // CERRAR LIGHTBOX con animación
   const closeLightbox = () => {
-    setIsOpen(false);
-    document.body.style.overflow = ""; // Restaura scroll
+    setIsAnimating(false); // Inicia animación de salida
+    // Espera a que termine la animación antes de cerrar
+    setTimeout(() => {
+      setIsOpen(false);
+      document.body.style.overflow = ""; // Restaura scroll
+    }, 300); // Debe coincidir con la duración de la transición CSS
   };
 
   // NAVEGACIÓN: Imagen anterior
@@ -80,7 +87,8 @@ export default function GalleryLightbox({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, currentIndex]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   // TOUCH: Swipe para navegar en móviles
   const handleTouchStart = (e: TouchEvent) => {
@@ -109,7 +117,9 @@ export default function GalleryLightbox({
 
   return (
     <div
-      class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm"
+      class={`fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md transition-opacity duration-300 ${
+        isAnimating ? "opacity-100" : "opacity-0"
+      }`}
       onClick={closeLightbox}
       role="dialog"
       aria-modal="true"
@@ -118,7 +128,9 @@ export default function GalleryLightbox({
       {/* BOTÓN CERRAR (X) */}
       <button
         onClick={closeLightbox}
-        class="absolute top-4 right-4 z-10 rounded-full bg-white/10 p-2 transition-colors hover:bg-white/20"
+        class={`absolute top-4 right-4 z-10 rounded-full bg-white/10 p-2 transition-all duration-300 hover:bg-white/20 ${
+          isAnimating ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0"
+        }`}
         aria-label="Cerrar visor de imágenes"
         type="button"
       >
@@ -140,7 +152,11 @@ export default function GalleryLightbox({
       </button>
 
       {/* CONTADOR: Imagen X de Y */}
-      <div class="absolute top-4 left-4 z-10 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-md">
+      <div
+        class={`absolute top-4 left-4 z-10 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-md transition-all duration-300 ${
+          isAnimating ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0"
+        }`}
+      >
         {currentIndex + 1} / {images.length}
       </div>
 
@@ -150,7 +166,9 @@ export default function GalleryLightbox({
           e.stopPropagation();
           goToPrevious();
         }}
-        class="absolute left-4 z-10 hidden rounded-full bg-white/10 p-3 transition-colors hover:bg-white/20 md:block"
+        class={`absolute left-4 z-10 hidden rounded-full bg-white/10 p-3 transition-all duration-300 hover:bg-white/20 md:block ${
+          isAnimating ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"
+        }`}
         aria-label="Imagen anterior"
         type="button"
       >
@@ -173,7 +191,9 @@ export default function GalleryLightbox({
 
       {/* IMAGEN PRINCIPAL */}
       <div
-        class="relative mx-4 max-h-[90vh] max-w-7xl"
+        class={`relative mx-4 max-h-[90vh] max-w-7xl transition-all duration-300 ${
+          isAnimating ? "scale-100 opacity-100" : "scale-95 opacity-0"
+        }`}
         onClick={(e) => e.stopPropagation()}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -199,7 +219,9 @@ export default function GalleryLightbox({
           e.stopPropagation();
           goToNext();
         }}
-        class="absolute right-4 z-10 hidden rounded-full bg-white/10 p-3 transition-colors hover:bg-white/20 md:block"
+        class={`absolute right-4 z-10 hidden rounded-full bg-white/10 p-3 transition-all duration-300 hover:bg-white/20 md:block ${
+          isAnimating ? "translate-x-0 opacity-100" : "translate-x-4 opacity-0"
+        }`}
         aria-label="Imagen siguiente"
         type="button"
       >
@@ -221,7 +243,11 @@ export default function GalleryLightbox({
       </button>
 
       {/* INDICADORES DE NAVEGACIÓN MÓVIL (solo en touch devices) */}
-      <div class="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2 md:hidden">
+      <div
+        class={`absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2 transition-all duration-300 md:hidden ${
+          isAnimating ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+        }`}
+      >
         <button
           onClick={(e) => {
             e.stopPropagation();

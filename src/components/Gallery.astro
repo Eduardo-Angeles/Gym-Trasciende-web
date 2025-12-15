@@ -4,104 +4,139 @@ import GalleryLightbox from "./GalleryLightbox.tsx";
 import SectionContainer from "./SectionContainer.astro";
 import Subtitle from "./Subtitle.astro";
 
+// Interface TypeScript para las imágenes de la galería
+interface GalleryImage {
+  src: string;
+  alt: string;
+  category: string;
+  size: "normal" | "tall" | "wide" | "big";
+}
+
 // CONFIGURACIÓN DE IMÁGENES
 // Aquí defines todas las fotos de la galería
 // Cambia las rutas y añade/elimina según necesites
-const galleryImages = [
+const galleryImages: GalleryImage[] = [
   {
     src: "/gallery/gym-1.jpg",
     alt: "Área de entrenamiento con pesas",
-    category: "instalaciones" // Categorías opcionales para futuros filtros
+    category: "instalaciones",
+    size: "normal" // normal (1x1), tall (1x2), wide (2x1), big (2x2)
   },
   {
     src: "/gallery/gym-2.jpg",
     alt: "Zona de cardio con máquinas modernas",
-    category: "instalaciones"
+    category: "instalaciones",
+    size: "tall" // Vertical
   },
   {
     src: "/gallery/gym-3.jpg",
     alt: "Clase grupal de entrenamiento",
-    category: "clases"
+    category: "clases",
+    size: "normal"
   },
   {
     src: "/gallery/gym-4.jpg",
     alt: "Cliente mostrando progreso de transformación",
-    category: "transformaciones"
+    category: "transformaciones",
+    size: "wide" // Horizontal
   },
   {
     src: "/gallery/gym-5.jpg",
     alt: "Área de funcional training",
-    category: "instalaciones"
+    category: "instalaciones",
+    size: "normal"
   },
   {
     src: "/gallery/gym-6.jpg",
     alt: "Entrenamiento personalizado",
-    category: "clases"
+    category: "clases",
+    size: "tall" // Vertical
   },
   {
     src: "/gallery/gym-7.jpg",
     alt: "Instalaciones del gimnasio",
-    category: "instalaciones"
+    category: "instalaciones",
+    size: "normal"
   },
   {
     src: "/gallery/gym-8.jpg",
     alt: "Equipo de entrenamiento",
-    category: "instalaciones"
+    category: "instalaciones",
+    size: "normal"
   },
   {
     src: "/gallery/gym-9.jpg",
     alt: "Sesión de entrenamiento",
-    category: "clases"
+    category: "clases",
+    size: "wide" // Horizontal
   },
   {
     src: "/gallery/gym-10.jpg",
     alt: "Área de entrenamiento funcional",
-    category: "instalaciones"
+    category: "instalaciones",
+    size: "normal"
   },
   {
     src: "/gallery/gym-11.jpg",
     alt: "Entrenamiento en grupo",
-    category: "clases"
+    category: "clases",
+    size: "normal"
   },
   {
     src: "/gallery/gym-12.jpg",
     alt: "Espacio de entrenamiento",
-    category: "instalaciones"
+    category: "instalaciones",
+    size: "normal"
   },
 ];
 
 // CONFIGURACIÓN DE DISEÑO
 // Ajusta estos valores para cambiar la apariencia del grid
-const gridConfig = {
-  cols: "grid-cols-2 md:grid-cols-3 lg:grid-cols-4", // Columnas responsive
+const gridConfig: Record<string, string> = {
+  cols: "grid-cols-2 md:grid-cols-4", // Columnas responsive (2 móvil, 4 desktop)
+  rows: "auto-rows-[250px]", // Altura base de cada celda
   gap: "gap-4", // Espacio entre imágenes
-  aspectRatio: "aspect-square", // Puedes cambiar a aspect-video, aspect-4/3, etc.
+  flow: "grid-flow-dense", // Rellena espacios automáticamente
   roundedCorners: "rounded-lg", // Esquinas redondeadas
   hoverEffect: "hover:scale-105", // Efecto al pasar el mouse
   transition: "transition-transform duration-300 ease-out"
 };
+
+// Obtener clases de tamaño según el tipo (solo aplica en desktop md+)
+const getSizeClasses = (size: GalleryImage["size"]): string => {
+  switch (size) {
+    case "tall":
+      return "md:row-span-2"; // Ocupa 2 filas (vertical)
+    case "wide":
+      return "md:col-span-2"; // Ocupa 2 columnas (horizontal)
+    case "big":
+      return "md:col-span-2 md:row-span-2"; // Ocupa 2x2 (grande)
+    default:
+      return ""; // Tamaño normal (1x1)
+  }
+};
 ---
 <!-- Sección de Galería -->
-  <SectionContainer>
+<SectionContainer class="py-16 md:py-20">
+  <div class="space-y-6 md:space-y-8">
     <Subtitle>
       Nuestra <span class="text-primary">Galería</span>
     </Subtitle>
-  
 
-<section class="w-full">
-  <!-- Grid de imágenes (SSR, carga instantánea) -->
-  <div class={`grid ${gridConfig.cols} ${gridConfig.gap}`}>
+  <section class="w-full">
+  <!-- Grid de imágenes con tamaños variados (SSR, carga instantánea) -->
+  <div class:list={["grid", gridConfig.cols, gridConfig.rows, gridConfig.flow, gridConfig.gap]}>
     {galleryImages.map((image, index) => (
       <button
         type="button"
-        class={`
-          relative overflow-hidden cursor-pointer
-          ${gridConfig.aspectRatio}
-          ${gridConfig.roundedCorners}
-          ${gridConfig.transition}
-          ${gridConfig.hoverEffect}
-          focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-black
-        `}
+        class:list={[
+          "relative overflow-hidden cursor-pointer",
+          "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-black",
+          getSizeClasses(image.size),
+          gridConfig.roundedCorners,
+          gridConfig.transition,
+          gridConfig.hoverEffect,
+        ]}
         data-gallery-trigger
         data-image-index={index}
         aria-label={`Abrir imagen: ${image.alt}`}
@@ -128,8 +163,8 @@ const gridConfig = {
     client:idle
     images={galleryImages}
   />
-</section>
-
+  </section>
+  </div>
 </SectionContainer>
 
 <!-- 
