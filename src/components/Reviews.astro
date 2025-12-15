@@ -1,50 +1,52 @@
 ---
 import Subtitle from "./Subtitle.astro";
 import SectionContainer from "./SectionContainer.astro";
+import GoogleLogo from "./icons/GoogleLogo.astro";
+import FacebookLogo from "./icons/FacebookLogo.astro";
+
+// URLs de enlaces externos
+const GOOGLE_MAPS_URL =
+  "https://www.google.com/maps/place/TRASCIENDE+GYM/@16.796545,-96.676601,17z/data=!4m6!3m5!1s0x85c741a017d0319f:0x6572de728b9487d3!8m2!3d16.79653!4d-96.676603!16s%2Fg%2F11yq2xq4sb?hl=es-419&entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D";
+const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61583792785523";
 
 interface Review {
   name: string;
   image: string;
-  starColor: string;
-  nameColor: string;
   testimonial: string;
+  platform: "google" | "facebook";
 }
 
 const reviews: Review[] = [
   {
-    name: "María González",
-    image: "/review1.webp",
-    starColor: "text-emerald-400",
-    nameColor: "text-emerald-400",
+    name: "Mar",
+    image: "/reviewmar.png",
     testimonial:
-      "¡Los entrenadores están súper capacitados y las instalaciones son de primera. Llevo 6 meses entrenando y los resultados son evidentes. Totalmente recomendado para quien busca un gimnasio serio.",
+      "Buen ambiente, muy completo. Son muy amables y están atentos. Recomiendo ampliamente, además es el único gym con guardería que conozco. 🤩",
+    platform: "google",
   },
   {
     name: "Carlos Rodríguez",
     image: "/review2.webp",
-    starColor: "text-emerald-400",
-    nameColor: "text-emerald-400",
-    testimonial:
-      "Llevo 8 meses y es el mejor gimnasio donde he estado. Las clases de spinning son mi favoritas y el área de pesas tiene todo lo que necesitas. Los instructores siempre están atentos a corregir tu postura.",
+    testimonial: "Me encantó el lugar, es muy bonito y todos muy amables",
+    platform: "google",
   },
   {
-    name: "Laura Fernández",
-    image: "/review3.webp",
-    starColor: "text-emerald-400",
-    nameColor: "text-emerald-400",
+    name: "Alo",
+    image: "/alo.png",
     testimonial:
       "Me encanta entrenar en Gym Trasciende. El ambiente es motivador, las máquinas están siempre en perfecto estado y los horarios son súper flexibles. He logrado mis objetivos gracias al apoyo de los entrenadores.",
+    platform: "facebook",
   },
   {
     name: "Ana Patricia Morales",
     image: "/review4.webp",
-    starColor: "text-emerald-400",
-    nameColor: "text-emerald-400",
     testimonial:
       "Descubrí Gym Trasciende por recomendación y ahora no puedo parar de entrenar aquí. Las instalaciones son limpias, modernas y el personal es muy amable. He mejorado mi condición física y mi salud. Muy recomendado.",
+    platform: "facebook",
   },
 ];
 
+// Path SVG para estrellas de rating
 const starPath =
   "M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z";
 ---
@@ -56,11 +58,9 @@ const starPath =
 
 <style>
   /* Permitir que las imágenes de perfil sobresalgan de las tarjetas */
-  #keen-slider.keen-slider {
-    overflow: visible !important;
-  }
+  #keen-slider.keen-slider,
   #keen-slider .keen-slider__slide {
-    overflow: visible !important;
+    overflow: visible;
   }
 </style>
 
@@ -68,9 +68,6 @@ const starPath =
   import KeenSlider from "https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/+esm";
 
   function setupKeenSlider() {
-    const keenSliderActive = document.getElementById("keen-slider-active");
-    const keenSliderCount = document.getElementById("keen-slider-count");
-
     const keenSlider = new KeenSlider(
       "#keen-slider",
       {
@@ -110,9 +107,6 @@ const starPath =
           slider.slides[slider.track.details.rel].classList.remove(
             "opacity-40",
           );
-
-          keenSliderActive.innerText = slider.track.details.rel + 1;
-          keenSliderCount.innerText = slider.slides.length;
         },
         slideChanged(slider) {
           slider.slides.forEach((slide) => slide.classList.add("opacity-40"));
@@ -120,8 +114,6 @@ const starPath =
           slider.slides[slider.track.details.rel].classList.remove(
             "opacity-40",
           );
-
-          keenSliderActive.innerText = slider.track.details.rel + 1;
         },
       },
       [],
@@ -130,8 +122,8 @@ const starPath =
     const keenSliderPrevious = document.getElementById("keen-slider-previous");
     const keenSliderNext = document.getElementById("keen-slider-next");
 
-    keenSliderPrevious.addEventListener("click", () => keenSlider.prev());
-    keenSliderNext.addEventListener("click", () => keenSlider.next());
+    keenSliderPrevious?.addEventListener("click", () => keenSlider.prev());
+    keenSliderNext?.addEventListener("click", () => keenSlider.next());
   }
 
   document.addEventListener("astro:page-load", setupKeenSlider);
@@ -147,31 +139,57 @@ const starPath =
         reviews.map((review) => (
           <div class="keen-slider__slide overflow-visible opacity-40 transition-opacity duration-500">
             <blockquote class="relative rounded-lg bg-gray-900/80 p-6 pt-16 shadow-sm backdrop-blur-md sm:p-8 sm:pt-20">
+              {/* Imagen de perfil del reviewer */}
               <img
-                alt=""
+                alt={`Foto de perfil de ${review.name}`}
                 src={review.image}
                 class="absolute top-0 left-1/2 size-24 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-gray-900/80 object-cover shadow-lg sm:size-28"
               />
 
               <div class="text-center">
-                <div class={`flex justify-center gap-0.5 ${review.starColor}`}>
-                  {[...Array(5)].map(() => (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path d={starPath} />
-                    </svg>
-                  ))}
+                {/* Badge de plataforma + Rating de estrellas */}
+                <div class="flex items-center justify-center gap-2">
+                  {/* Badge indicador de plataforma de origen */}
+                  <div
+                    class={`rounded-full p-1.5 ${
+                      review.platform === "google"
+                        ? "bg-gray-800/80 ring-2 ring-blue-500/50"
+                        : "bg-gray-800/80 ring-2 ring-blue-600/50"
+                    }`}
+                  >
+                    {review.platform === "google" ? (
+                      <GoogleLogo />
+                    ) : (
+                      <FacebookLogo />
+                    )}
+                  </div>
+
+                  {/* Rating de 5 estrellas */}
+                  <div
+                    class="flex gap-0.5 text-emerald-400"
+                    role="img"
+                    aria-label="5 estrellas"
+                  >
+                    {[...Array(5)].map(() => (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="size-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path d={starPath} />
+                      </svg>
+                    ))}
+                  </div>
                 </div>
 
-                <p class={`mt-2 text-xl font-semibold ${review.nameColor}`}>
+                {/* Nombre del reviewer */}
+                <p class="mt-2 text-xl font-semibold text-emerald-400">
                   {review.name}
                 </p>
               </div>
 
+              {/* Testimonio */}
               <p class="mt-4 text-center text-gray-200">{review.testimonial}</p>
             </blockquote>
           </div>
@@ -179,19 +197,24 @@ const starPath =
       }
     </div>
 
-    <div class="mt-6 flex items-center justify-center gap-4">
+    {/* Controles de navegación y enlaces externos */}
+    <div
+      class="mt-8 flex flex-wrap items-center justify-center gap-4 md:flex-nowrap"
+    >
+      {/* Botón anterior */}
       <button
-        aria-label="Previous slide"
+        aria-label="Ver reseña anterior"
         id="keen-slider-previous"
-        class="text-secondary hover:text-primary transition-colors"
+        class="group border-secondary/20 hover:border-primary hover:bg-primary/10 order-1 flex size-12 items-center justify-center rounded-full border-2 bg-gray-900/50 backdrop-blur-sm transition-all duration-300 hover:scale-110 active:scale-95 md:order-0"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
-          stroke-width="1.5"
+          stroke-width="2.5"
           stroke="currentColor"
-          class="size-5"
+          class="text-secondary group-hover:text-primary size-5 transition-colors"
+          aria-hidden="true"
         >
           <path
             stroke-linecap="round"
@@ -200,29 +223,58 @@ const starPath =
         </svg>
       </button>
 
-      <p class="text-secondary w-16 text-center text-sm">
-        <span id="keen-slider-active"></span>
-        /
-        <span id="keen-slider-count"></span>
-      </p>
+      {/* Enlaces a perfiles de Google y Facebook */}
+      <div
+        class="border-secondary/20 order-3 flex h-12 w-full items-center justify-center gap-1 rounded-full border bg-gray-900/50 px-1 backdrop-blur-sm md:order-0 md:w-auto"
+      >
+        <a
+          href={GOOGLE_MAPS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group/google flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-2 transition-all duration-300 hover:bg-blue-500/10 md:flex-none"
+          aria-label="Ver más reseñas en Google Maps"
+        >
+          <GoogleLogo />
+          <span
+            class="text-secondary group-hover/google:text-primary text-sm font-medium transition-colors"
+            >Google</span
+          >
+        </a>
 
+        <div class="bg-secondary/20 h-6 w-px" aria-hidden="true"></div>
+
+        <a
+          href={FACEBOOK_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group/facebook flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-2 transition-all duration-300 hover:bg-blue-600/10 md:flex-none"
+          aria-label="Ver más reseñas en Facebook"
+        >
+          <FacebookLogo />
+          <span
+            class="text-secondary group-hover/facebook:text-primary text-sm font-medium transition-colors"
+            >Facebook</span
+          >
+        </a>
+      </div>
+
+      {/* Botón siguiente */}
       <button
-        aria-label="Next slide"
+        aria-label="Ver siguiente reseña"
         id="keen-slider-next"
-        class="text-secondary hover:text-primary transition-colors"
+        class="group border-secondary/20 hover:border-primary hover:bg-primary/10 order-2 flex size-12 items-center justify-center rounded-full border-2 bg-gray-900/50 backdrop-blur-sm transition-all duration-300 hover:scale-110 active:scale-95 md:order-0"
       >
         <svg
-          class="size-5"
+          class="text-secondary group-hover:text-primary size-5 transition-colors"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
+          stroke-width="2.5"
           xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
         >
-          <path
-            d="M9 5l7 7-7 7"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"></path>
+          <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"
+          ></path>
         </svg>
       </button>
     </div>
