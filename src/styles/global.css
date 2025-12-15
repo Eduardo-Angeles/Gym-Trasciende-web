@@ -3,6 +3,7 @@
 @theme {
   --color-primary: #d5fb00;
   --color-secondary: #f7f7f7;
+  --color-tertiary: #0e1300;
   --color-accent: #006400;
   --color-background: #0d0e11;
   --background-image-hero-pattern: url("/fondo2.webp");

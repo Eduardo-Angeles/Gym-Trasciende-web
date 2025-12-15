@@ -1,0 +1,32 @@
+---
+/**
+ * MapEmbed - Componente de mapa embebido con Google Maps
+ *
+ * Muestra la ubicación del gimnasio en un mapa interactivo de Google Maps.
+ * Optimizado para rendimiento con lazy loading.
+ */
+
+interface Props {
+  height?: string;
+  class?: string;
+}
+
+const { height = "450", class: className } = Astro.props;
+
+// Coordenadas del gimnasio
+const lat = "16.796544696461932";
+const lng = "-96.67660126449219";
+---
+
+<div class:list={["w-full overflow-hidden rounded-lg", className]}>
+  <iframe
+    src={`https://www.google.com/maps/embed/v1/view?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&center=${lat},${lng}&zoom=17`}
+    width="100%"
+    height={height}
+    style="border:0;"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    title="Ubicación de Gym Trasciende"
+    class="w-full"></iframe>
+</div>

@@ -2,6 +2,8 @@
 import Layout from "@layouts/Layout.astro";
 import HeroClipped from "@components/HeroClipped.astro";
 import ContacSocialPils from "@components/ContacSocialPils.astro";
+import MapEmbed from "@components/MapEmbed.astro";
+import SectionContainer from "@components/SectionContainer.astro";
 ---
 
 <Layout
@@ -30,4 +32,19 @@ import ContacSocialPils from "@components/ContacSocialPils.astro";
       </div>
     </div>
   </HeroClipped>
+
+  <!-- Sección de Ubicación -->
+  <SectionContainer class="py-12 lg:py-16">
+    <div class="mx-auto max-w-5xl">
+      <h2
+        class="text-secondary mb-4 text-center text-3xl font-bold md:text-4xl"
+      >
+        Encuéntranos
+      </h2>
+      <p class="text-secondary/80 mb-8 text-center text-base md:text-lg">
+        Guillermo Prieto Sur 45, La Estación, 71510 Ocotlán de Morelos, Oax.
+      </p>
+      <MapEmbed height="400" class="shadow-lg" />
+    </div>
+  </SectionContainer>
 </Layout>

@@ -185,11 +185,11 @@ export default function PricingSelector() {
     <div className="relative overflow-hidden rounded-3xl">
       {/* Fondo con gradiente - transición suave */}
       <div
-        className={`absolute inset-0 bg-gradient-to-br ${currentGradient} transition-all duration-[1500ms] ease-in-out`}
+        className={`absolute inset-0 bg-linear-to-br ${currentGradient} transition-all duration-1500 ease-in-out`}
       />
 
       {/* Overlay para suavizar aún más */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent" />
 
       {/* Contenido */}
       <div className="relative z-10 p-4 md:p-12">
@@ -208,7 +208,7 @@ export default function PricingSelector() {
                   }`}
                 >
                   {/* Efecto de brillo en hover */}
-                  <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
+                  <span className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
                   <span className="relative">{area.name}</span>
                 </button>
               ))}
@@ -222,7 +222,7 @@ export default function PricingSelector() {
             {pricingData[selectedArea].map((card, index) => (
               <div
                 key={`${selectedArea}-${index}`}
-                className="group max-w-[250px] min-w-[250px] flex-shrink-0 snap-center rounded-2xl bg-white/85 p-5 shadow-lg backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:scale-[1.03] hover:bg-gradient-to-br hover:from-emerald-500/90 hover:to-teal-600/90 hover:shadow-2xl active:scale-[0.98] md:max-w-none md:min-w-0 md:hover:-translate-y-2 md:hover:scale-[1.03]"
+                className="group max-w-[250px] min-w-[250px] shrink-0 snap-center rounded-2xl bg-white/85 p-5 shadow-lg backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:scale-[1.03] hover:bg-linear-to-br hover:from-emerald-500/90 hover:to-teal-600/90 hover:shadow-2xl active:scale-[0.98] md:max-w-none md:min-w-0 md:hover:-translate-y-2 md:hover:scale-[1.03]"
                 style={{
                   animation: "fadeInUp 0.8s ease-out",
                   animationDelay: `${index * 100}ms`,
@@ -262,7 +262,7 @@ export default function PricingSelector() {
                       className="flex items-start gap-2 text-gray-700 transition-colors duration-300 group-hover:text-white"
                     >
                       <svg
-                        className="mt-1 h-5 w-5 flex-shrink-0 text-green-500 transition-all duration-300 group-hover:scale-110 group-hover:text-white"
+                        className="mt-1 h-5 w-5 shrink-0 text-green-500 transition-all duration-300 group-hover:scale-110 group-hover:text-white"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -278,7 +278,7 @@ export default function PricingSelector() {
                 </ul>
 
                 {/* Botón CTA */}
-                <button className="w-full rounded-lg bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-3 font-semibold text-white transition-all duration-300 group-hover:bg-white group-hover:from-white group-hover:to-white group-hover:text-emerald-700 hover:scale-105 hover:shadow-lg active:scale-95">
+                <button className="w-full rounded-lg bg-linear-to-r from-gray-900 to-gray-800 px-6 py-3 font-semibold text-white transition-all duration-300 group-hover:bg-white group-hover:from-white group-hover:to-white group-hover:text-emerald-700 hover:scale-105 hover:shadow-lg active:scale-95">
                   Inscribirme
                 </button>
               </div>
