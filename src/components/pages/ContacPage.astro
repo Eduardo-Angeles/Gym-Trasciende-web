@@ -4,6 +4,7 @@ import HeroClipped from "@components/HeroClipped.astro";
 import ContacSocialPils from "@components/ContacSocialPils.astro";
 import MapEmbed from "@components/MapEmbed.astro";
 import SectionContainer from "@components/SectionContainer.astro";
+import Gallery from "@components/Gallery.astro";
 ---
 
 <Layout
@@ -34,6 +35,7 @@ import SectionContainer from "@components/SectionContainer.astro";
   </HeroClipped>
 
   <!-- Sección de Ubicación -->
+
   <SectionContainer class="py-12 lg:py-16">
     <div class="mx-auto max-w-5xl">
       <h2
@@ -47,4 +49,6 @@ import SectionContainer from "@components/SectionContainer.astro";
       <MapEmbed height="400" class="shadow-lg" />
     </div>
   </SectionContainer>
+
+  <Gallery />
 </Layout>

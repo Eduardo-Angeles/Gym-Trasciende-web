@@ -1,0 +1,158 @@
+---
+import { Image } from "astro:assets";
+import GalleryLightbox from "./GalleryLightbox.tsx";
+import SectionContainer from "./SectionContainer.astro";
+import Subtitle from "./Subtitle.astro";
+
+// CONFIGURACIÓN DE IMÁGENES
+// Aquí defines todas las fotos de la galería
+// Cambia las rutas y añade/elimina según necesites
+const galleryImages = [
+  {
+    src: "/gallery/gym-1.jpg",
+    alt: "Área de entrenamiento con pesas",
+    category: "instalaciones" // Categorías opcionales para futuros filtros
+  },
+  {
+    src: "/gallery/gym-2.jpg",
+    alt: "Zona de cardio con máquinas modernas",
+    category: "instalaciones"
+  },
+  {
+    src: "/gallery/gym-3.jpg",
+    alt: "Clase grupal de entrenamiento",
+    category: "clases"
+  },
+  {
+    src: "/gallery/gym-4.jpg",
+    alt: "Cliente mostrando progreso de transformación",
+    category: "transformaciones"
+  },
+  {
+    src: "/gallery/gym-5.jpg",
+    alt: "Área de funcional training",
+    category: "instalaciones"
+  },
+  {
+    src: "/gallery/gym-6.jpg",
+    alt: "Entrenamiento personalizado",
+    category: "clases"
+  },
+  {
+    src: "/gallery/gym-7.jpg",
+    alt: "Instalaciones del gimnasio",
+    category: "instalaciones"
+  },
+  {
+    src: "/gallery/gym-8.jpg",
+    alt: "Equipo de entrenamiento",
+    category: "instalaciones"
+  },
+  {
+    src: "/gallery/gym-9.jpg",
+    alt: "Sesión de entrenamiento",
+    category: "clases"
+  },
+  {
+    src: "/gallery/gym-10.jpg",
+    alt: "Área de entrenamiento funcional",
+    category: "instalaciones"
+  },
+  {
+    src: "/gallery/gym-11.jpg",
+    alt: "Entrenamiento en grupo",
+    category: "clases"
+  },
+  {
+    src: "/gallery/gym-12.jpg",
+    alt: "Espacio de entrenamiento",
+    category: "instalaciones"
+  },
+];
+
+// CONFIGURACIÓN DE DISEÑO
+// Ajusta estos valores para cambiar la apariencia del grid
+const gridConfig = {
+  cols: "grid-cols-2 md:grid-cols-3 lg:grid-cols-4", // Columnas responsive
+  gap: "gap-4", // Espacio entre imágenes
+  aspectRatio: "aspect-square", // Puedes cambiar a aspect-video, aspect-4/3, etc.
+  roundedCorners: "rounded-lg", // Esquinas redondeadas
+  hoverEffect: "hover:scale-105", // Efecto al pasar el mouse
+  transition: "transition-transform duration-300 ease-out"
+};
+---
+<!-- Sección de Galería -->
+  <SectionContainer>
+    <Subtitle>
+      Nuestra <span class="text-primary">Galería</span>
+    </Subtitle>
+  
+
+<section class="w-full">
+  <!-- Grid de imágenes (SSR, carga instantánea) -->
+  <div class={`grid ${gridConfig.cols} ${gridConfig.gap}`}>
+    {galleryImages.map((image, index) => (
+      <button
+        type="button"
+        class={`
+          relative overflow-hidden cursor-pointer
+          ${gridConfig.aspectRatio}
+          ${gridConfig.roundedCorners}
+          ${gridConfig.transition}
+          ${gridConfig.hoverEffect}
+          focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-black
+        `}
+        data-gallery-trigger
+        data-image-index={index}
+        aria-label={`Abrir imagen: ${image.alt}`}
+      >
+        <!-- Imagen optimizada con Astro -->
+        <Image
+          src={image.src}
+          alt={image.alt}
+          width={600}
+          height={600}
+          quality={80}
+          loading={index < 4 ? "eager" : "lazy"}
+          class="w-full h-full object-cover"
+        />
+        
+        <!-- Overlay sutil al hover -->
+        <div class="absolute inset-0 bg-black/0 hover:bg-black/20 transition-colors duration-300" aria-hidden="true" />
+      </button>
+    ))}
+  </div>
+
+  <!-- Lightbox interactivo (Preact, carga solo cuando se necesita) -->
+  <GalleryLightbox 
+    client:idle
+    images={galleryImages}
+  />
+</section>
+
+</SectionContainer>
+
+<!-- 
+  NOTAS PARA MODIFICAR:
+  
+  1. AÑADIR IMÁGENES: 
+     - Sube tus fotos a /public/gallery/
+     - Añade objetos al array galleryImages con src, alt y category
+  
+  2. CAMBIAR DISEÑO DEL GRID:
+     - Modifica gridConfig.cols para cambiar columnas (ej: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3")
+     - Modifica gridConfig.aspectRatio para cambiar proporción (aspect-video, aspect-4/3, etc.)
+     - Modifica gridConfig.gap para cambiar espaciado (gap-2, gap-6, gap-8, etc.)
+  
+  3. ELIMINAR EFECTO HOVER:
+     - Cambia gridConfig.hoverEffect a ""
+  
+  4. AÑADIR FILTROS POR CATEGORÍA:
+     - Las categorías ya están listas en los datos
+     - Puedes agregar botones de filtro antes del grid
+  
+  5. OPTIMIZACIÓN DE CARGA:
+     - loading="eager" en las primeras 4 imágenes (above the fold)
+     - loading="lazy" en el resto
+     - Ajusta width/height según el tamaño real que necesites
+-->
