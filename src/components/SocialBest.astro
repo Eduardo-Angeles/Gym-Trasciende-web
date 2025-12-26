@@ -1,0 +1,247 @@
+---
+import SectionContainer from "./SectionContainer.astro";
+import TiktokVideo from "./TiktokVideo.astro";
+import Icon from "./ui/Icon.astro";
+import Subtitle from "./Subtitle.astro";
+
+const VIDEOS = [
+  // Datos de los videos que se mostrarán en el carrusel
+
+  {
+    videoId: "7587493146313952529",
+    thumbnailUrl: "/img/thumbnails/t4.webp",
+    title: "Cumplimos un mes y estamos felices",
+  },
+  {
+    videoId: "7582695527733644562",
+    thumbnailUrl: "/img/thumbnails/t2.webp",
+    title: "Ya sabes que pedirle a Santa 🎅?",
+  },
+  {
+    videoId: "7576068654563921168",
+    thumbnailUrl: "/img/thumbnails/t3.webp",
+    title: "Trascender >> tener un impacto significativo y duradero",
+  },
+  {
+    videoId: "7576838366457646352",
+    thumbnailUrl: "/img/thumbnails/t1.webp",
+    title: "Muy pronto, cada vez más cerca",
+  },
+  {
+    videoId: "7587493146313952529",
+    thumbnailUrl: "/img/thumbnails/t4.webp",
+    title: "Muy pronto, cada vez más cerca",
+  },
+] as const;
+---
+
+<SectionContainer class="px-0">
+  <div class="relative pb-6 md:pb-12">
+    <!-- Subtitle centrado -->
+    <div class="flex justify-center">
+      <Subtitle class="!pb-0">¿Quiénes somos?</Subtitle>
+    </div>
+
+    <!-- Botones posicionados a la derecha -->
+    <div class="absolute top-0 right-0 hidden items-center gap-x-4 md:flex">
+      <!-- Botón para retroceder en el carrusel -->
+      <button
+        class="bg-secondary/10 text-secondary rounded-full p-1 opacity-45 transition-all enabled:hover:scale-110 enabled:active:scale-100"
+        id="left-button"
+        disabled="true"
+        aria-label="Ir al elemento anterior"
+      >
+        <Icon name="leftarrow" />
+      </button>
+      <!-- Botón para avanzar en el carrusel -->
+      <button
+        class="bg-secondary/10 text-secondary rounded-full p-1 transition-all enabled:hover:scale-110 enabled:active:scale-100"
+        id="right-button"
+        aria-label="Ir al siguiente elemento"
+      >
+        <Icon name="rightarrow" />
+      </button>
+    </div>
+  </div>
+
+  <!-- Contenedor principal del carrusel con variables CSS para controlar la opacidad de los bordes -->
+  <div
+    class="carousel-container relative -mr-4 pr-4 md:mr-0 md:pr-0"
+    id="carousel-container"
+    style="--left-opacity: 0; --right-opacity: 1;"
+  >
+    <!-- Área desplazable que contiene los videos. 'snap-x' permite que el scroll se ajuste a los elementos -->
+    <div
+      class="custom-scrollbar -mr-4 flex snap-x snap-mandatory gap-x-4 overflow-scroll pr-4 md:mr-0 md:gap-x-8 md:pr-0"
+      id="carousel"
+    >
+      {
+        // Iteramos sobre los datos para renderizar cada componente TiktokVideo
+        VIDEOS.map(({ videoId, thumbnailUrl, title }) => (
+          <TiktokVideo
+            videoId={videoId}
+            thumbnailUrl={thumbnailUrl}
+            title={title}
+          />
+        ))
+      }
+    </div>
+  </div>
+</SectionContainer>
+
+<style>
+  /* Ocultar la barra de desplazamiento nativa para un diseño más limpio */
+  .custom-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .custom-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Efecto de desvanecimiento (gradiente oscuro) en el lado izquierdo */
+  .carousel-container:before {
+    background-image: linear-gradient(to left, transparent, #0d0e11);
+    content: "";
+    height: 570px;
+    left: 0;
+    opacity: var(--left-opacity);
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 150ms;
+    width: 64px;
+    z-index: 10;
+  }
+
+  /* Efecto de desvanecimiento (gradiente oscuro) en el lado derecho */
+  .carousel-container:after {
+    background-image: linear-gradient(to right, transparent, #0d0e11);
+    content: "";
+    height: 570px;
+    opacity: var(--right-opacity);
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 150ms;
+    width: 64px;
+    z-index: 10;
+  }
+
+  @media (max-width: 768px) {
+    .carousel-container:before {
+      opacity: 0 !important;
+    }
+
+    .carousel-container:after {
+      opacity: 0 !important;
+    }
+  }
+</style>
+
+<script>
+  // Variable para guardar la función de cleanup
+  let cleanupCarousel: (() => void) | null = null;
+
+  // Función de inicialización que se ejecuta cada vez que se carga la página
+  function initCarousel() {
+    // Limpiar listeners anteriores si existen
+    if (cleanupCarousel) {
+      cleanupCarousel();
+    }
+
+    // Selección de elementos del DOM necesarios para la interactividad
+    const rightButton = document.querySelector(
+      "#right-button",
+    ) as HTMLButtonElement;
+    const leftButton = document.querySelector(
+      "#left-button",
+    ) as HTMLButtonElement;
+    const carousel = document.querySelector("#carousel") as HTMLDivElement;
+    const carouselContainer = document.querySelector(
+      "#carousel-container",
+    ) as HTMLDivElement;
+
+    // Verificar que los elementos existen antes de agregar listeners
+    if (!rightButton || !leftButton || !carousel || !carouselContainer) return;
+
+    // Manejadores de eventos (guardados en variables para poder removerlos)
+    const handleLeftClick = () => {
+      carousel.scrollTo({
+        left: carousel.scrollLeft - 320, // Desplaza 320px hacia atrás
+        behavior: "smooth",
+      });
+    };
+
+    const handleRightClick = () => {
+      carousel.scrollTo({
+        left: carousel.scrollLeft + 320, // Desplaza 320px hacia adelante
+        behavior: "smooth",
+      });
+    };
+
+    const handleScroll = () => {
+      const tolerance = 2; // Pequeña tolerancia para compensar errores de redondeo
+
+      // Función auxiliar para habilitar/deshabilitar botones visualmente y funcionalmente
+      const updateButtonState = (
+        button: HTMLButtonElement,
+        disable: boolean,
+      ) => {
+        button.classList.toggle("opacity-45", disable);
+        button.disabled = disable;
+      };
+
+      // Función auxiliar para actualizar variables CSS de opacidad
+      const updateOpacity = (property: string, value: string) => {
+        carouselContainer.style.setProperty(property, value);
+      };
+
+      // Lógica para el botón izquierdo: deshabilitar si estamos al principio
+      if (carousel.scrollLeft <= tolerance) {
+        updateButtonState(leftButton, true);
+      } else {
+        updateButtonState(leftButton, false);
+      }
+
+      // Lógica para el botón derecho: deshabilitar si llegamos al final
+      if (
+        carousel.scrollLeft + carousel.clientWidth >=
+        carousel.scrollWidth - tolerance
+      ) {
+        updateButtonState(rightButton, true);
+        updateOpacity("--right-opacity", "0"); // Ocultar gradiente derecho al final
+      } else {
+        updateButtonState(rightButton, false);
+        updateOpacity("--right-opacity", "1");
+      }
+
+      // Controlar visibilidad del gradiente izquierdo
+      if (carousel.scrollLeft > tolerance) {
+        updateOpacity("--left-opacity", "1");
+      } else {
+        updateOpacity("--left-opacity", "0");
+      }
+    };
+
+    // Agregar event listeners
+    leftButton.addEventListener("click", handleLeftClick);
+    rightButton.addEventListener("click", handleRightClick);
+    carousel.addEventListener("scroll", handleScroll);
+
+    // Guardar función de cleanup para la próxima vez
+    cleanupCarousel = () => {
+      leftButton.removeEventListener("click", handleLeftClick);
+      rightButton.removeEventListener("click", handleRightClick);
+      carousel.removeEventListener("scroll", handleScroll);
+    };
+  }
+
+  // Inicializar en la carga inicial de la página
+  initCarousel();
+
+  // Re-inicializar cuando se navega con View Transitions
+  document.addEventListener("astro:page-load", initCarousel);
+</script>

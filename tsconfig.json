@@ -7,7 +7,8 @@
     "paths": {
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"],
-      "@hooks/*": ["src/components/hooks/*"]
+      "@hooks/*": ["src/components/hooks/*"],
+      "@icons/*": ["src/icons/*"]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
