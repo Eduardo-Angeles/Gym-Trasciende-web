@@ -1,0 +1,98 @@
+---
+import Layout from "@layouts/Layout.astro";
+import SectionContainer from "@components/SectionContainer.astro";
+
+// Página 404 - Página no encontrada
+---
+
+<Layout
+  title="404 - Página no encontrada | Gym Trasciende"
+  description="Lo sentimos, la página que buscas no existe o está en construcción."
+>
+  <SectionContainer
+    backgroundImage="linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)), url('/fondofijo.webp')"
+    class="flex min-h-screen items-center justify-center py-20 md:py-24"
+  >
+    <div class="mx-auto flex max-w-3xl flex-col items-center gap-8 text-center">
+      <!-- Error 404 -->
+      <div class="space-y-4">
+        <h1
+          class="text-primary text-7xl leading-none font-bold md:text-8xl lg:text-9xl"
+        >
+          404
+        </h1>
+        <h2 class="text-secondary text-3xl font-bold md:text-4xl">
+          Página No Encontrada
+        </h2>
+      </div>
+
+      <!-- Mensaje -->
+      <div class="space-y-4">
+        <p class="text-xl text-gray-300 md:text-2xl">
+          Lo sentimos, la página que buscas no existe o
+        </p>
+        <p class="text-primary text-2xl font-bold md:text-3xl">
+          ESTÁ EN CONSTRUCCIÓN
+        </p>
+        <p class="text-base text-gray-400">
+          ¡Pero puedes seguir entrenando con nosotros!
+        </p>
+      </div>
+
+      <!-- Botones de acción -->
+      <div class="flex flex-col gap-4 sm:flex-row">
+        <a
+          href="/"
+          class="group bg-primary hover:shadow-primary/50 relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-8 py-4 font-bold text-black transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 transition-transform group-hover:-translate-x-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+            ></path>
+          </svg>
+          Volver al Inicio
+        </a>
+
+        <a
+          href="/contactos"
+          class="group border-primary text-primary hover:bg-primary/10 inline-flex items-center justify-center gap-2 rounded-full border-2 px-8 py-4 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 transition-transform group-hover:rotate-12"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+            ></path>
+          </svg>
+          Contáctanos
+        </a>
+      </div>
+
+      <!-- Mensaje motivacional -->
+      <div
+        class="border-primary/20 bg-primary/5 mt-8 rounded-xl border p-6 backdrop-blur-sm"
+      >
+        <p class="text-primary text-base font-medium md:text-lg">
+          "Qué desgracia es para un hombre envejecer sin haber visto nunca la
+          belleza y la fuerza de las que su cuerpo es capaz" 💪
+        </p>
+      </div>
+    </div>
+  </SectionContainer>
+</Layout>
