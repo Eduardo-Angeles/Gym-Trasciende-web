@@ -44,6 +44,20 @@ const reviews: Review[] = [
       "Descubrí Gym Trasciende por recomendación y ahora no puedo parar de entrenar aquí. Las instalaciones son limpias, modernas y el personal es muy amable. He mejorado mi condición física y mi salud. Muy recomendado.",
     platform: "facebook",
   },
+  {
+    name: "Luis Hernández",
+    image: "/review3.webp",
+    testimonial:
+      "Excelente gimnasio, cuenta con todo el equipo necesario y siempre está limpio. Los entrenadores son muy profesionales y te ayudan a alcanzar tus metas. Llevo 6 meses entrenando y los resultados son increíbles.",
+    platform: "google",
+  },
+  {
+    name: "María González",
+    image: "/review1.webp",
+    testimonial:
+      "Me encanta la variedad de clases y los horarios flexibles. El ambiente es súper motivador y he conocido gente increíble. Los resultados hablan por sí solos. Totalmente recomendado.",
+    platform: "facebook",
+  },
 ];
 
 // Path SVG para estrellas de rating
@@ -72,6 +86,7 @@ const starPath =
       "#keen-slider",
       {
         loop: true,
+        mode: "snap",
         defaultAnimation: {
           duration: 750,
         },
@@ -104,20 +119,34 @@ const starPath =
           },
         },
         created(slider) {
-          slider.slides[slider.track.details.rel].classList.remove(
-            "opacity-40",
-          );
+          updateOpacity(slider);
         },
         slideChanged(slider) {
-          slider.slides.forEach((slide) => slide.classList.add("opacity-40"));
-
-          slider.slides[slider.track.details.rel].classList.remove(
-            "opacity-40",
-          );
+          updateOpacity(slider);
         },
       },
       [],
     );
+
+    function updateOpacity(slider) {
+      const currentIdx = slider.track.details.rel;
+      const totalSlides = slider.slides.length;
+
+      slider.slides.forEach((slide, idx) => {
+        // Calcular distancia considerando el loop
+        let distance = Math.abs(currentIdx - idx);
+        if (distance > totalSlides / 2) {
+          distance = totalSlides - distance;
+        }
+
+        slide.style.opacity = "";
+        if (distance === 0) {
+          slide.classList.remove("opacity-40");
+        } else {
+          slide.classList.add("opacity-40");
+        }
+      });
+    }
 
     const keenSliderPrevious = document.getElementById("keen-slider-previous");
     const keenSliderNext = document.getElementById("keen-slider-next");
