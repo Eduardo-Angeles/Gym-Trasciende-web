@@ -11,7 +11,7 @@ const { videoId, thumbnailUrl, title } = Astro.props;
 ---
 
 <tiktok-video
-  class="relative h-[570px] w-80 shrink-0 cursor-pointer snap-center rounded-[16px] bg-black bg-[length:100%] bg-center transition-[background-size] hover:bg-[length:105%]"
+  class="relative h-142.5 w-80 shrink-0 cursor-pointer snap-center rounded-2xl bg-black bg-size-[100%] bg-center transition-[background-size] hover:bg-size-[105%]"
   videoid={videoId}
   thumbnailurl={thumbnailUrl}
   data-title={title}
@@ -21,7 +21,7 @@ const { videoId, thumbnailUrl, title } = Astro.props;
   tabindex="0"
 >
   <div
-    class="absolute right-6 bottom-6 rounded-full bg-white p-4 pl-[18px] transition-transform duration-300 hover:scale-110"
+    class="absolute right-6 bottom-6 rounded-full bg-white p-4 pl-4.5 transition-transform duration-300 hover:scale-110"
     id=`Id${videoId}`
     title={title}
   >
