@@ -1,0 +1,86 @@
+---
+/**
+ * FAQ - Preguntas Frecuentes
+ * Componente optimizado para SEO con Schema.org FAQPage
+ */
+import SectionContainer from "./SectionContainer.astro";
+import Subtitle from "./Subtitle.astro";
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FAQItem[];
+  class?: string;
+}
+
+const { items, class: className } = Astro.props;
+
+// Schema.org JSON-LD para FAQ
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: items.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+---
+
+<SectionContainer class:list={["py-16 md:py-20", className]}>
+  <Subtitle>Preguntas Frecuentes</Subtitle>
+
+  <div class="mx-auto max-w-3xl">
+    <div class="space-y-4" itemscope itemtype="https://schema.org/FAQPage">
+      {
+        items.map((item, index) => (
+          <details
+            class="group rounded-xl border border-white/10 bg-gray-900/50 backdrop-blur-sm transition-all duration-300 hover:border-emerald-500/30"
+            itemscope
+            itemprop="mainEntity"
+            itemtype="https://schema.org/Question"
+          >
+            <summary class="hover:text-primary flex cursor-pointer items-center justify-between p-6 font-semibold text-white transition-colors">
+              <span itemprop="name">{item.question}</span>
+              <svg
+                class="h-5 w-5 transition-transform duration-300 group-open:rotate-180"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </summary>
+            <div
+              class="border-t border-white/10 px-6 pt-4 pb-6 text-gray-300"
+              itemscope
+              itemprop="acceptedAnswer"
+              itemtype="https://schema.org/Answer"
+            >
+              <p itemprop="text">{item.answer}</p>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Schema.org JSON-LD (defer para no bloquear rendering) -->
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(faqSchema)}
+    is:inline
+  />
+</SectionContainer>

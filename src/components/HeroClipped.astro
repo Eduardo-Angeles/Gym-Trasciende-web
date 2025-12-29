@@ -1,60 +1,73 @@
 ---
 /**
- * HeroClipped - Hero con clip-path en V y efecto de relleno en espacios del corte
+ * HeroClipped - Hero reutilizable con clip-path en V
+ *
+ * CARACTERÍSTICAS:
+ * - Imagen con clip-path personalizado (clase cp-v)
+ * - Overlay oscuro configurable
+ * - Contenido centrado vertical y horizontalmente
+ * - Altamente personalizable vía props
  *
  * EJEMPLO DE USO:
  *
  * <HeroClipped
- *   backgroundImage="linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/fondofijo.webp')"
- *   fixedBackground={true}
- *   minHeight="min-h-[60vh]"
+ *   img="/hero-image.webp"
+ *   alt="Descripción de la imagen"
+ *   minHeight="min-h-dvh"
+ *   overlayOpacity="50"
  * >
- *   <Subtitle>Tu Título</Subtitle>
- *   <p>Tu contenido aquí...</p>
+ *   <h1>Tu Título</h1>
+ *   <p>Tu contenido...</p>
  * </HeroClipped>
  */
 
 interface Props {
-  backgroundImage: string;
-  fixedBackground?: boolean;
+  /** Ruta de la imagen del hero */
+  img: string;
+  /** Texto alternativo para la imagen (importante para SEO y accesibilidad) */
+  alt?: string;
+  /** Altura mínima del hero (clase Tailwind) */
   minHeight?: string;
+  /** Opacidad del overlay oscuro (0-100, donde 0 = transparente, 100 = negro sólido) */
+  overlayOpacity?: string;
+  /** Posición del objeto de la imagen (object-position de Tailwind) */
+  objectPosition?: string;
+  /** Color de fondo para los espacios del clip-path (clase Tailwind bg-*) */
+  backgroundColor?: string;
+  /** Clases CSS adicionales para el contenedor */
   class?: string;
 }
 
 const {
-  backgroundImage,
-  fixedBackground = false,
-  minHeight = "min-h-[60vh]",
+  img,
+  alt = "Hero background",
+  minHeight = "min-h-[90vh]",
+  overlayOpacity = "50",
+  objectPosition = "object-center",
+  backgroundColor = "bg-background",
   class: className = "",
 } = Astro.props;
 ---
 
-<div class="relative bg-black">
-  <!-- Fondo que rellena los espacios del clip-path -->
-  <div
-    class="absolute inset-0 scale-110 bg-cover bg-center bg-no-repeat"
-    style={{
-      backgroundImage,
-      backgroundAttachment: fixedBackground ? "fixed" : "scroll",
-      filter: "blur(25px) brightness(0.3)",
-      zIndex: 0,
-    }}
-  >
-  </div>
+<!-- Contenedor principal: Define el área total del hero -->
+<div
+  class={`relative w-full max-w-[100vw] overflow-hidden ${backgroundColor} ${minHeight} ${className}`}
+>
+  <!-- Imagen principal con clip-path -->
+  <img
+    class={`absolute inset-0 h-full w-full cp-v object-cover ${objectPosition}`}
+    src={img}
+    alt={alt}
+    loading="eager"
+  />
 
-  <!-- Sección principal con clip-path (por encima del fondo) -->
+  <!-- Overlay oscuro configurable sobre la imagen -->
+  <div class={`absolute inset-0 cp-v bg-black/${overlayOpacity}`}></div>
+
+  <!-- Contenido del hero: Centrado vertical y horizontal sobre la imagen -->
   <div
-    class={`relative cp-v bg-cover bg-center bg-no-repeat ${minHeight} ${className}`}
-    style={{
-      backgroundImage,
-      backgroundAttachment: fixedBackground ? "fixed" : "scroll",
-      zIndex: 1,
-    }}
+    class={`relative z-10 flex ${minHeight} w-full flex-col items-center justify-center px-4`}
   >
-    <section class="mx-auto w-full max-w-7xl">
-      <div class="mx-auto w-full px-4 py-20 md:py-24">
-        <slot />
-      </div>
-    </section>
+    <slot />
   </div>
 </div>

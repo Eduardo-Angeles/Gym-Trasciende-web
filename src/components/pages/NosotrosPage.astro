@@ -1,0 +1,186 @@
+---
+/**
+ * NosotrosPage - Página sobre nosotros con estructura profesional
+ *
+ * ESTRUCTURA:
+ * 1. HeroClipped: Hero full-height con mensaje inspirador
+ * 2. OurStory: Historia del gimnasio con timeline visual
+ * 3. Pilares: Nuestros pilares fundamentales
+ * 4. TeamSection: Equipo de entrenadores profesionales
+ * 5. TrustMetrics: Métricas de confianza y experiencia
+ * 6. ScheduleSection: Horarios de atención
+ * 7. SocialBest: Redes sociales y reseñas
+ * 8. Gallery: Galería de fotos del gimnasio
+ * 9. CTA final: Llamado a la acción para unirse
+ */
+
+import Layout from "@layouts/Layout.astro";
+import HeroClipped from "@components/HeroClipped.astro";
+import ContacSocialPils from "@components/ContacSocialPils.astro";
+import SectionContainer from "@components/SectionContainer.astro";
+import Gallery from "@components/Gallery.astro";
+import SocialBest from "@components/SocialBest.astro";
+import Pilares from "@components/Pilares.astro";
+import OurStory from "@components/OurStory.astro";
+import TeamSection from "@components/TeamSection.astro";
+import TrustMetrics from "@components/TrustMetrics.astro";
+import ScheduleSection from "@components/ScheduleSection.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+import FAQ from "@components/FAQ.astro";
+
+// Datos de horario del gimnasio
+const schedule = [
+  { days: "Lunes - Viernes", hours: "5:00 AM - 11:00 PM" },
+  { days: "Sábados", hours: "7:00 AM - 9:00 PM" },
+  { days: "Domingos", hours: "8:00 AM - 2:00 PM" },
+];
+
+// Breadcrumbs para navegación y SEO
+const breadcrumbs = [
+  { label: "Inicio", url: "/" },
+  { label: "Nosotros", url: "/nosotros" },
+];
+
+// Preguntas frecuentes sobre el gimnasio
+const faqItems = [
+  {
+    question: "¿Desde cuándo está abierto Gym Trasciende?",
+    answer:
+      "Abrimos nuestras puertas en 2019 con el compromiso de ofrecer un espacio seguro y profesional para la transformación física. Desde entonces, hemos crecido constantemente y servido a más de 450 miembros activos.",
+  },
+  {
+    question: "¿Qué hace diferente a Gym Trasciende de otros gimnasios?",
+    answer:
+      "Nos enfocamos en tres pilares fundamentales: experiencia comprobada con entrenadores certificados, tu seguridad como prioridad número uno, y un enfoque integral que va más allá del entrenamiento físico. No solo somos un gimnasio, somos tu socio en la transformación.",
+  },
+  {
+    question: "¿Los entrenadores están certificados?",
+    answer:
+      "Sí, todos nuestros entrenadores cuentan con certificaciones profesionales reconocidas (NSCA-CPT, ACE, NASM, entre otras) y años de experiencia en distintas especialidades como fuerza, cardio, nutrición y prevención de lesiones.",
+  },
+  {
+    question: "¿Ofrecen planes para principiantes?",
+    answer:
+      "¡Por supuesto! Tenemos programas diseñados específicamente para personas que están comenzando su camino fitness. Nuestros entrenadores te guiarán paso a paso con técnicas seguras y progresión gradual.",
+  },
+  {
+    question: "¿Cuál es su filosofía de entrenamiento?",
+    answer:
+      "Creemos firmemente en el progreso sostenible y seguro. Nuestra meta es que alcances tus objetivos de fitness sin riesgos, cuidando tu salud a largo plazo. Cada programa está diseñado para ser realista, efectivo y adaptado a tus necesidades individuales.",
+  },
+];
+---
+
+<Layout
+  title="Nosotros | Gym Trasciende - Conoce Nuestra Historia y Equipo Profesional"
+  description="Descubre quiénes somos, nuestra historia desde 2019, valores fundamentales y el equipo profesional certificado que te acompañará en tu transformación. Más de 5 años creando historias de éxito con +450 miembros activos."
+  keywords="gym trasciende, gimnasio profesional, entrenadores certificados, historia gimnasio, equipo fitness, gimnasio 5 estrellas, transformación física, gym cerca de mi"
+  author="Gym Trasciende"
+  type="website"
+>
+  <!-- 1. Hero inspirador -->
+  <HeroClipped
+    img="/fondofijo.webp"
+    alt="Gimnasio Trasciende - Nuestro equipo"
+    minHeight="min-h-dvh"
+    overlayOpacity="50"
+  >
+    <div
+      class="mx-auto flex w-full max-w-4xl flex-col items-center gap-8 text-center"
+    >
+      <div class="rounded-xl bg-white/10 p-8 backdrop-blur-sm md:p-12">
+        <h1
+          class="text-secondary mb-4 text-4xl leading-tight font-bold md:mb-6 md:text-6xl lg:text-6xl"
+        >
+          ¿Quiénes somos?
+        </h1>
+
+        <p class="max-w-2xl text-base leading-relaxed text-gray-100 md:text-lg">
+          No solo somos un gimnasio; somos tu socio en la transformación.
+          Nuestra meta principal es que alcances tus objetivos de fitness de la
+          mejor forma posible y sin riesgos. Creemos que el verdadero progreso
+          es sostenible y seguro.
+        </p>
+
+        <ContacSocialPils />
+      </div>
+    </div>
+  </HeroClipped>
+
+  <!-- Breadcrumbs para navegación y SEO -->
+  <SectionContainer class="pt-6 md:pt-8">
+    <Breadcrumbs items={breadcrumbs} />
+  </SectionContainer>
+
+  <!-- 2. Nuestra Historia -->
+  <OurStory />
+
+  <!-- 3. Pilares Fundamentales -->
+  <Pilares />
+
+  <!-- 4. Nuestro Equipo -->
+  <TeamSection />
+
+  <!-- 5. Métricas de Confianza -->
+  <TrustMetrics />
+
+  <!-- 6. Horarios -->
+  <SectionContainer class="py-16 md:py-20">
+    <div class="mx-auto max-w-2xl">
+      <ScheduleSection schedule={schedule} />
+    </div>
+  </SectionContainer>
+
+  <!-- 7. Redes Sociales y Reseñas -->
+  <SocialBest />
+
+  <!-- 8. Galería -->
+  <Gallery />
+
+  <!-- 9. Preguntas Frecuentes -->
+  <FAQ items={faqItems} />
+
+  <!-- 10. CTA Final -->
+  <SectionContainer class="py-20 md:py-24">
+    <div
+      class="mx-auto max-w-4xl rounded-2xl border border-emerald-500/30 bg-linear-to-br from-gray-900/80 to-gray-800/80 p-8 text-center backdrop-blur-sm md:p-12"
+    >
+      <h2
+        class="text-secondary mb-4 text-3xl font-bold md:text-4xl lg:text-5xl"
+      >
+        ¿Listo para comenzar tu transformación?
+      </h2>
+      <p class="text-secondary mx-auto mb-8 max-w-2xl text-lg leading-relaxed">
+        Únete a nuestra comunidad de más de 450 miembros activos. Da el primer
+        paso hacia una vida más saludable con el respaldo de nuestro equipo
+        profesional.
+      </p>
+      <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <a
+          href="/contacto"
+          class="bg-primary hover:bg-secondary inline-flex w-full items-center justify-center gap-2 rounded-lg px-8 py-4 text-lg font-bold text-black transition-all duration-300 hover:scale-105 sm:w-auto"
+        >
+          Contáctanos Ahora
+          <svg
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+        <a
+          href="/#pricing"
+          class="inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-emerald-500 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-emerald-500/10 sm:w-auto"
+        >
+          Ver Planes
+        </a>
+      </div>
+    </div>
+  </SectionContainer>
+</Layout>

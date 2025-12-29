@@ -1,0 +1,65 @@
+---
+/**
+ * ScheduleSection - Sección de horarios con indicador de estado
+ * Muestra los horarios del gimnasio y un badge dinámico de abierto/cerrado
+ */
+
+import OpenStatusBadge from "./OpenStatusBadge.tsx";
+
+interface ScheduleItem {
+  days: string;
+  hours: string;
+}
+
+interface Props {
+  schedule: ScheduleItem[];
+  class?: string;
+}
+
+const { schedule, class: className } = Astro.props;
+---
+
+<section
+  class:list={[
+    "border-primary/30 mb-12 overflow-hidden rounded-2xl border bg-white/5 p-6 backdrop-blur-md",
+    className,
+  ]}
+  aria-labelledby="schedule-heading"
+>
+  <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+    <div class="flex items-center gap-3">
+      <div
+        class="bg-primary/20 flex h-12 w-12 items-center justify-center rounded-xl"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="text-primary h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </div>
+      <h2 id="schedule-heading" class="text-2xl font-bold text-white">
+        Horarios
+      </h2>
+    </div>
+    <OpenStatusBadge client:visible schedule={schedule} />
+  </div>
+
+  <div class="space-y-3">
+    {
+      schedule.map((item) => (
+        <div class="flex items-center justify-between rounded-lg bg-white/5 px-4 py-3 transition-colors hover:bg-white/10">
+          <span class="font-medium text-gray-300">{item.days}</span>
+          <span class="text-primary font-semibold">{item.hours}</span>
+        </div>
+      ))
+    }
+  </div>
+</section>

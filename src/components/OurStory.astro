@@ -1,0 +1,168 @@
+---
+/**
+ * OurStory - Sección de historia del gimnasio
+ * Timeline visual con los hitos más importantes
+ */
+import SectionContainer from "./SectionContainer.astro";
+import Subtitle from "./Subtitle.astro";
+---
+
+<SectionContainer class="py-16 md:py-20">
+  <article itemscope itemtype="https://schema.org/Article">
+    <Subtitle>Nuestra Historia</Subtitle>
+
+    <div class="mx-auto max-w-4xl">
+      <p
+        class="text-secondary mb-12 text-center text-lg leading-relaxed md:text-xl"
+        itemprop="description"
+      >
+        Desde nuestros inicios, hemos estado comprometidos con una visión clara:
+        <span class="text-primary font-semibold"
+          >transformar vidas a través del fitness sostenible y seguro</span
+        >.
+      </p>
+
+      <!-- Timeline -->
+      <div class="relative">
+        <!-- Línea vertical central -->
+        <div
+          class="absolute top-0 left-1/2 hidden h-full w-0.5 -translate-x-1/2 bg-gradient-to-b from-emerald-500/50 via-teal-500/50 to-cyan-500/50 md:block"
+        >
+        </div>
+
+        <!-- Items del timeline -->
+        <div class="space-y-12">
+          <!-- Item 1: Fundación -->
+          <div
+            class="relative flex flex-col items-start gap-4 md:flex-row md:items-center md:gap-8"
+          >
+            <!-- Punto en la línea (solo desktop) -->
+            <div
+              class="absolute top-1/2 left-1/2 hidden h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500 ring-4 ring-emerald-500/20 md:block"
+            >
+            </div>
+
+            <!-- Contenido izquierda (año) -->
+            <div class="md:w-1/2 md:pr-12 md:text-right">
+              <span
+                class="bg-primary inline-block rounded-full px-4 py-1 text-sm font-bold text-black"
+                >2019</span
+              >
+            </div>
+
+            <!-- Contenido derecha (descripción) -->
+            <div class="md:w-1/2 md:pl-12">
+              <div
+                class="rounded-xl border border-emerald-500/20 bg-gray-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-emerald-400/50 hover:bg-gray-900/70"
+              >
+                <h3 class="mb-2 text-xl font-bold text-white">
+                  Nuestros Inicios
+                </h3>
+                <p class="text-sm leading-relaxed text-gray-300">
+                  Abrimos nuestras puertas con el sueño de crear un espacio
+                  donde cada persona pudiera descubrir su mejor versión.
+                  Comenzamos con un pequeño equipo de entrenadores apasionados y
+                  unas instalaciones modestas pero llenas de energía.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2: Expansión -->
+          <div
+            class="relative flex flex-col items-start gap-4 md:flex-row md:items-center md:gap-8"
+          >
+            <div
+              class="absolute top-1/2 left-1/2 hidden h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-500 ring-4 ring-teal-500/20 md:block"
+            >
+            </div>
+
+            <div class="md:w-1/2 md:pr-12 md:text-right">
+              <div
+                class="rounded-xl border border-teal-500/20 bg-gray-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-teal-400/50 hover:bg-gray-900/70 md:mr-0 md:ml-auto md:max-w-md"
+              >
+                <h3 class="mb-2 text-xl font-bold text-white">
+                  Crecimiento y Renovación
+                </h3>
+                <p class="text-sm leading-relaxed text-gray-300">
+                  Renovamos nuestras instalaciones y expandimos nuestra área de
+                  entrenamiento. Incorporamos equipos de última generación y
+                  programas especializados para distintos objetivos y niveles.
+                </p>
+              </div>
+            </div>
+
+            <div class="md:w-1/2 md:pl-12">
+              <span
+                class="bg-primary inline-block rounded-full px-4 py-1 text-sm font-bold text-black"
+                >2021</span
+              >
+            </div>
+          </div>
+
+          <!-- Item 3: Comunidad -->
+          <div
+            class="relative flex flex-col items-start gap-4 md:flex-row md:items-center md:gap-8"
+          >
+            <div
+              class="absolute top-1/2 left-1/2 hidden h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-500 ring-4 ring-cyan-500/20 md:block"
+            >
+            </div>
+
+            <div class="md:w-1/2 md:pr-12 md:text-right">
+              <span
+                class="bg-primary inline-block rounded-full px-4 py-1 text-sm font-bold text-black"
+                >2023</span
+              >
+            </div>
+
+            <div class="md:w-1/2 md:pl-12">
+              <div
+                class="rounded-xl border border-cyan-500/20 bg-gray-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-cyan-400/50 hover:bg-gray-900/70"
+              >
+                <h3 class="mb-2 text-xl font-bold text-white">
+                  Una Comunidad Fuerte
+                </h3>
+                <p class="text-sm leading-relaxed text-gray-300">
+                  Más de 450 miembros activos forman parte de nuestra familia.
+                  Lo que comenzó como un gimnasio se transformó en una verdadera
+                  comunidad de apoyo mutuo, donde celebramos cada logro juntos.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 4: Presente -->
+          <div
+            class="relative flex flex-col items-start gap-4 md:flex-row md:items-center md:gap-8"
+          >
+            <div
+              class="absolute top-1/2 left-1/2 hidden h-4 w-4 -translate-x-1/2 -translate-y-1/2 animate-pulse rounded-full bg-emerald-400 ring-4 ring-emerald-400/30 md:block"
+            >
+            </div>
+
+            <div class="md:w-1/2 md:pr-12 md:text-right">
+              <div
+                class="rounded-xl border border-emerald-400/30 bg-gray-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-emerald-400/50 hover:bg-gray-900/70 md:mr-0 md:ml-auto md:max-w-md"
+              >
+                <h3 class="mb-2 text-xl font-bold text-white">Hoy y Siempre</h3>
+                <p class="text-sm leading-relaxed text-gray-300">
+                  Continuamos innovando y mejorando cada día. Nuestra misión
+                  sigue siendo la misma: ser tu aliado en el camino hacia una
+                  vida más saludable, con seguridad, profesionalismo y pasión.
+                </p>
+              </div>
+            </div>
+
+            <div class="md:w-1/2 md:pl-12">
+              <span
+                class="bg-primary inline-block animate-pulse rounded-full px-4 py-1 text-sm font-bold text-black"
+                >2025</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</SectionContainer>
