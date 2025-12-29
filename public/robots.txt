@@ -1,13 +1,4 @@
-# robots.txt para Gym Trasciende
-
 User-agent: *
 Allow: /
-
-# Permitir el acceso a los estilos e imágenes optimizadas de Astro
 Allow: /_astro/
-
-# Bloquear directorios privados (opcional)
-Disallow: /api/
-
-# Enlace directo al mapa del sitio para Google
 Sitemap: https://trasciendegym.com/sitemap-index.xml
