@@ -1,0 +1,503 @@
+---
+/**
+ * Spinning - Página del servicio de Clases de Spinning
+ *
+ * ESTRUCTURA:
+ * 1. Hero - Introducción al spinning
+ * 2. ¿Qué es? - Descripción del servicio
+ * 3. Beneficios - ServiceFeatures con beneficios clave
+ * 4. Niveles - Para quién es
+ * 5. Horarios - ScheduleSection específico
+ * 6. Galería - Fotos de clases
+ * 7. Instructores - Mini sección del equipo
+ * 8. Testimonios - Reviews
+ * 9. FAQ - Preguntas específicas
+ * 10. Precios - Pricing
+ * 11. CTA - Reserva tu clase
+ */
+
+import Layout from "@layouts/Layout.astro";
+import HeroClipped from "@components/sections/HeroClipped.astro";
+import SectionContainer from "@components/layout/SectionContainer.astro";
+import Subtitle from "@components/ui/Subtitle.astro";
+import ServiceFeatures from "@components/services/ServiceFeatures.astro";
+import ScheduleSection from "@components/sections/ScheduleSection.astro";
+import Gallery from "@components/sections/Gallery.astro";
+import Reviews from "@components/sections/Reviews.astro";
+import FAQ from "@components/sections/FAQ.astro";
+import PricingPlan from "@components/sections/PricingPlan.astro";
+
+// Beneficios del spinning
+const spinningFeatures = [
+  {
+    icon: "fire",
+    title: "Quema de Calorías",
+    description:
+      "Quema hasta 600-800 calorías por clase de 45 minutos. El entrenamiento cardiovascular más efectivo.",
+  },
+  {
+    icon: "heart",
+    title: "Salud Cardiovascular",
+    description:
+      "Fortalece tu corazón y mejora tu resistencia cardiovascular con entrenamientos progresivos.",
+  },
+  {
+    icon: "lightning",
+    title: "Bajo Impacto",
+    description:
+      "Ejercicio de alta intensidad sin impacto en articulaciones. Ideal para todas las edades.",
+  },
+  {
+    icon: "users",
+    title: "Energía Grupal",
+    description:
+      "La motivación del grupo y la música crean una experiencia única y adictiva.",
+  },
+  {
+    icon: "chart",
+    title: "Resultados Visibles",
+    description:
+      "Tonifica piernas, glúteos y core. Resultados visibles en 4-6 semanas de entrenamiento constante.",
+  },
+  {
+    icon: "music",
+    title: "Música Motivadora",
+    description:
+      "Playlist cuidadosamente seleccionado para maximizar tu energía y disfrutar cada clase.",
+  },
+];
+
+// Horarios específicos de spinning
+const spinningSchedule = [
+  { days: "Lunes", hours: "6:00 AM, 7:00 PM, 8:00 PM" },
+  { days: "Martes", hours: "6:00 AM, 7:00 PM" },
+  { days: "Miércoles", hours: "6:00 AM, 7:00 PM, 8:00 PM" },
+  { days: "Jueves", hours: "6:00 AM, 7:00 PM" },
+  { days: "Viernes", hours: "6:00 AM, 7:00 PM" },
+  { days: "Sábado", hours: "9:00 AM, 10:00 AM" },
+];
+
+// FAQ específico de spinning
+const spinningFAQ = [
+  {
+    question: "¿Necesito tener experiencia en spinning?",
+    answer:
+      "¡No! Nuestras clases están diseñadas para todos los niveles. Tenemos clases para principiantes donde aprenderás la técnica correcta, ajustes de la bici y ritmo de pedaleo. Nuestros instructores te guiarán en cada paso.",
+  },
+  {
+    question: "¿Qué debo llevar a mi primera clase?",
+    answer:
+      "Solo necesitas ropa deportiva cómoda, una toalla y una botella de agua. Nosotros proporcionamos las bicicletas estáticas profesionales. Si tienes zapatos de ciclismo con calas SPD, puedes traerlos, aunque no son obligatorios.",
+  },
+  {
+    question: "¿Cuánto dura una clase de spinning?",
+    answer:
+      "Nuestras clases tienen una duración de 45 minutos, incluyendo calentamiento y enfriamiento. Es el tiempo perfecto para un entrenamiento intenso y efectivo sin agotarte demasiado.",
+  },
+  {
+    question: "¿Puedo seguir el ritmo si soy principiante?",
+    answer:
+      "¡Por supuesto! Cada persona controla la resistencia de su propia bici. El instructor te guiará con diferentes niveles de intensidad, pero TÚ decides qué tan fuerte pedalear. Empieza a tu ritmo y ve progresando.",
+  },
+  {
+    question: "¿Qué tan llenas están las clases?",
+    answer:
+      "Nuestras clases más populares (6:00 AM y 7:00 PM) suelen llenarse rápido. Te recomendamos reservar tu lugar con anticipación a través de nuestra app o en recepción. Tenemos cupo limitado para garantizar espacio cómodo.",
+  },
+  {
+    question: "¿Incluye la membresía las clases de spinning?",
+    answer:
+      "Sí, todas nuestras membresías incluyen acceso ilimitado a las clases de spinning. Solo necesitas reservar tu lugar con anticipación.",
+  },
+];
+
+// Instructores de spinning (reutilizable para otros servicios)
+const instructores = [
+  {
+    name: "María González",
+    role: "Instructora Principal",
+    specialty: "Spinning & Resistencia",
+    experience: "8 años de experiencia",
+    description:
+      "Especialista en entrenamiento cardiovascular de alta intensidad.",
+  },
+  {
+    name: "Carlos Ramírez",
+    role: "Instructor",
+    specialty: "Spinning & Motivación",
+    experience: "5 años de experiencia",
+    description: "Experto en crear ambientes energéticos y motivadores.",
+  },
+];
+---
+
+<Layout
+  title="Clases de Spinning | Gym Trasciende - Quema Calorías y Diviértete"
+  description="Clases de spinning profesionales en Gym Trasciende. Quema hasta 800 calorías por sesión, fortalece tu corazón y tonifica tu cuerpo. Instructores certificados, música motivadora y horarios flexibles. ¡Prueba tu primera clase gratis!"
+  keywords="clases spinning, spinning gym, entrenamiento cardiovascular, quemar calorías, clases grupales fitness, spinning para principiantes, instructores spinning certificados"
+  type="website"
+>
+  <!-- 1. Hero -->
+  <HeroClipped
+    img="/bento-info/bentospin.webp"
+    alt="Clases de Spinning en Gym Trasciende"
+    minHeight="min-h-[80vh]"
+    overlayOpacity="50"
+  >
+    <div
+      class="mx-auto flex w-full max-w-5xl flex-col items-center gap-6 text-center"
+    >
+      <div class="rounded-xl bg-white/10 p-8 backdrop-blur-sm md:p-12">
+        <div class="mb-4 inline-block rounded-full bg-emerald-500/20 px-4 py-2">
+          <span class="text-primary text-sm font-bold tracking-wide uppercase"
+            >Servicio Destacado</span
+          >
+        </div>
+        <h1
+          class="text-secondary mb-4 text-4xl leading-tight font-bold md:mb-6 md:text-6xl lg:text-7xl"
+        >
+          Clases de Spinning
+        </h1>
+        <p
+          class="text-secondary mx-auto mb-6 max-w-2xl text-lg leading-relaxed md:text-xl"
+        >
+          Quema calorías, fortalece tu corazón y diviértete al ritmo de la
+          música con nuestras clases profesionales de spinning.
+        </p>
+        <div class="flex flex-col gap-3 sm:flex-row sm:justify-center">
+          <a
+            href="#reserva"
+            class="bg-primary hover:bg-secondary inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-lg font-bold text-black transition-all duration-300 hover:scale-105"
+          >
+            Reserva tu Clase
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </a>
+          <a
+            href="#horarios"
+            class="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-white/10"
+          >
+            Ver Horarios
+          </a>
+        </div>
+      </div>
+    </div>
+  </HeroClipped>
+
+  <!-- 2. ¿Qué es el Spinning? -->
+  <SectionContainer class="py-16 md:py-20">
+    <div class="mx-auto max-w-4xl">
+      <Subtitle>¿Qué es el Spinning?</Subtitle>
+      <div class="grid gap-8 md:grid-cols-2">
+        <div>
+          <p class="text-secondary mb-4 text-lg leading-relaxed">
+            El spinning es un entrenamiento cardiovascular de <span
+              class="text-primary font-semibold">alta intensidad</span
+            >
+            en bicicleta estática, realizado al ritmo de música motivadora y guiado
+            por instructores certificados.
+          </p>
+          <p class="text-secondary text-base leading-relaxed">
+            En nuestras clases de 45 minutos, experimentarás diferentes ritmos,
+            resistencias y técnicas que simulan terrenos variados. Es una forma
+            divertida, efectiva y social de mejorar tu condición física.
+          </p>
+        </div>
+        <div
+          class="rounded-xl border border-emerald-500/20 bg-gray-900/50 p-6 backdrop-blur-sm"
+        >
+          <h3 class="mb-4 text-xl font-bold text-white">
+            En cada clase trabajarás:
+          </h3>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <svg
+                class="text-primary mt-1 h-5 w-5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-300"
+                >Sistema cardiovascular y resistencia</span
+              >
+            </li>
+            <li class="flex items-start gap-3">
+              <svg
+                class="text-primary mt-1 h-5 w-5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-300"
+                >Tonificación de piernas y glúteos</span
+              >
+            </li>
+            <li class="flex items-start gap-3">
+              <svg
+                class="text-primary mt-1 h-5 w-5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-300"
+                >Fortalecimiento del core y estabilidad</span
+              >
+            </li>
+            <li class="flex items-start gap-3">
+              <svg
+                class="text-primary mt-1 h-5 w-5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-300"
+                >Quema de calorías y pérdida de grasa</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </SectionContainer>
+
+  <!-- 3. Beneficios -->
+  <ServiceFeatures
+    title="Beneficios del Spinning"
+    features={spinningFeatures}
+  />
+
+  <!-- 4. Niveles de Clases -->
+  <SectionContainer class="py-16 md:py-20">
+    <Subtitle>Clases para Todos los Niveles</Subtitle>
+    <div class="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
+      <!-- Principiante -->
+      <div
+        class="rounded-xl border border-emerald-500/20 bg-gray-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-emerald-400/40"
+      >
+        <div class="mb-4 inline-block rounded-lg bg-emerald-500/20 px-3 py-1">
+          <span class="text-primary text-sm font-bold">PRINCIPIANTE</span>
+        </div>
+        <h3 class="mb-3 text-xl font-bold text-white">Spin Intro</h3>
+        <p class="mb-4 text-sm text-gray-300">
+          Perfecto para tu primera vez. Aprende la técnica correcta, ajustes de
+          la bici y familiarízate con diferentes resistencias.
+        </p>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li>✓ Ritmo moderado</li>
+          <li>✓ Explicación detallada</li>
+          <li>✓ Descansos frecuentes</li>
+        </ul>
+      </div>
+
+      <!-- Intermedio -->
+      <div
+        class="rounded-xl border border-teal-500/20 bg-gray-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-teal-400/40"
+      >
+        <div class="mb-4 inline-block rounded-lg bg-teal-500/20 px-3 py-1">
+          <span class="text-sm font-bold text-teal-400">INTERMEDIO</span>
+        </div>
+        <h3 class="mb-3 text-xl font-bold text-white">Spin Power</h3>
+        <p class="mb-4 text-sm text-gray-300">
+          Aumenta la intensidad con intervalos de alta energía, subidas
+          desafiantes y sprints controlados.
+        </p>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li>✓ Ritmo alto-moderado</li>
+          <li>✓ Intervalos HIIT</li>
+          <li>✓ Mayor resistencia</li>
+        </ul>
+      </div>
+
+      <!-- Avanzado -->
+      <div
+        class="rounded-xl border border-cyan-500/20 bg-gray-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-cyan-400/40"
+      >
+        <div class="mb-4 inline-block rounded-lg bg-cyan-500/20 px-3 py-1">
+          <span class="text-sm font-bold text-cyan-400">AVANZADO</span>
+        </div>
+        <h3 class="mb-3 text-xl font-bold text-white">Spin Extreme</h3>
+        <p class="mb-4 text-sm text-gray-300">
+          Desafío máximo con sprints intensos, subidas prolongadas y mínimos
+          descansos. Para ciclistas experimentados.
+        </p>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li>✓ Ritmo muy alto</li>
+          <li>✓ Resistencia máxima</li>
+          <li>✓ Sin pausas</li>
+        </ul>
+      </div>
+    </div>
+  </SectionContainer>
+
+  <!-- 5. Horarios -->
+  <section id="horarios">
+    <SectionContainer class="py-16 md:py-20">
+      <div class="mx-auto max-w-3xl">
+        <Subtitle>Horarios de Clases</Subtitle>
+        <p class="text-secondary mb-8 text-center">
+          Reserva tu lugar con anticipación. Cupo limitado para garantizar la
+          mejor experiencia.
+        </p>
+        <ScheduleSection schedule={spinningSchedule} />
+        <div class="mt-6 text-center">
+          <p class="text-sm text-gray-400">
+            💡 Tip: Las clases de 6:00 AM y 7:00 PM son las más populares.
+            ¡Reserva con tiempo!
+          </p>
+        </div>
+      </div>
+    </SectionContainer>
+  </section>
+
+  <!-- 6. Instructores -->
+  <SectionContainer class="py-16 md:py-20">
+    <Subtitle>Nuestros Instructores</Subtitle>
+    <div class="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
+      {
+        instructores.map((instructor) => (
+          <div class="rounded-xl border border-white/10 bg-gray-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-emerald-500/30">
+            <div class="mb-4 flex items-center gap-4">
+              <div class="flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-emerald-500/20 to-cyan-500/20">
+                <svg
+                  class="h-8 w-8 text-white/60"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-white">{instructor.name}</h3>
+                <p class="text-primary text-sm font-semibold">
+                  {instructor.role}
+                </p>
+              </div>
+            </div>
+            <div class="mb-3 flex items-center gap-2">
+              <svg
+                class="text-primary h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                />
+              </svg>
+              <span class="text-sm text-gray-300">{instructor.specialty}</span>
+            </div>
+            <p class="mb-2 text-xs text-gray-400">{instructor.experience}</p>
+            <p class="text-sm text-gray-300">{instructor.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </SectionContainer>
+
+  <!-- 7. Galería -->
+  <Gallery />
+
+  <!-- 8. Testimonios -->
+  <Reviews />
+
+  <!-- 9. FAQ -->
+  <FAQ items={spinningFAQ} />
+
+  <!-- 10. Precios -->
+  <PricingPlan />
+
+  <!-- 11. CTA Final -->
+  <section id="reserva">
+    <SectionContainer class="py-20 md:py-24">
+      <div
+        class="mx-auto max-w-4xl rounded-2xl border border-emerald-500/30 bg-linear-to-br from-gray-900/80 to-gray-800/80 p-8 text-center backdrop-blur-sm md:p-12"
+      >
+        <h2
+          class="text-secondary mb-4 text-3xl font-bold md:text-4xl lg:text-5xl"
+        >
+          ¡Tu Primera Clase es GRATIS!
+        </h2>
+        <p
+          class="text-secondary mx-auto mb-8 max-w-2xl text-lg leading-relaxed"
+        >
+          Ven a probar una clase de spinning sin compromiso. Trae solo tu
+          energía, nosotros ponemos todo lo demás.
+        </p>
+        <div
+          class="flex flex-col items-center justify-center gap-4 sm:flex-row"
+        >
+          <a
+            href="/contacto"
+            class="bg-primary hover:bg-secondary inline-flex w-full items-center justify-center gap-2 rounded-lg px-8 py-4 text-lg font-bold text-black transition-all duration-300 hover:scale-105 sm:w-auto"
+          >
+            Reservar Clase Gratis
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </a>
+          <a
+            href="/servicios"
+            class="inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-emerald-500 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-emerald-500/10 sm:w-auto"
+          >
+            Ver Otros Servicios
+          </a>
+        </div>
+        <p class="mt-6 text-sm text-gray-400">
+          📱 También puedes llamarnos o escribirnos por WhatsApp para reservar
+        </p>
+      </div>
+    </SectionContainer>
+  </section>
+</Layout>

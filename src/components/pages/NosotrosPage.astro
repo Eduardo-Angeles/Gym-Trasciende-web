@@ -15,30 +15,23 @@
  */
 
 import Layout from "@layouts/Layout.astro";
-import HeroClipped from "@components/HeroClipped.astro";
-import ContacSocialPils from "@components/ContacSocialPils.astro";
-import SectionContainer from "@components/SectionContainer.astro";
-import Gallery from "@components/Gallery.astro";
-import SocialBest from "@components/SocialBest.astro";
-import Pilares from "@components/Pilares.astro";
-import OurStory from "@components/OurStory.astro";
-import TeamSection from "@components/TeamSection.astro";
-import TrustMetrics from "@components/TrustMetrics.astro";
-import ScheduleSection from "@components/ScheduleSection.astro";
-import Breadcrumbs from "@components/Breadcrumbs.astro";
-import FAQ from "@components/FAQ.astro";
+import HeroClipped from "@components/sections/HeroClipped.astro";
+import ContacSocialPils from "@components/social/ContacSocialPils.astro";
+import SectionContainer from "@components/layout/SectionContainer.astro";
+import Gallery from "@components/sections/Gallery.astro";
+import SocialBest from "@components/social/SocialBest.astro";
+import Pilares from "@components/sections/Pilares.astro";
+import OurStory from "@components/sections/OurStory.astro";
+import TeamSection from "@components/sections/TeamSection.astro";
+import TrustMetrics from "@components/sections/TrustMetrics.astro";
+import ScheduleSection from "@components/sections/ScheduleSection.astro";
+import FAQ from "@components/sections/FAQ.astro";
 
 // Datos de horario del gimnasio
 const schedule = [
   { days: "Lunes - Viernes", hours: "5:00 AM - 11:00 PM" },
   { days: "Sábados", hours: "7:00 AM - 9:00 PM" },
   { days: "Domingos", hours: "8:00 AM - 2:00 PM" },
-];
-
-// Breadcrumbs para navegación y SEO
-const breadcrumbs = [
-  { label: "Inicio", url: "/" },
-  { label: "Nosotros", url: "/nosotros" },
 ];
 
 // Preguntas frecuentes sobre el gimnasio
@@ -106,11 +99,6 @@ const faqItems = [
       </div>
     </div>
   </HeroClipped>
-
-  <!-- Breadcrumbs para navegación y SEO -->
-  <SectionContainer class="pt-6 md:pt-8">
-    <Breadcrumbs items={breadcrumbs} />
-  </SectionContainer>
 
   <!-- 2. Nuestra Historia -->
   <OurStory />

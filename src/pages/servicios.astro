@@ -1,0 +1,272 @@
+---
+/**
+ * Servicios - Página principal de servicios (HUB)
+ *
+ * ESTRUCTURA:
+ * 1. Hero - Introducción a servicios
+ * 2. BentoInfo - Grid con los 4 servicios principales (links a páginas individuales)
+ * 3. TrustMetrics - Estadísticas y confianza
+ * 4. FAQ - Preguntas frecuentes sobre servicios
+ * 5. CTA - Llamado a la acción
+ */
+
+import Layout from "@layouts/Layout.astro";
+import HeroClipped from "@components/sections/HeroClipped.astro";
+import SectionContainer from "@components/layout/SectionContainer.astro";
+import BentoInfo from "@components/services/BentoInfo.astro";
+import TrustMetrics from "@components/sections/TrustMetrics.astro";
+import FAQ from "@components/sections/FAQ.astro";
+import Subtitle from "@components/ui/Subtitle.astro";
+
+// FAQ general sobre servicios
+const faqItems = [
+  {
+    question: "¿Qué servicios ofrece Gym Trasciende?",
+    answer:
+      "Ofrecemos 4 servicios principales: Área de Pesas y Fuerza, Clases Profesionales de Spinning, Área de Adultos Mayores, y Asesoría en Nutrición y Recuperación. Cada servicio está diseñado con profesionales certificados.",
+  },
+  {
+    question: "¿Necesito experiencia previa?",
+    answer:
+      "¡No! Todos nuestros servicios están diseñados para todos los niveles. Ya seas principiante o avanzado, nuestros entrenadores adaptarán los programas a tu nivel y objetivos personales.",
+  },
+  {
+    question: "¿Puedo probar una clase antes de inscribirme?",
+    answer:
+      "¡Por supuesto! Ofrecemos una clase de prueba gratuita para que conozcas nuestras instalaciones, entrenadores y el ambiente que te espera. Contáctanos para agendar tu visita.",
+  },
+  {
+    question: "¿Los servicios tienen costo adicional?",
+    answer:
+      "La mayoría de nuestros servicios están incluidos en tu membresía. Algunos servicios especializados como entrenamiento personal 1-a-1 o planes nutricionales personalizados tienen un costo adicional.",
+  },
+  {
+    question: "¿Qué incluye la membresía?",
+    answer:
+      "Todas nuestras membresías incluyen acceso completo al área de pesas, clases grupales de spinning, uso de instalaciones, asesoría básica de entrenadores y participación en eventos especiales del gimnasio.",
+  },
+];
+---
+
+<Layout
+  title="Servicios | Gym Trasciende - Pesas, Spinning, Nutrición y Más"
+  description="Descubre nuestros servicios profesionales: Área de pesas y fuerza, clases de spinning, programas para adultos mayores y asesoría nutricional. Entrenadores certificados y equipamiento de primera."
+  keywords="servicios gym, clases spinning, área de pesas, entrenamiento fuerza, nutrición deportiva, gym adultos mayores, entrenadores certificados"
+  type="website"
+>
+  <!-- 1. Hero -->
+  <HeroClipped
+    img="/fondofijo.webp"
+    alt="Gym Trasciende - Nuestros servicios profesionales"
+    minHeight="min-h-[70vh]"
+    overlayOpacity="60"
+  >
+    <div
+      class="mx-auto flex w-full max-w-4xl flex-col items-center gap-6 text-center"
+    >
+      <div class="rounded-xl bg-white/10 p-8 backdrop-blur-sm md:p-10">
+        <h1
+          class="text-secondary mb-4 text-4xl leading-tight font-bold md:mb-6 md:text-6xl"
+        >
+          Nuestros Servicios
+        </h1>
+        <p
+          class="text-secondary mx-auto max-w-2xl text-base leading-relaxed md:text-lg"
+        >
+          Equipamiento de primera, entrenadores certificados y programas
+          diseñados para ayudarte a alcanzar tus objetivos de fitness de manera
+          segura y efectiva.
+        </p>
+      </div>
+    </div>
+  </HeroClipped>
+
+  <!-- 2. Introducción -->
+  <SectionContainer class="py-16 md:py-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <Subtitle>¿Qué ofrecemos?</Subtitle>
+      <p class="text-secondary text-lg leading-relaxed">
+        En Gym Trasciende no solo ofrecemos un espacio para entrenar. Brindamos
+        una
+        <span class="text-primary font-semibold"
+          >experiencia completa de transformación</span
+        >
+        con servicios especializados, profesionales certificados y el mejor equipamiento.
+      </p>
+    </div>
+  </SectionContainer>
+
+  <!-- 3. Grid de Servicios (BentoInfo) -->
+  <BentoInfo />
+
+  <!-- 4. Por qué elegirnos -->
+  <SectionContainer class="py-16 md:py-20">
+    <div class="mx-auto max-w-4xl">
+      <Subtitle>¿Por qué elegir nuestros servicios?</Subtitle>
+
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <!-- Punto 1 -->
+        <div class="flex gap-4">
+          <div
+            class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-emerald-500/20"
+          >
+            <svg
+              class="h-6 w-6 text-emerald-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+              ></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="mb-2 text-lg font-bold text-white">
+              Entrenadores Certificados
+            </h3>
+            <p class="text-sm text-gray-300">
+              Profesionales con certificaciones internacionales y años de
+              experiencia
+            </p>
+          </div>
+        </div>
+
+        <!-- Punto 2 -->
+        <div class="flex gap-4">
+          <div
+            class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-teal-500/20"
+          >
+            <svg
+              class="h-6 w-6 text-teal-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="mb-2 text-lg font-bold text-white">
+              Equipamiento de Primera
+            </h3>
+            <p class="text-sm text-gray-300">
+              Máquinas de última generación y mantenimiento constante
+            </p>
+          </div>
+        </div>
+
+        <!-- Punto 3 -->
+        <div class="flex gap-4">
+          <div
+            class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-cyan-500/20"
+          >
+            <svg
+              class="h-6 w-6 text-cyan-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+              ></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="mb-2 text-lg font-bold text-white">
+              Ambiente Inclusivo
+            </h3>
+            <p class="text-sm text-gray-300">
+              Programas para todos los niveles, edades y capacidades
+            </p>
+          </div>
+        </div>
+
+        <!-- Punto 4 -->
+        <div class="flex gap-4">
+          <div
+            class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-emerald-400/20"
+          >
+            <svg
+              class="h-6 w-6 text-emerald-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+              ></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="mb-2 text-lg font-bold text-white">Seguridad Primero</h3>
+            <p class="text-sm text-gray-300">
+              Protocolos estrictos y supervisión constante para tu bienestar
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </SectionContainer>
+
+  <!-- 5. Métricas -->
+  <TrustMetrics />
+
+  <!-- 6. FAQ -->
+  <FAQ items={faqItems} />
+
+  <!-- 7. CTA Final -->
+  <SectionContainer class="py-20 md:py-24">
+    <div
+      class="mx-auto max-w-4xl rounded-2xl border border-emerald-500/30 bg-linear-to-br from-gray-900/80 to-gray-800/80 p-8 text-center backdrop-blur-sm md:p-12"
+    >
+      <h2 class="text-secondary mb-4 text-3xl font-bold md:text-4xl">
+        ¿Listo para comenzar?
+      </h2>
+      <p class="text-secondary mx-auto mb-8 max-w-2xl text-lg leading-relaxed">
+        Agenda una visita y prueba cualquiera de nuestros servicios de forma
+        gratuita. Descubre por qué somos el gimnasio favorito de más de 450
+        miembros activos.
+      </p>
+      <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <a
+          href="/contacto"
+          class="bg-primary hover:bg-secondary inline-flex w-full items-center justify-center gap-2 rounded-lg px-8 py-4 text-lg font-bold text-black transition-all duration-300 hover:scale-105 sm:w-auto"
+        >
+          Agenda tu Visita
+          <svg
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+        <a
+          href="/#pricing"
+          class="inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-emerald-500 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-emerald-500/10 sm:w-auto"
+        >
+          Ver Planes y Precios
+        </a>
+      </div>
+    </div>
+  </SectionContainer>
+</Layout>
