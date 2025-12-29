@@ -8,7 +8,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://strong-nasturtium-2ec0f6.netlify.app",
+  site: "https://trasciendegym.com",
 
   vite: {
     plugins: [tailwindcss()],
@@ -22,13 +22,13 @@ export default defineConfig({
       lastmod: new Date(),
       // Configuración personalizada de URLs
       customPages: [
-        "https://strong-nasturtium-2ec0f6.netlify.app/",
-        "https://strong-nasturtium-2ec0f6.netlify.app/nosotros",
-        "https://strong-nasturtium-2ec0f6.netlify.app/links",
+        "https://trasciendegym.com/",
+        "https://trasciendegym.com/nosotros",
+        "https://trasciendegym.com/links",
       ],
       serialize(item) {
         // Prioridad personalizada por página
-        if (item.url === "https://strong-nasturtium-2ec0f6.netlify.app/") {
+        if (item.url === "https://trasciendegym.com/") {
           item.priority = 1.0;
         }
         if (item.url.includes("/nosotros")) {

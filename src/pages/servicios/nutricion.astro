@@ -45,27 +45,383 @@
  */
 
 import Layout from "@layouts/Layout.astro";
-// TODO: Importar más componentes...
+import HeroClipped from "@components/sections/HeroClipped.astro";
+import SectionContainer from "@components/layout/SectionContainer.astro";
+import Subtitle from "@components/ui/Subtitle.astro";
+import ServiceFeatures from "@components/services/ServiceFeatures.astro";
+import ScheduleSection from "@components/sections/ScheduleSection.astro";
+import Gallery from "@components/sections/Gallery.astro";
+import Reviews from "@components/sections/Reviews.astro";
+import FAQ from "@components/sections/FAQ.astro";
+import PricingPlan from "@components/sections/PricingPlan.astro";
+
+// Características/beneficios del área de nutrición
+const nutricionFeatures = [
+  {
+    icon: "heart",
+    title: "Planes Personalizados",
+    description:
+      "Evaluación nutricional y planes alimenticios adaptados a tus objetivos y estilo de vida.",
+  },
+  {
+    icon: "star",
+    title: "Nutriólogo Certificado",
+    description:
+      "Atención profesional y seguimiento cercano para resultados reales y sostenibles.",
+  },
+  {
+    icon: "chart",
+    title: "Educación Nutricional",
+    description:
+      "Talleres, charlas y recursos para que aprendas a comer mejor y tomar decisiones informadas.",
+  },
+  {
+    icon: "clock",
+    title: "Seguimiento Mensual",
+    description:
+      "Revisiones periódicas para ajustar tu plan y mantenerte motivado/a.",
+  },
+  {
+    icon: "trophy",
+    title: "Resultados Medibles",
+    description:
+      "Monitoreo de progreso, composición corporal y mejoras en salud general.",
+  },
+  {
+    icon: "music",
+    title: "Recetas y Tips",
+    description:
+      "Ideas prácticas, recetas saludables y consejos para facilitar tu día a día.",
+  },
+];
+
+// Horarios sugeridos (puedes personalizar)
+const nutricionSchedule = [
+  { days: "Lunes a Viernes", hours: "10:00 AM - 2:00 PM" },
+  { days: "Sábado", hours: "10:00 AM - 12:00 PM" },
+];
+
+// FAQ específico de nutrición
+const nutricionFAQ = [
+  {
+    question: "¿Necesito pagar extra por nutrición?",
+    answer:
+      "La consulta inicial está incluida en algunas membresías. Consulta nuestros planes para más detalles.",
+  },
+  {
+    question: "¿Incluye plan de comidas?",
+    answer:
+      "Sí, recibirás un plan alimenticio personalizado según tus objetivos y preferencias.",
+  },
+  {
+    question: "¿Hacen seguimiento mensual?",
+    answer:
+      "Sí, ofrecemos revisiones y ajustes mensuales para asegurar tu progreso.",
+  },
+  {
+    question: "¿Es solo para bajar de peso?",
+    answer:
+      "No, también ayudamos con aumento de masa muscular, mejora de salud, rendimiento deportivo y hábitos sostenibles.",
+  },
+  {
+    question: "¿Qué incluye una consulta?",
+    answer:
+      "Evaluación, plan personalizado, educación nutricional y seguimiento. Todo adaptado a ti.",
+  },
+  {
+    question: "¿Puedo consultar si no soy miembro?",
+    answer:
+      "Sí, el servicio de nutrición está abierto a todo público, seas o no miembro del gimnasio.",
+  },
+];
 ---
 
 <Layout
-  title="Nutrición y Recuperación | Gym Trasciende"
-  description="TODO: Actualizar descripción SEO"
-  keywords="TODO: palabras clave específicas"
+  title="Nutrición y Recuperación | Gym Trasciende - Alimenta tu progreso"
+  description="Consulta nutricional profesional en Gym Trasciende. Planes personalizados, educación, seguimiento y resultados reales. Mejora tu salud y rendimiento con nuestro nutriólogo certificado."
+  keywords="nutrición, consulta nutricional, planes alimenticios, nutriólogo, salud, recuperación, recetas, educación nutricional, seguimiento, gimnasio"
+  type="website"
 >
-  <!-- TODO: Agregar contenido usando spinning.astro como referencia -->
-  <div class="flex min-h-screen items-center justify-center">
-    <div class="text-center">
-      <h1 class="mb-4 text-4xl font-bold text-white">
-        Nutrición y Recuperación
-      </h1>
-      <p class="mb-6 text-gray-300">Esta página está en construcción</p>
-      <a
-        href="/servicios"
-        class="bg-primary hover:bg-secondary rounded-lg px-6 py-3 font-bold text-black transition-all"
-      >
-        Volver a Servicios
-      </a>
+  {/* 1. Hero principal */}
+  <HeroClipped
+    img="/bento-info/comida.webp"
+    alt="Nutrición y recuperación en Gym Trasciende"
+    minHeight="min-h-[80vh]"
+    overlayOpacity="50"
+  >
+    <div
+      class="mx-auto flex w-full max-w-5xl flex-col items-center gap-6 text-center"
+    >
+      <div class="rounded-xl bg-white/10 p-8 backdrop-blur-sm md:p-12">
+        <div class="mb-4 inline-block rounded-full bg-emerald-500/20 px-4 py-2">
+          <span class="text-primary text-sm font-bold tracking-wide uppercase">
+            Nutrición y Recuperación
+          </span>
+        </div>
+        <h1
+          class="text-secondary mb-4 text-4xl leading-tight font-bold md:mb-6 md:text-6xl lg:text-7xl"
+        >
+          Nutrición y Recuperación
+        </h1>
+        <p
+          class="text-secondary mx-auto mb-6 max-w-2xl text-lg leading-relaxed md:text-xl"
+        >
+          Alimenta tu progreso con asesoría profesional, planes personalizados y
+          educación nutricional para lograr tus objetivos de forma saludable.
+        </p>
+        <div class="flex flex-col gap-3 sm:flex-row sm:justify-center">
+          <a
+            href="#reserva"
+            class="bg-primary hover:bg-secondary inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-lg font-bold text-black transition-all duration-300 hover:scale-105"
+          >
+            Agenda tu Consulta
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </a>
+          <a
+            href="#horarios"
+            class="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-white/10"
+          >
+            Ver Horarios
+          </a>
+        </div>
+      </div>
     </div>
-  </div>
+  </HeroClipped>
+
+  {/* 2. ¿Por qué consultar nutrición? */}
+  <SectionContainer class="py-16 md:py-20">
+    <div class="mx-auto max-w-4xl">
+      <Subtitle>¿Por qué consultar nutrición?</Subtitle>
+      <div class="grid gap-8 md:grid-cols-2">
+        <div>
+          <p class="text-secondary mb-4 text-lg leading-relaxed">
+            Una buena alimentación es clave para tu salud, rendimiento y
+            recuperación. Nuestro servicio de nutrición te ayuda a lograr tus
+            metas de forma sostenible.
+          </p>
+          <p class="text-secondary text-base leading-relaxed">
+            Recibe atención personalizada, educación y seguimiento para
+            transformar tus hábitos y potenciar tus resultados.
+          </p>
+        </div>
+        <div
+          class="rounded-xl border border-emerald-500/20 bg-gray-900/50 p-6 backdrop-blur-sm"
+        >
+          <h3 class="mb-4 text-xl font-bold text-white">
+            Servicios disponibles:
+          </h3>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <svg
+                class="text-primary mt-1 h-5 w-5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-300">Evaluación nutricional inicial</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg
+                class="text-primary mt-1 h-5 w-5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-300"
+                >Planes alimenticios personalizados</span
+              >
+            </li>
+            <li class="flex items-start gap-3">
+              <svg
+                class="text-primary mt-1 h-5 w-5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-300"
+                >Educación y talleres nutricionales</span
+              >
+            </li>
+            <li class="flex items-start gap-3">
+              <svg
+                class="text-primary mt-1 h-5 w-5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-300">Seguimiento y ajustes mensuales</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg
+                class="text-primary mt-1 h-5 w-5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-300">Recetas y recursos prácticos</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </SectionContainer>
+
+  {/* 3. Beneficios */}
+  <ServiceFeatures
+    title="Beneficios de la Nutrición"
+    features={nutricionFeatures}
+  />
+
+  {/* 4. Ejemplo de planes y recursos */}
+  <SectionContainer class="py-16 md:py-20">
+    <Subtitle>Ejemplo de Plan y Recursos</Subtitle>
+    <div class="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
+      <div
+        class="rounded-xl border border-emerald-500/20 bg-gray-900/50 p-6 backdrop-blur-sm"
+      >
+        <h3 class="mb-3 text-lg font-bold text-white">
+          Plan de alimentación básico
+        </h3>
+        <ul class="list-disc pl-5 text-gray-300">
+          <li>Desayuno: Avena con fruta y nueces</li>
+          <li>Comida: Pollo a la plancha, arroz integral y ensalada</li>
+          <li>Snack: Yogur natural con semillas</li>
+          <li>Cena: Omelette de verduras y pan integral</li>
+        </ul>
+      </div>
+      <div
+        class="rounded-xl border border-teal-500/20 bg-gray-900/50 p-6 backdrop-blur-sm"
+      >
+        <h3 class="mb-3 text-lg font-bold text-white">Tips de recuperación</h3>
+        <ul class="list-disc pl-5 text-gray-300">
+          <li>Hidrátate antes, durante y después del ejercicio</li>
+          <li>Incluye proteína en cada comida</li>
+          <li>Descansa lo suficiente para recuperarte</li>
+          <li>Evita dietas extremas, busca equilibrio</li>
+        </ul>
+      </div>
+    </div>
+  </SectionContainer>
+
+  {/* 5. Horarios */}
+  <section id="horarios">
+    <SectionContainer class="py-16 md:py-20">
+      <div class="mx-auto max-w-3xl">
+        <Subtitle>Horarios de Consultas</Subtitle>
+        <p class="text-secondary mb-8 text-center">
+          Agenda tu consulta en los horarios disponibles o pregunta por opciones
+          personalizadas.
+        </p>
+        <ScheduleSection schedule={nutricionSchedule} />
+      </div>
+    </SectionContainer>
+  </section>
+
+  {/* 6. Galería */}
+  <Gallery />
+
+  {/* 7. Testimonios */}
+  <Reviews />
+
+  {/* 8. FAQ */}
+  <FAQ items={nutricionFAQ} />
+
+  {/* 9. Precios */}
+  <PricingPlan />
+
+  {/* 10. CTA Final */}
+  <section id="reserva">
+    <SectionContainer class="py-20 md:py-24">
+      <div
+        class="mx-auto max-w-4xl rounded-2xl border border-emerald-500/30 bg-linear-to-br from-gray-900/80 to-gray-800/80 p-8 text-center backdrop-blur-sm md:p-12"
+      >
+        <h2
+          class="text-secondary mb-4 text-3xl font-bold md:text-4xl lg:text-5xl"
+        >
+          ¡Mejora tu salud desde hoy!
+        </h2>
+        <p
+          class="text-secondary mx-auto mb-8 max-w-2xl text-lg leading-relaxed"
+        >
+          Agenda tu consulta nutricional y recibe tu plan personalizado para
+          transformar tu alimentación y bienestar.
+        </p>
+        <div
+          class="flex flex-col items-center justify-center gap-4 sm:flex-row"
+        >
+          <a
+            href="/contacto"
+            class="bg-primary hover:bg-secondary inline-flex w-full items-center justify-center gap-2 rounded-lg px-8 py-4 text-lg font-bold text-black transition-all duration-300 hover:scale-105 sm:w-auto"
+          >
+            Solicitar Consulta Gratis
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </a>
+          <a
+            href="/servicios"
+            class="inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-emerald-500 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-emerald-500/10 sm:w-auto"
+          >
+            Ver Otros Servicios
+          </a>
+        </div>
+        <p class="mt-6 text-sm text-gray-400">
+          📱 También puedes llamarnos o escribirnos por WhatsApp para más
+          información
+        </p>
+      </div>
+    </SectionContainer>
+  </section>
 </Layout>
+> Volver a Servicios
+

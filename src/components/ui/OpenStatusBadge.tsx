@@ -59,13 +59,45 @@ export default function OpenStatusBadge({ schedule }: Props) {
       setIsOpen(false);
     };
 
-    // Parsear días de la semana
+    // Parsear días de la semana (acepta nombres completos, abreviados y rangos)
     const parseDays = (daysStr: string): number[] => {
-      if (daysStr.includes("Lun") && daysStr.includes("Vie")) {
-        return [1, 2, 3, 4, 5]; // Lunes a Viernes
+      const daysMap: Record<string, number> = {
+        domingo: 0,
+        dom: 0,
+        lunes: 1,
+        lun: 1,
+        martes: 2,
+        mar: 2,
+        miércoles: 3,
+        miercoles: 3,
+        mié: 3,
+        mie: 3,
+        jueves: 4,
+        jue: 4,
+        viernes: 5,
+        vie: 5,
+        sábado: 6,
+        sabado: 6,
+        sáb: 6,
+        sab: 6,
+      };
+      const lower = daysStr.toLowerCase().trim();
+      // Rango: "Lunes a Viernes"
+      const rango = lower.match(/(lunes|lun)\s*a\s*(viernes|vie)/);
+      if (rango) return [1, 2, 3, 4, 5];
+      // Rango: "Lunes a Sábado"
+      if (lower.includes("lunes a sábado")) return [1, 2, 3, 4, 5, 6];
+      // Día único
+      for (const key in daysMap) {
+        if (lower === key) return [daysMap[key]];
       }
-      if (daysStr === "Sábado") return [6];
-      if (daysStr === "Domingo") return [0];
+      // Lista separada por comas
+      if (lower.includes(",")) {
+        return lower
+          .split(",")
+          .map((d) => daysMap[d.trim()] ?? -1)
+          .filter((n) => n >= 0);
+      }
       return [];
     };
 
