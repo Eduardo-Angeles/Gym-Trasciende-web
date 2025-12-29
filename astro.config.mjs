@@ -1,16 +1,16 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-
 import tailwindcss from "@tailwindcss/vite";
-
 import preact from "@astrojs/preact";
 import sitemap from "@astrojs/sitemap";
-
 import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://trasciendegym.com",
+
+  // Forzamos salida estática ya que no tienes login ni DB
+  output: "static",
 
   vite: {
     plugins: [tailwindcss()],
@@ -22,14 +22,12 @@ export default defineConfig({
       changefreq: "weekly",
       priority: 0.7,
       lastmod: new Date(),
-      // Configuración personalizada de URLs
       customPages: [
         "https://trasciendegym.com/",
         "https://trasciendegym.com/nosotros",
         "https://trasciendegym.com/links",
       ],
       serialize(item) {
-        // Prioridad personalizada por página
         if (item.url === "https://trasciendegym.com/") {
           item.priority = 1.0;
         }
@@ -41,5 +39,11 @@ export default defineConfig({
     }),
   ],
 
-  adapter: cloudflare(),
+  // Ajuste para Cloudflare y optimización de imágenes
+  adapter: cloudflare({
+    imageService: "compile", // Soluciona el error de "sharp" en los logs
+    platformProxy: {
+      enabled: true,
+    },
+  }),
 });
