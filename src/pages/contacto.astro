@@ -16,24 +16,10 @@ import ScheduleSection from "@components/sections/ScheduleSection.astro";
 // IMPORTANTE: Actualiza el número de WhatsApp con tu número real (formato: 52 + código de área + número)
 const socialLinks = [
   {
-    name: "WhatsApp",
-    url: "https://wa.me/529513004258?text=Hola,%20quiero%20información%20sobre%20Gym%20Trasciende",
-    icon: null,
-    color: "from-green-600 to-green-500",
-    whatsapp: true,
-    special: true,
-  },
-  {
-    name: "TikTok",
-    url: "https://www.tiktok.com/@trasciende.gym",
-    icon: Tiktok,
-    color: "from-black via-[#ff0050] to-[#00f2ea]",
-  },
-  {
     name: "Instagram",
     url: "https://www.instagram.com/trasciendegym?igsh=MmJxaHRjM2w2cG1p",
     icon: Instagram,
-    color: "from-purple-600 via-pink-600 to-orange-500",
+    color: "from-primary to-accent",
   },
   {
     name: "Facebook",
@@ -42,17 +28,24 @@ const socialLinks = [
     color: "from-blue-600 to-blue-500",
   },
   {
-    name: "Sitio Web",
-    url: "/",
+    name: "TikTok",
+    url: "https://www.tiktok.com/@trasciende.gym",
+    icon: Tiktok,
+    color: "from-black via-[#ff0050] to-[#00f2ea]",
+  },
+  {
+    name: "WhatsApp",
+    url: "https://wa.me/529513004258?text=Hola,%20quiero%20información%20sobre%20Gym%20Trasciende",
     icon: null,
-    color: "from-primary to-accent",
-    special: false,
+    color: "from-green-600 to-green-500",
+    whatsapp: true,
+    special: true,
   },
 ];
 
 // Horarios del gimnasio
 const schedule = [
-  { days: "Lunes a Viernes", hours: "6:00 AM - 10:00 PM" },
+  { days: "Lunes a Viernes", hours: "5:00 AM - 10:00 PM" },
   { days: "Sábado", hours: "6:30 AM - 5:00 PM" },
   { days: "Domingo", hours: "12:00 PM - 4:00 PM" },
 ];

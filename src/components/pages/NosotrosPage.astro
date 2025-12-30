@@ -27,11 +27,11 @@ import TrustMetrics from "@components/sections/TrustMetrics.astro";
 import ScheduleSection from "@components/sections/ScheduleSection.astro";
 import FAQ from "@components/sections/FAQ.astro";
 
-// Datos de horario del gimnasio
+// Horarios del gimnasio
 const schedule = [
-  { days: "Lunes - Viernes", hours: "5:00 AM - 11:00 PM" },
-  { days: "Sábados", hours: "7:00 AM - 9:00 PM" },
-  { days: "Domingos", hours: "8:00 AM - 2:00 PM" },
+  { days: "Lunes a Viernes", hours: "5:00 AM - 10:00 PM" },
+  { days: "Sábado", hours: "6:00 AM - 5:00 PM" },
+  { days: "Domingo", hours: "12:00 PM - 4:00 PM" },
 ];
 
 // Preguntas frecuentes sobre el gimnasio
@@ -39,7 +39,7 @@ const faqItems = [
   {
     question: "¿Desde cuándo está abierto Gym Trasciende?",
     answer:
-      "Abrimos nuestras puertas en 2019 con el compromiso de ofrecer un espacio seguro y profesional para la transformación física. Desde entonces, hemos crecido constantemente y servido a más de 450 miembros activos.",
+      "Abrimos nuestras este noviembre del 2025 con el compromiso de ofrecer un espacio seguro y profesional para la transformación física.",
   },
   {
     question: "¿Qué hace diferente a Gym Trasciende de otros gimnasios?",
@@ -47,9 +47,9 @@ const faqItems = [
       "Nos enfocamos en tres pilares fundamentales: experiencia comprobada con entrenadores certificados, tu seguridad como prioridad número uno, y un enfoque integral que va más allá del entrenamiento físico. No solo somos un gimnasio, somos tu socio en la transformación.",
   },
   {
-    question: "¿Los entrenadores están certificados?",
+    question: "¿Los entrenadores tienen experiencia?",
     answer:
-      "Sí, todos nuestros entrenadores cuentan con certificaciones profesionales reconocidas (NSCA-CPT, ACE, NASM, entre otras) y años de experiencia en distintas especialidades como fuerza, cardio, nutrición y prevención de lesiones.",
+      "Sí, todos nuestros entrenadores cuentan con años de experiencia en distintas especialidades como fuerza, cardio, nutrición y prevención de lesiones.",
   },
   {
     question: "¿Ofrecen planes para principiantes?",
@@ -88,11 +88,13 @@ const faqItems = [
           ¿Quiénes somos?
         </h1>
 
-        <p class="max-w-2xl text-base leading-relaxed text-gray-100 md:text-lg">
-          No solo somos un gimnasio; somos tu socio en la transformación.
-          Nuestra meta principal es que alcances tus objetivos de fitness de la
-          mejor forma posible y sin riesgos. Creemos que el verdadero progreso
-          es sostenible y seguro.
+        <p
+          class="max-w-2xl text-base leading-relaxed font-medium text-gray-100 md:text-lg"
+        >
+          Sabemos que empezar puede ser la parte más difícil. Por eso, hemos
+          creado un entorno donde todos son bienvenidos, sin importar su nivel
+          de experiencia. Queremos acompañarte en tu transformación de manera
+          personal.
         </p>
 
         <ContacSocialPils />
@@ -100,17 +102,16 @@ const faqItems = [
     </div>
   </HeroClipped>
 
+  <!-- 5. Métricas de Confianza -->
+  <TrustMetrics />
   <!-- 2. Nuestra Historia -->
-  <OurStory />
-
-  <!-- 3. Pilares Fundamentales -->
-  <Pilares />
+  {/** <OurStory /> **/}
 
   <!-- 4. Nuestro Equipo -->
   <TeamSection />
+  <!-- 3. Pilares Fundamentales -->
 
-  <!-- 5. Métricas de Confianza -->
-  <TrustMetrics />
+  <Pilares />
 
   <!-- 6. Horarios -->
   <SectionContainer class="py-16 md:py-20">
@@ -121,9 +122,6 @@ const faqItems = [
 
   <!-- 7. Redes Sociales y Reseñas -->
   <SocialBest />
-
-  <!-- 8. Galería -->
-  <Gallery />
 
   <!-- 9. Preguntas Frecuentes -->
   <FAQ items={faqItems} />

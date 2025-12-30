@@ -1,11 +1,8 @@
 ---
 import SocialPil from "@components/social/SocialPil.astro";
-import Gmail from "@components/icons/Gmail.astro";
 import Facebook from "@components/icons/Facebook.astro";
 import Instagram from "@components/icons/Instagram.astro";
-import Phone from "@components/icons/Phone.astro";
 import Tiktok from "@components/icons/Tiktok.astro";
-import Yelp from "@components/icons/Yelp.astro";
 ---
 
 <nav
@@ -44,31 +41,18 @@ import Yelp from "@components/icons/Yelp.astro";
   <SocialPil
     href="https://www.tiktok.com/@trasciende.gym"
     class={` 
-              border border-black rounded-full 
+               rounded-full 
               flex justify-center items-center gap-x-2 
               py-2 px-4
               transition 
               hover:scale-110
               bg-gray-700 hover:bg-gray-400
               text-white
+              col-span-2 justify-self-center
+              sm:col-span-1 sm:justify-self-auto
             `}
   >
     <Tiktok class="size-6" />
     Tiktok
-  </SocialPil>
-
-  <SocialPil
-    href="tel:+18623184425"
-    class={` 
-              border border-green-400 rounded-full 
-              flex justify-center items-center gap-x-2 
-              py-2 px-4
-              transition 
-              hover:scale-110
-              bg-green-400 hover:bg-green-600
-            `}
-  >
-    <Phone class="size-6" />
-    Whatsapp
   </SocialPil>
 </nav>

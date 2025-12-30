@@ -64,31 +64,34 @@ const pricingData: Record<AreaId, PricingCard[]> = {
       type: "Semanal",
       price: "$110",
       features: [
-        "Lun-Vie 6am-10pm",
-        "Sáb 6:30am-5pm",
+        "Asesoría personalizada en rutinas",
+        "Acceso completo",
+        "Lun-Vie 5am-10pm",
+        "Sáb 6:00am-5pm",
         "Dom 12pm-4pm",
-        "Visita $35",
       ],
     },
     {
       type: "Quincenal",
       price: "$200",
       features: [
-        "Lun-Vie 6am-10pm",
-        "Sáb 6:30am-5pm",
-        "Dom 12pm-4pm",
+        "Asesoría personalizada en rutinas",
         "Acceso completo",
+        "Lun-Vie 5am-10pm",
+        "Sáb 6:00am-5pm",
+        "Dom 12pm-4pm",
       ],
     },
     {
       type: "Mensual",
       price: "$380",
       features: [
-        "Lun-Vie 6am-10pm",
-        "Sáb 6:30am-5pm",
+        "Asesoría personalizada en rutinas",
+        "Acceso completo",
+        "Lun-Vie 5am-10pm",
+        "Sáb 6:00am-5pm",
         "Dom 12pm-4pm",
         "Promo estudiante $340",
-        "Equipamiento completo",
       ],
     },
   ],
@@ -131,7 +134,8 @@ const pricingData: Record<AreaId, PricingCard[]> = {
       features: [
         "Lun-Vie 8:15am-9:15am",
         "Clases especializadas",
-        "Instructor certificado",
+        "Ambiente seguro",
+        "Seguimiento personalizado",
       ],
     },
     {
@@ -139,6 +143,7 @@ const pricingData: Record<AreaId, PricingCard[]> = {
       price: "$200",
       features: [
         "Lun-Vie 8:15am-9:15am",
+        "Clases especializadas",
         "Ambiente seguro",
         "Seguimiento personalizado",
       ],
@@ -149,8 +154,8 @@ const pricingData: Record<AreaId, PricingCard[]> = {
       features: [
         "Lun-Vie 8:15am-9:15am",
         "Clases especializadas",
-        "Instructor certificado",
-        "Visita $35",
+        "Ambiente seguro",
+        "Seguimiento personalizado",
       ],
     },
   ],
@@ -158,17 +163,21 @@ const pricingData: Record<AreaId, PricingCard[]> = {
     {
       type: "3 Meses",
       price: "$1,000",
-      features: ["Horarios de Pesas", "Acceso completo"],
+      features: ["Horarios de Pesas", "Todos los beneficios del área de pesas"],
     },
     {
       type: "6 Meses",
       price: "$1,900",
-      features: ["Horarios de Pesas", "Ahorra $380"],
+      features: ["Horarios de Pesas", "Todos los beneficios del área de pesas"],
     },
     {
       type: "1 Año",
       price: "$3,750",
-      features: ["Horarios de Pesas", "Ahorra $810", "¡Mejor precio!"],
+      features: [
+        "Horarios de Pesas",
+        "Todos los beneficios del área de pesas",
+        "¡Mejor precio!",
+      ],
     },
   ],
 };
@@ -222,7 +231,7 @@ export default function PricingSelector() {
             {pricingData[selectedArea].map((card, index) => (
               <div
                 key={`${selectedArea}-${index}`}
-                className="group max-w-[250px] min-w-[250px] shrink-0 snap-center rounded-2xl bg-white/85 p-5 shadow-lg backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:scale-[1.03] hover:bg-linear-to-br hover:from-emerald-500/90 hover:to-teal-600/90 hover:shadow-2xl active:scale-[0.98] md:max-w-none md:min-w-0 md:hover:-translate-y-2 md:hover:scale-[1.03]"
+                className="group max-w-62.5 min-w-62.5 shrink-0 snap-center rounded-2xl bg-white/85 p-5 shadow-lg backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:scale-[1.03] hover:bg-linear-to-br hover:from-emerald-500/90 hover:to-teal-600/90 hover:shadow-2xl active:scale-[0.98] md:max-w-none md:min-w-0 md:hover:-translate-y-2 md:hover:scale-[1.03]"
                 style={{
                   animation: "fadeInUp 0.8s ease-out",
                   animationDelay: `${index * 100}ms`,
@@ -277,10 +286,13 @@ export default function PricingSelector() {
                   ))}
                 </ul>
 
-                {/* Botón CTA */}
-                <button className="w-full rounded-lg bg-linear-to-r from-gray-900 to-gray-800 px-6 py-3 font-semibold text-white transition-all duration-300 group-hover:bg-white group-hover:from-white group-hover:to-white group-hover:text-emerald-700 hover:scale-105 hover:shadow-lg active:scale-95">
+                {/* Botón CTA como enlace a contacto */}
+                <a
+                  href="/contacto"
+                  className="block w-full rounded-lg bg-linear-to-r from-gray-900 to-gray-800 px-6 py-3 text-center font-semibold text-white transition-all duration-300 group-hover:bg-white group-hover:from-white group-hover:to-white group-hover:text-emerald-700 hover:scale-105 hover:shadow-lg active:scale-95"
+                >
                   Inscribirme
-                </button>
+                </a>
               </div>
             ))}
           </div>
