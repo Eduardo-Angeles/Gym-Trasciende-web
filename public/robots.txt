@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Allow: /_astro/
+
 Sitemap: https://trasciendegym.com/sitemap-index.xml
