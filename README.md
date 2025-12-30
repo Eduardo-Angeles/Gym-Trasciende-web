@@ -1,5 +1,7 @@
 # 💪 Gym Trasciende - Website
 
+[🌐 Visita el sitio web](https://trasciendegym.com)
+
 > Sitio web moderno para Gym Trasciende. Construido con Astro 5, Tailwind CSS 4, y Preact para máxima performance y experiencia de usuario.
 
 [![Astro 5](https://img.shields.io/badge/Astro-5.16.4-FF5D01?style=flat&logo=astro&logoColor=white)](https://astro.build)
@@ -39,11 +41,13 @@ pnpm astro check
 ## 🔧 Stack Tecnológico
 
 ### Core
+
 - **Astro 5.16.4** - Framework SSG con Islands Architecture
 - **Tailwind CSS 4.1.17** - Utility-first CSS framework
 - **Preact 10.28.0** - Alternativa ligera a React (3KB)
 
 ### Librerías
+
 - **@fontsource-variable/montserrat** - Tipografía variable
 - **keen-slider 6.8.6** - Carrusel de reviews
 - **countup.js** - Animación de contadores
@@ -51,11 +55,13 @@ pnpm astro check
 ## 🎨 Tema
 
 ### Colores de Marca
+
 - **Primary**: `#d5fb00` - Verde lima vibrante
 - **Secondary**: `#f7f7f7` - Gris claro
 - **Accent**: `#006400` - Verde oscuro
 
 ### Tipografía
+
 - **Font**: Montserrat Variable
 
 ## 📄 Licencia
