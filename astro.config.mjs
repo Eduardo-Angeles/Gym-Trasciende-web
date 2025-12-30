@@ -25,7 +25,7 @@ export default defineConfig({
       customPages: [
         "https://trasciendegym.com/",
         "https://trasciendegym.com/nosotros",
-        "https://trasciendegym.com/links",
+        "https://trasciendegym.com/contacto",
       ],
       serialize(item) {
         if (item.url === "https://trasciendegym.com/") {
