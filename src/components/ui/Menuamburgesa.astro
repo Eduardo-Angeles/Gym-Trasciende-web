@@ -1,3 +1,7 @@
+---
+import ButtonAnimation from "../icons/ButtonAnimation.astro";
+---
+
 <div class="relative lg:hidden">
   <input type="checkbox" id="menu-toggle" class="peer hidden" />
 
@@ -40,17 +44,19 @@
     >
       Reviews
     </a>
+
     <a
       href="/contacto"
-      class="border-secondary/5 text-secondary hover:bg-primary/5 hover:text-primary border-b px-6 py-4 font-medium transition-all duration-200 hover:pl-7"
+      role="button"
+      aria-label="Ir a página de contacto"
+      class="group text-primary hover:bg-primary/10 inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
     >
-      Contacto
-    </a>
-    <a
-      href="/contacto"
-      class="bg-primary/10 text-primary hover:bg-primary border-primary/20 border px-6 py-4 font-semibold transition-all duration-200 hover:pl-7 hover:text-black"
-    >
-      Contáctanos
+      <span>¡Quiero entrenar!</span>
+      <ButtonAnimation
+        width={24}
+        height={24}
+        class="transition-transform group-hover:scale-110"
+      />
     </a>
   </nav>
 </div>

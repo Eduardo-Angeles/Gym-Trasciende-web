@@ -1,5 +1,5 @@
 ---
-
+import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
 ---
 
 <!-- Hero: pantalla completa con imagen de fondo -->
@@ -42,13 +42,20 @@
       <!-- Botón de contacto -->
       <a
         href="/contacto"
-        class="bg-primary hover:bg-secondary inline-block rounded-lg px-5 py-2.5 text-sm font-bold text-black transition-all duration-300 hover:scale-105 md:px-8 md:py-4 md:text-lg"
+        role="button"
+        aria-label="Ir a página de contacto"
+        class="group border-primary text-primary hover:bg-primary/10 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
       >
-        Contáctanos
+        <span
+          class="relative text-base font-semibold transition-all duration-300"
+          >¡Quiero entrenar!</span
+        >
+        <ButtonAnimation
+          width={24}
+          height={24}
+          class="transition-transform group-hover:scale-110"
+        />
       </a>
     </div>
   </div>
-
-  <!-- ContacSocial al final de la sección -->
-  <div class="w-full"></div>
 </section>
