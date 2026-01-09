@@ -1,0 +1,204 @@
+---
+/**
+ * Reviews - Página de Reseñas y Testimonios
+ *
+ * ESTRUCTURA:
+ * 1. Hero - Hero con mensaje sobre testimonios reales
+ * 2. TrustMetrics - Estadísticas de confianza (5 estrellas)
+ * 3. Reviews - Carrusel de reseñas de clientes
+ * 4. SocialBest - Videos de TikTok mostrando autenticidad
+ * 5. Impacto - Sección con transformaciones destacadas
+ * 6. FAQ - Preguntas sobre reviews
+ * 7. CTA - Llamado a la acción final
+ */
+
+import Layout from "@layouts/Layout.astro";
+import HeroClipped from "@components/sections/HeroClipped.astro";
+import SectionContainer from "@components/layout/SectionContainer.astro";
+import ReviewsSection from "@components/sections/Reviews.astro";
+import TrustMetrics from "@components/sections/TrustMetrics.astro";
+import SocialBest from "@components/social/SocialBest.astro";
+import FAQ from "@components/sections/FAQ.astro";
+import Subtitle from "@components/ui/Subtitle.astro";
+import ContacSocialPils from "@components/social/ContacSocialPils.astro";
+
+// FAQ sobre reseñas y testimonios
+const faqItems = [
+  {
+    question: "¿Son reales todas estas reseñas?",
+    answer:
+      "¡Por supuesto! Todas nuestras reseñas son 100% auténticas y verificadas. Puedes encontrarlas directamente en nuestros perfiles de Google Maps y Facebook. La transparencia es fundamental para nosotros.",
+  },
+  {
+    question: "¿Cómo puedo dejar mi propia reseña?",
+    answer:
+      "Nos encantaría escuchar tu experiencia! Puedes dejar tu reseña en Google Maps o Facebook. Solo busca 'Trasciende Gym' o usa los enlaces que encontrarás en esta página. Tu opinión nos ayuda a mejorar cada día.",
+  },
+  {
+    question: "¿Qué hace que tantos clientes recomienden Trasciende Gym?",
+    answer:
+      "Nuestros clientes destacan tres aspectos principales: entrenadores profesionales y atentos, instalaciones modernas y limpias, y un ambiente familiar donde todos son bienvenidos sin importar su nivel de experiencia.",
+  },
+  {
+    question: "¿Puedo visitar el gimnasio antes de inscribirme?",
+    answer:
+      "¡Absolutamente! Te invitamos a conocer nuestras instalaciones. Ofrecemos una clase de prueba por solo $35 para que vivas la experiencia completa. Contáctanos para agendar tu visita.",
+  },
+  {
+    question: "¿Ofrecen garantía de resultados?",
+    answer:
+      "Si bien cada cuerpo es diferente y los resultados varían según el compromiso individual, nuestro equipo se compromete a brindarte el mejor acompañamiento, rutinas personalizadas y asesoría nutricional para maximizar tus posibilidades de éxito.",
+  },
+];
+
+// Estadísticas de impacto
+const impactStats = [
+  {
+    icon: "🎯",
+    title: "100% Satisfacción",
+    description:
+      "De nuestros miembros recomiendan Trasciende Gym a sus amigos y familia",
+  },
+  {
+    icon: "💪",
+    title: "Enfoque en Seguridad y Confianza",
+    description:
+      "Atención personalizada constante para garantizar que ejecutas tu plan a la perfección",
+  },
+  {
+    icon: "⭐",
+    title: "5.0 Estrellas",
+    description:
+      "Calificación perfecta en Google y Facebook gracias a nuestros miembros",
+  },
+  {
+    icon: "🤝",
+    title: "Comunidad Activa",
+    description:
+      "Un ambiente familiar donde todos se apoyan mutuamente para alcanzar sus metas",
+  },
+];
+---
+
+<Layout
+  title="Reseñas y Testimonios | Gym Trasciende - 5 Estrellas en Google"
+  description="Lee testimonios reales de nuestros miembros en Trasciende Gym Ocotlán. Descubre por qué somos el gimnasio mejor calificado con 5 estrellas en Google y Facebook."
+  keywords="reseñas gym trasciende, testimonios gimnasio ocotlán, opiniones trasciende gym, gym 5 estrellas, mejor gimnasio ocotlán, reseñas google gym, testimonios fitness"
+  type="website"
+>
+  <!-- 1. Hero principal -->
+  <HeroClipped
+    img="/fondofijo.webp"
+    alt="Testimonios de miembros satisfechos de Gym Trasciende"
+    minHeight="min-h-[85vh]"
+    overlayOpacity="60"
+  >
+    <div
+      class="mx-auto flex w-full max-w-4xl flex-col items-center gap-6 text-center"
+    >
+      <div class="rounded-xl bg-white/10 p-8 backdrop-blur-sm md:p-12">
+        <div class="mb-4 inline-block rounded-full bg-emerald-500/20 px-4 py-2">
+          <span class="text-primary text-sm font-bold tracking-wide uppercase">
+            ⭐ 5.0 Estrellas
+          </span>
+        </div>
+        <h1
+          class="text-secondary mb-4 text-4xl leading-tight font-bold md:mb-6 md:text-6xl"
+        >
+          Lo Que Dicen Nuestros Miembros
+        </h1>
+        <p
+          class="text-secondary mx-auto max-w-2xl text-base leading-relaxed md:text-lg"
+        >
+          Historias reales de personas como tú que decidieron dar el primer paso
+          hacia su transformación. Cada testimonio es auténtico y verificado.
+        </p>
+        <ContacSocialPils />
+      </div>
+    </div>
+  </HeroClipped>
+
+  <!-- 2. Métricas de Confianza -->
+  <TrustMetrics />
+
+  <!-- 3. Carrusel de Reviews -->
+  <ReviewsSection />
+
+  <!-- 4. Sección de Impacto y Transformaciones -->
+  <SectionContainer
+    backgroundImage="linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/precios.jpg')"
+    fixedBackground={true}
+    class="py-16 md:py-20"
+  >
+    <div class="mx-auto max-w-6xl">
+      <Subtitle>¿Por Qué Eligen Trasciende Gym?</Subtitle>
+      <p
+        class="text-secondary mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed"
+      >
+        No es solo lo que ofrecemos, sino cómo lo hacemos. Descubre lo que hace
+        especial a nuestra comunidad.
+      </p>
+
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          impactStats.map((stat) => (
+            <div class="group rounded-xl border border-emerald-500/20 bg-gray-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-emerald-500/40 hover:bg-gray-900/70">
+              <div class="mb-4 text-5xl">{stat.icon}</div>
+              <h3 class="text-primary mb-2 text-xl font-bold transition-colors group-hover:text-emerald-400">
+                {stat.title}
+              </h3>
+              <p class="text-secondary text-sm leading-relaxed">
+                {stat.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </SectionContainer>
+
+  <!-- 5. Videos de TikTok (autenticidad) -->
+  <SocialBest />
+
+  <!-- 6. FAQ sobre Reviews -->
+  <FAQ items={faqItems} />
+
+  <!-- 7. CTA Final -->
+  <SectionContainer class="py-16 md:py-20">
+    <div
+      class="mx-auto max-w-4xl rounded-2xl border border-emerald-500/20 bg-linear-to-br from-gray-900/50 to-gray-900/30 p-8 text-center backdrop-blur-sm md:p-12"
+    >
+      <div class="mb-4 inline-block rounded-full bg-emerald-500/20 px-4 py-2">
+        <span class="text-primary text-sm font-bold tracking-wide uppercase">
+          ¡Únete a Nosotros!
+        </span>
+      </div>
+      <h2 class="text-secondary mb-4 text-3xl font-bold md:text-4xl">
+        ¿Quieres Ser Parte de Estas Historias de Éxito?
+      </h2>
+      <p class="text-secondary mb-8 text-lg leading-relaxed">
+        Cada transformación comienza con una decisión. Deja que nuestro equipo
+        profesional te acompañe en tu camino hacia la mejor versión de ti mismo.
+      </p>
+
+      <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <a
+          href="/contacto"
+          class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-500 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-emerald-400 sm:w-auto"
+        >
+          Agenda tu Clase de Prueba
+        </a>
+        <a
+          href="/#planes"
+          class="inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-emerald-500 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-emerald-500/10 sm:w-auto"
+        >
+          Ver Planes y Precios
+        </a>
+      </div>
+
+      <p class="text-secondary mt-6 text-sm">
+        💚 Primera clase por solo $35 • Sin compromiso • Instalaciones modernas
+      </p>
+    </div>
+  </SectionContainer>
+</Layout>
