@@ -1,0 +1,474 @@
+---
+/**
+ * Promociones - Página de Promociones
+ *
+ * ESTRUCTURA ESCALABLE:
+ * 1. Hero - Con countdown
+ * 2. Promociones Temporales (Enero) - Con countdown visible
+ * 3. Promociones Permanentes - Sin fecha límite
+ * 4. Cómo Aprovechar - 3 pasos simples
+ * 5. FAQ - Preguntas frecuentes
+ * 6. CTA - Final urgente
+ */
+
+import Layout from "@layouts/Layout.astro";
+import HeroClipped from "@components/sections/HeroClipped.astro";
+import SectionContainer from "@components/layout/SectionContainer.astro";
+import Subtitle from "@components/ui/Subtitle.astro";
+import FAQ from "@components/sections/FAQ.astro";
+import CountdownTimer from "@components/ui/CountdownTimer";
+
+// ========== PROMOCIONES TEMPORALES (Con fecha límite) ==========
+const promosEnero = [
+  {
+    id: 1,
+    title: "Promo Pareja",
+    price: "$350",
+    priceDetail: "por persona/mes",
+    icon: "💑",
+    features: [
+      "Inscripción incluida",
+      "2 personas",
+      "Acceso completo",
+      "Asesoría personalizada",
+      "Horarios flexibles",
+    ],
+    badge: "Popular",
+    isTemporary: true,
+  },
+  {
+    id: 2,
+    title: "Promo Amigos 3+",
+    price: "$340",
+    priceDetail: "por persona/mes",
+    icon: "👥",
+    features: [
+      "Inscripción incluida",
+      "3 o más personas",
+      "Acceso completo",
+      "Asesoría personalizada",
+      "Horarios flexibles",
+    ],
+    badge: "Mejor Ahorro",
+    isTemporary: true,
+  },
+  {
+    id: 3,
+    title: "Paquete Familiar 3+",
+    price: "$340",
+    priceDetail: "por persona/mes",
+    icon: "👨‍👩‍👧",
+    features: [
+      "Inscripción incluida",
+      "3 o más familiares",
+      "Acceso completo",
+      "Asesoría personalizada",
+      "Horarios flexibles",
+    ],
+    badge: "Familia",
+    isTemporary: true,
+  },
+];
+
+// ========== PROMOCIONES PERMANENTES (Todo el año) ==========
+const promosPermanentes = [
+  {
+    id: 4,
+    title: "Inscripción Gratis",
+    price: "$0",
+    priceDetail: "de costo de inscripción",
+    savings: "¡Ahorras $200!",
+    icon: "🎁",
+    features: [
+      "Sin costo de inscripción",
+      "Válido todo el año",
+      "Para cualquier plan",
+      "Solo pagas tu mensualidad",
+      "Sin letra pequeña",
+    ],
+    badge: "Siempre",
+    isPermanent: true,
+  },
+  {
+    id: 5,
+    title: "Cumpleaños 10% Off",
+    price: "$342",
+    priceDetail: "en tu mes de cumpleaños",
+    icon: "🎂",
+    features: [
+      "10% de descuento",
+      "Válido todo tu mes de cumpleaños",
+      "Presenta identificación oficial",
+      "Aplica a plan mensual",
+      "Renovable cada año",
+    ],
+    badge: "Especial",
+    isPermanent: true,
+  },
+];
+
+// FAQ sobre promociones
+const faqItems = [
+  {
+    question: "¿Hasta cuándo son válidas las promociones de enero?",
+    answer:
+      "Las promociones de Pareja, Amigos 3+ y Paquete Familiar son exclusivas de enero 2026. Debes inscribirte antes del 31 de enero para aprovechar estos precios especiales.",
+  },
+  {
+    question: "¿La inscripción siempre es gratis?",
+    answer:
+      "¡Sí! La inscripción es completamente gratis durante todo el año, sin importar qué plan elijas. Es nuestro compromiso para que inicies tu transformación sin costos ocultos.",
+  },
+  {
+    question: "¿Puedo combinar promociones?",
+    answer:
+      "Las promociones temporales de enero (Pareja, Amigos 3+, Familiar 3+) no son acumulables entre sí. Sin embargo, todas incluyen la inscripción gratis que es permanente. El descuento de cumpleaños tampoco se puede combinar con las promos de enero.",
+  },
+  {
+    question: "¿Cómo funciona el descuento de cumpleaños?",
+    answer:
+      "Durante todo tu mes de cumpleaños obtienes 10% de descuento en tu mensualidad. Solo necesitas presentar una identificación oficial que confirme tu fecha de nacimiento. Puedes renovar este beneficio cada año en tu mes.",
+  },
+  {
+    question: "¿La promoción de pareja aplica para cualquier tipo de relación?",
+    answer:
+      "¡Sí! La promo de pareja aplica para parejas, amigos, hermanos, o cualquier dupla que quiera entrenar junta. Lo importante es que se inscriban al mismo tiempo.",
+  },
+  {
+    question: "¿Qué incluye la membresía mensual?",
+    answer:
+      "Incluye acceso completo al área de pesas, asesoría personalizada en rutinas, horarios flexibles (Lun-Vie 5am-10pm, Sáb 6:30am-5pm, Dom 12pm-4pm) y todos los beneficios del gimnasio.",
+  },
+];
+
+// Pasos para aprovechar
+const steps = [
+  {
+    number: 1,
+    title: "Reúne a tu grupo",
+    description:
+      "Junta a tu pareja, amigos o familia que quieran empezar a entrenar contigo.",
+  },
+  {
+    number: 2,
+    title: "Contáctanos",
+    description:
+      "Escríbenos por redes o visítanos en el gimnasio antes del 31 de enero.",
+  },
+  {
+    number: 3,
+    title: "Inscríbanse juntos",
+    description:
+      "Completen su inscripción al mismo tiempo y aprovechen el precio especial.",
+  },
+];
+---
+
+<Layout
+  title="Promociones y Ofertas | Gym Trasciende - Descuentos Especiales Ocotlán"
+  description="Aprovecha nuestras promociones en Trasciende Gym Ocotlán. Inscripción gratis todo el año y ofertas especiales de enero 2026. Inscríbete en pareja, con amigos o en familia y ahorra."
+  keywords="promociones gym, descuentos gimnasio ocotlán, ofertas gym 2026, promo pareja gym, gym familiar descuento, inscripción gratis gym"
+  type="website"
+>
+  <!-- 1. Hero con Countdown -->
+  <HeroClipped
+    img="/precios.jpg"
+    alt="Promociones especiales Trasciende Gym"
+    minHeight="min-h-[90vh]"
+    overlayOpacity="70"
+  >
+    <div
+      class="mx-auto flex w-full max-w-5xl flex-col items-center gap-8 text-center"
+    >
+      <div class="rounded-2xl bg-white/5 p-8 backdrop-blur-md md:p-12">
+        <!-- Badge de oferta limitada -->
+        <div
+          class="mb-6 inline-block animate-pulse rounded-full bg-linear-to-r from-orange-500 to-red-500 px-6 py-2"
+        >
+          <span class="text-sm font-bold tracking-wide text-white uppercase">
+            🔥 Ofertas Especiales de Enero 2026
+          </span>
+        </div>
+
+        <h1
+          class="text-secondary mb-4 text-4xl leading-tight font-bold md:mb-6 md:text-6xl"
+        >
+          Promociones Todo el Año
+        </h1>
+
+        <p
+          class="text-secondary mx-auto mb-8 max-w-2xl text-lg leading-relaxed md:text-xl"
+        >
+          Inscripción gratis siempre + Promociones especiales de enero para
+          entrenar en grupo.
+        </p>
+
+        <a
+          href="#promociones-enero"
+          class="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-500 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-emerald-400"
+        >
+          Ver Promociones
+          <svg
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </HeroClipped>
+
+  <!-- 2. Promociones Temporales de Enero -->
+  <SectionContainer class="py-16 md:py-24">
+    <div id="promociones-enero">
+      <Subtitle>Promociones Exclusivas de Enero</Subtitle>
+
+      {/* Countdown visible en sección */}
+      <div class="mt-12 flex justify-center">
+        <div
+          class="rounded-xl border border-orange-500/20 bg-gray-900/50 p-6 backdrop-blur-sm"
+        >
+          <p
+            class="text-primary mb-4 text-center text-sm font-semibold tracking-wide uppercase"
+          >
+            ⏰ Tiempo restante para estas ofertas:
+          </p>
+          <CountdownTimer client:load />
+        </div>
+      </div>
+
+      <p
+        class="text-secondary mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed"
+      >
+        Inscríbete en grupo y ahorra. Todas incluyen inscripción gratis y acceso
+        completo.
+      </p>
+
+      <div class="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
+        {
+          promosEnero.map((promo) => (
+            <div class="group relative flex flex-col overflow-hidden rounded-2xl border-2 border-orange-500/30 bg-gray-900/50 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-orange-500/60 hover:shadow-2xl hover:shadow-orange-500/20">
+              {/* Badge */}
+              <div class="absolute top-4 right-4 z-10 rounded-full bg-linear-to-r from-orange-500 to-red-500 px-3 py-1 shadow-lg">
+                <span class="text-xs font-bold text-white uppercase">
+                  {promo.badge}
+                </span>
+              </div>
+
+              <div class="p-8">
+                {/* Icono */}
+                <div class="mb-4 text-6xl transition-transform duration-300 group-hover:scale-110">
+                  {promo.icon}
+                </div>
+
+                {/* Título */}
+                <h3 class="mb-2 text-2xl font-bold text-white">
+                  {promo.title}
+                </h3>
+
+                {/* Precios */}
+                <div class="mb-6">
+                  <div class="flex items-baseline gap-2">
+                    <span class="text-primary text-5xl font-bold tabular-nums">
+                      {promo.price}
+                    </span>
+                    <span class="text-secondary text-sm">
+                      {promo.priceDetail}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Features */}
+                <ul class="mb-8 space-y-3">
+                  {promo.features.map((feature) => (
+                    <li class="flex items-start gap-2">
+                      <svg
+                        class="text-primary mt-1 h-5 w-5 shrink-0 transition-colors group-hover:text-orange-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      <span class="text-secondary text-sm">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CTA */}
+                <a
+                  href="/contacto"
+                  class="block w-full rounded-lg border-2 border-orange-500 bg-orange-500/10 px-6 py-3 text-center font-bold text-white transition-all duration-300 hover:bg-orange-500 hover:text-black hover:shadow-lg hover:shadow-orange-500/50"
+                >
+                  Aprovechar Ahora
+                </a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </SectionContainer>
+
+  <!-- 3. Promociones Permanentes -->
+  <SectionContainer class="py-16 md:py-24">
+    <div id="promociones-permanentes">
+      <Subtitle>Disponibles Todo el Año</Subtitle>
+
+      <p
+        class="text-secondary mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed"
+      >
+        Sin fechas límite, sin trucos. Estas promociones siempre están
+        disponibles.
+      </p>
+
+      <div class="mx-auto grid max-w-6xl gap-8 md:grid-cols-2 lg:max-w-4xl">
+        {
+          promosPermanentes.map((promo) => (
+            <div class="group relative flex flex-col overflow-hidden rounded-2xl border-2 border-emerald-500/30 bg-gray-900/50 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-emerald-500/60 hover:shadow-2xl hover:shadow-emerald-500/20">
+              {/* Badge */}
+              <div class="absolute top-4 right-4 z-10 rounded-full bg-linear-to-r from-emerald-500 to-teal-500 px-3 py-1 shadow-lg">
+                <span class="text-xs font-bold text-white uppercase">
+                  {promo.badge}
+                </span>
+              </div>
+
+              <div class="p-8 text-center">
+                {/* Icono */}
+                <div class="mb-4 text-7xl transition-transform duration-300 group-hover:scale-110">
+                  {promo.icon}
+                </div>
+
+                {/* Título */}
+                <h3 class="mb-2 text-3xl font-bold text-white">
+                  {promo.title}
+                </h3>
+
+                {/* Precios */}
+                <div class="mb-6">
+                  <div class="flex items-baseline justify-center gap-2" />
+                  <span class="text-secondary mt-2 block text-lg">
+                    {promo.priceDetail}
+                  </span>
+                </div>
+
+                {/* Features */}
+                <ul class="mb-8 space-y-3">
+                  {promo.features.map((feature) => (
+                    <li class="flex items-center justify-center gap-2">
+                      <svg
+                        class="text-primary h-5 w-5 shrink-0 transition-colors group-hover:text-emerald-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      <span class="text-secondary text-sm font-medium">
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CTA */}
+                <a
+                  href="/contacto"
+                  class="block w-full rounded-lg border-2 border-emerald-500 bg-emerald-500/10 px-6 py-3 text-center font-bold text-white transition-all duration-300 hover:bg-emerald-500 hover:text-black hover:shadow-lg hover:shadow-emerald-500/50"
+                >
+                  Inscribirme Ahora
+                </a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </SectionContainer>
+
+  <!-- 4. Cómo Aprovechar -->
+  <SectionContainer
+    backgroundImage="linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/fondofijo.webp')"
+    fixedBackground={true}
+    class="py-16 md:py-20"
+  >
+    <Subtitle>¿Cómo Aprovechar las Promociones?</Subtitle>
+
+    <div class="mx-auto max-w-5xl">
+      <div class="grid gap-8 md:grid-cols-3">
+        {
+          steps.map((step) => (
+            <div class="group text-center transition-transform duration-300 hover:-translate-y-2">
+              <div class="bg-primary mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-emerald-500/50">
+                <span class="text-3xl font-bold text-black">{step.number}</span>
+              </div>
+              <h3 class="mb-3 text-xl font-bold text-white">{step.title}</h3>
+              <p class="text-secondary leading-relaxed">{step.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </SectionContainer>
+
+  <!-- 5. FAQ -->
+  <FAQ items={faqItems} />
+
+  <!-- 6. CTA Final Urgente -->
+  <SectionContainer class="py-16 md:py-20">
+    <div
+      class="mx-auto max-w-4xl rounded-2xl border-2 border-orange-500/30 bg-linear-to-br from-gray-900/80 to-orange-900/20 p-8 text-center shadow-xl backdrop-blur-sm md:p-12"
+    >
+      <div
+        class="mb-4 inline-block rounded-full bg-linear-to-r from-orange-500 to-red-500 px-6 py-2 shadow-lg"
+      >
+        <span class="text-sm font-bold tracking-wide text-white uppercase">
+          ⏰ ¡Las Ofertas de Enero Terminan Pronto!
+        </span>
+      </div>
+
+      <h2 class="text-secondary mb-4 text-3xl font-bold md:text-4xl">
+        No Dejes Pasar Esta Oportunidad
+      </h2>
+
+      <p class="text-secondary mb-8 text-lg leading-relaxed">
+        Las promociones de grupo terminan el 31 de enero de 2026. La inscripción
+        gratis es permanente, pero los descuentos en planes familiares son solo
+        por tiempo limitado.
+      </p>
+
+      <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <a
+          href="/contacto"
+          class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-500 px-8 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-emerald-400 hover:shadow-xl hover:shadow-emerald-500/50 sm:w-auto"
+        >
+          Inscribirme Ahora
+        </a>
+        <a
+          href="/reviews"
+          class="inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-emerald-500 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-emerald-500/10 sm:w-auto"
+        >
+          Lo que dicen de nosotros
+        </a>
+      </div>
+
+      <p class="text-secondary mt-6 text-sm">
+        💚 Inscripción gratis todo el año • Promos de enero válidas hasta el
+        31/01/2026
+      </p>
+    </div>
+  </SectionContainer>
+</Layout>
