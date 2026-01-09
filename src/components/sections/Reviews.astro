@@ -25,37 +25,37 @@ const reviews: Review[] = [
     platform: "google",
   },
   {
-    name: "Carlos Rodríguez",
-    image: "/review2.webp",
-    testimonial: "Me encantó el lugar, es muy bonito y todos muy amables",
-    platform: "google",
+    name: "Sophie Santiago",
+    image: "/sofie.jpg",
+    testimonial:
+      "Siii, súper recomendado, el lugar está hermoso, las máquinas nuevas y en buen funcionamiento, las couchs súper amables y muy profesionales, lugar perfecto para mis horas de entrenamiento.",
+    platform: "facebook",
   },
   {
     name: "Alo",
     image: "/alo.png",
-    testimonial:
-      "Me encanta entrenar en Gym Trasciende. El ambiente es motivador, las máquinas están siempre en perfecto estado y los horarios son súper flexibles. He logrado mis objetivos gracias al apoyo de los entrenadores.",
-    platform: "facebook",
+    testimonial: "Me encantó el lugar, es muy bonito y todos muy amables",
+    platform: "google",
   },
   {
-    name: "Ana Patricia Morales",
-    image: "/review4.webp",
+    name: "Ivo Jimenez",
+    image: "/ivo.jpg",
     testimonial:
       "Descubrí Gym Trasciende por recomendación y ahora no puedo parar de entrenar aquí. Las instalaciones son limpias, modernas y el personal es muy amable. He mejorado mi condición física y mi salud. Muy recomendado.",
     platform: "facebook",
   },
   {
-    name: "Luis Hernández",
-    image: "/review3.webp",
+    name: "Abigail Perez",
+    image: "/abi.webp",
     testimonial:
-      "Excelente gimnasio, cuenta con todo el equipo necesario y siempre está limpio. Los entrenadores son muy profesionales y te ayudan a alcanzar tus metas. Llevo 6 meses entrenando y los resultados son increíbles.",
+      "Súper recomendado! ⭐️⭐️⭐️⭐️⭐️, Los instructores siempre están al pendiente de tu técnica para que no te lastimes, lo cual agradezco mucho porque voy empezando.",
     platform: "google",
   },
   {
-    name: "María González",
-    image: "/review1.webp",
+    name: "Rodrigo Arango",
+    image: "/rodrigo.jpg",
     testimonial:
-      "Me encanta la variedad de clases y los horarios flexibles. El ambiente es súper motivador y he conocido gente increíble. Los resultados hablan por sí solos. Totalmente recomendado.",
+      "Súper recomendado el gym, un espacio agradable y diferente a los demás, el ambiente es agradable, la atención es muy amable; además como estudiante los precios muy muy accesibles.",
     platform: "facebook",
   },
 ];
@@ -113,8 +113,15 @@ const starPath =
           "(min-width: 1024px)": {
             slides: {
               origin: "center",
-              perView: 3,
+              perView: 2.5,
               spacing: 16,
+            },
+          },
+          "(min-width: 1440px)": {
+            slides: {
+              origin: "center",
+              perView: 2.8,
+              spacing: 20,
             },
           },
         },
