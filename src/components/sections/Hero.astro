@@ -5,7 +5,7 @@ import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
 <!-- Hero: pantalla completa con imagen de fondo -->
 <section
   class="flex min-h-dvh flex-col justify-between bg-cover bg-center bg-no-repeat p-4 md:p-12 lg:p-16"
-  style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), var(--background-image-hero-pattern);"
+  style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), var(--background-image-hero-pattern);"
 >
   <!-- Contenedor del contenido -->
   <div class="mx-auto flex w-full max-w-7xl grow items-center px-4 lg:px-8">
@@ -39,23 +39,39 @@ import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
         solo para ti. El primer paso lo das tú, el resto lo hacemos juntos.
       </p>
 
-      <!-- Botón de contacto -->
-      <a
-        href="/contacto"
-        role="button"
-        aria-label="Ir a página de contacto"
-        class="group border-primary text-primary hover:bg-primary/10 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
-      >
-        <span
-          class="relative text-base font-semibold transition-all duration-300"
-          >¡Quiero entrenar!</span
+      <!-- Botones de acción -->
+      <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
+        <!-- Botón de contacto -->
+        <a
+          href="/contacto"
+          role="button"
+          aria-label="Ir a página de contacto"
+          class="group border-primary text-primary hover:bg-primary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
         >
-        <ButtonAnimation
-          width={24}
-          height={24}
-          class="transition-transform group-hover:scale-110"
-        />
-      </a>
+          <span
+            class="relative text-base font-semibold transition-all duration-300"
+            >¡Quiero entrenar!</span
+          >
+          <ButtonAnimation
+            width={24}
+            height={24}
+            class="transition-transform group-hover:scale-110"
+          />
+        </a>
+
+        <!-- Botón de precios -->
+        <a
+          href="/#precios"
+          role="button"
+          aria-label="Ver precios y planes"
+          class="group border-secondary text-secondary hover:bg-secondary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
+        >
+          <span
+            class="relative text-base font-semibold transition-all duration-300"
+            >Ver precios</span
+          >
+        </a>
+      </div>
     </div>
   </div>
 </section>

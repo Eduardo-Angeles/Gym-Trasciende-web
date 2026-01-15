@@ -35,6 +35,7 @@ interface Props {
   backgroundImage?: string;
   fixedBackground?: boolean;
   class?: string;
+  id?: string;
 }
 
 const {
@@ -42,6 +43,7 @@ const {
   backgroundImage,
   fixedBackground = false,
   class: className,
+  id,
 } = Astro.props;
 
 const backgroundClass = backgroundImage
@@ -58,7 +60,11 @@ const backgroundClass = backgroundImage
       }
     : undefined}
 >
-  <section class="mx-auto w-full max-w-7xl">
+  <section
+    id={id}
+    class="mx-auto w-full max-w-7xl"
+    style={id ? "scroll-margin-top: 4rem;" : undefined}
+  >
     <div class:list={["mx-auto w-full px-4", className]}>
       <slot />
     </div>
