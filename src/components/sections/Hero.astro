@@ -1,5 +1,6 @@
 ---
 import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
+import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
 ---
 
 <!-- Hero: pantalla completa con imagen de fondo -->
@@ -43,7 +44,7 @@ import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
       <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
         <!-- Botón de contacto -->
         <a
-          href="/contacto"
+          href="/#servicios"
           role="button"
           aria-label="Ir a página de contacto"
           class="group border-primary text-primary hover:bg-primary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
@@ -70,6 +71,7 @@ import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
             class="relative text-base font-semibold transition-all duration-300"
             >Ver precios</span
           >
+          <ArrowAnimation class="size-5" />
         </a>
       </div>
     </div>

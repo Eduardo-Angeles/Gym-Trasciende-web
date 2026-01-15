@@ -1,9 +1,10 @@
 ---
 import SectionContainer from "@components/layout/SectionContainer.astro";
 import Subtitle from "@components/ui/Subtitle.astro";
+import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
 ---
 
-<SectionContainer class="py-16 md:py-20">
+<SectionContainer id="servicios" class="py-16 md:py-20">
   <Subtitle>¿Qué ofrecemos?</Subtitle>
   <div class="grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-2 md:p-0">
     <!-- Artículo 1: Pesas -->
@@ -19,15 +20,22 @@ import Subtitle from "@components/ui/Subtitle.astro";
         />
       </div>
       <!-- Capa oscura sobre la imagen -->
-      <div class="absolute inset-0 z-5 bg-black/10"></div>
+      <div
+        class="absolute inset-0 z-5 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
+      >
+      </div>
       <div
         class="absolute inset-0 z-10 flex flex-col items-start justify-end p-4"
       >
-        <span
-          class="tracking-separated pr-3 text-left text-3xl font-medium text-pretty md:max-w-64"
-        >
-          Área de Pesas y Fuerza
-        </span>
+        <div class="flex items-center gap-2">
+          <span
+            class="tracking-separated pr-3 text-left text-3xl font-medium text-pretty md:max-w-64"
+            style="text-shadow: 0 2px 12px rgba(0,0,0,0.9)"
+          >
+            Área de Pesas y Fuerza
+          </span>
+          <ArrowAnimation class="size-8" />
+        </div>
       </div>
     </a>
 
@@ -46,15 +54,22 @@ import Subtitle from "@components/ui/Subtitle.astro";
         />
       </div>
       <!-- Capa oscura sobre la imagen -->
-      <div class="absolute inset-0 z-5 bg-black/10"></div>
+      <div
+        class="absolute inset-0 z-5 bg-gradient-to-b from-black/80 via-black/40 to-transparent"
+      >
+      </div>
       <div
         class="absolute inset-0 z-10 flex flex-col items-start justify-start p-4"
       >
-        <span
-          class="tracking-separated pr-3 text-left text-3xl font-medium text-pretty md:max-w-64"
-        >
-          Clases profesionales de Spinning
-        </span>
+        <div class="flex items-center gap-2">
+          <span
+            class="tracking-separated pr-3 text-left text-3xl font-medium text-pretty md:max-w-64"
+            style="text-shadow: 0 2px 12px rgba(0,0,0,0.9)"
+          >
+            Clases profesionales de Spinning
+          </span>
+          <ArrowAnimation class="size-8 shrink-0 md:size-8" />
+        </div>
       </div>
     </a>
 
@@ -73,15 +88,22 @@ import Subtitle from "@components/ui/Subtitle.astro";
         />
       </div>
       <!-- Capa oscura sobre la imagen -->
-      <div class="absolute inset-0 z-5 bg-green-300/10"></div>
+      <div
+        class="absolute inset-0 z-5 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
+      >
+      </div>
       <div
         class="absolute inset-0 z-10 flex flex-col items-start justify-end p-4"
       >
-        <span
-          class="tracking-separated pr-3 text-left text-3xl font-medium text-pretty md:max-w-64"
-        >
-          Area de Adultos
-        </span>
+        <div class="flex items-center gap-2">
+          <span
+            class="tracking-separated pr-3 text-left text-3xl font-medium text-pretty md:max-w-64"
+            style="text-shadow: 0 2px 12px rgba(0,0,0,0.9)"
+          >
+            Area de Adultos
+          </span>
+          <ArrowAnimation class="size-8" />
+        </div>
       </div>
     </a>
 
@@ -100,15 +122,22 @@ import Subtitle from "@components/ui/Subtitle.astro";
         />
       </div>
       <!-- Capa oscura sobre la imagen -->
-      <div class="absolute inset-0 z-5 bg-black/30"></div>
+      <div
+        class="absolute inset-0 z-5 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
+      >
+      </div>
       <div
         class="absolute inset-0 z-10 flex flex-col items-start justify-end p-4"
       >
-        <span
-          class="tracking-separated pr-3 text-left text-3xl font-medium text-pretty md:max-w-64"
-        >
-          Tips: Nutrición y Recuperación
-        </span>
+        <div class="flex items-center gap-2">
+          <span
+            class="tracking-separated pr-3 text-left text-3xl font-medium text-pretty md:max-w-64"
+            style="text-shadow: 0 2px 12px rgba(0,0,0,0.9)"
+          >
+            Tips: Nutrición y Recuperación
+          </span>
+          <ArrowAnimation class="size-8 shrink-0 md:size-8" />
+        </div>
       </div>
     </a>
   </div>

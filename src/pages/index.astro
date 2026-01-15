@@ -8,6 +8,15 @@ import PrecingPlan from "@components/sections/PricingPlan.astro";
 import TrustMetrics from "@components/sections/TrustMetrics.astro";
 import About from "@components/ui/About.astro";
 import Gallery from "@components/sections/Gallery.astro";
+import SectionContainer from "@components/layout/SectionContainer.astro";
+import ScheduleSection from "@components/sections/ScheduleSection.astro";
+
+// Horarios del gimnasio
+const schedule = [
+  { days: "Lunes a Viernes", hours: "5:00 AM - 10:00 PM" },
+  { days: "Sábado", hours: "6:00 AM - 5:00 PM" },
+  { days: "Domingo", hours: "12:00 PM - 4:00 PM" },
+];
 ---
 
 <Layout
@@ -15,9 +24,16 @@ import Gallery from "@components/sections/Gallery.astro";
   description="¿Buscas gimnasio en Ocotlán? En Trasciende Gym te ofrecemos pesas, spinning y nutrición para todo nivel. Abierto desde las 5 am. ¡Empieza tu cambio hoy!"
 >
   <Hero />
+
   <BentoInfo />
   <TrustMetrics />
   <PrecingPlan />
+  <SectionContainer class="py-16 md:py-20">
+    <div class="mx-auto max-w-2xl">
+      <ScheduleSection schedule={schedule} />
+    </div>
+  </SectionContainer>
   <Reviews />
   <Gallery />
+  <SocialBest />
 </Layout>

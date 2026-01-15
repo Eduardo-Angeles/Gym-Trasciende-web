@@ -12,12 +12,22 @@
 
 import Layout from "@layouts/Layout.astro";
 import HeroClipped from "@components/sections/HeroClipped.astro";
+import PrecingPlan from "@components/sections/PricingPlan.astro";
 import SectionContainer from "@components/layout/SectionContainer.astro";
 import BentoInfo from "@components/services/BentoInfo.astro";
 import TrustMetrics from "@components/sections/TrustMetrics.astro";
 import FAQ from "@components/sections/FAQ.astro";
 import Subtitle from "@components/ui/Subtitle.astro";
 import Gallery from "@components/sections/Gallery.astro";
+import ScheduleSection from "@components/sections/ScheduleSection.astro";
+import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
+
+// Horarios del gimnasio
+const schedule = [
+  { days: "Lunes a Viernes", hours: "5:00 AM - 10:00 PM" },
+  { days: "Sábado", hours: "6:00 AM - 5:00 PM" },
+  { days: "Domingo", hours: "12:00 PM - 4:00 PM" },
+];
 
 // FAQ general sobre servicios
 const faqItems = [
@@ -47,10 +57,10 @@ const faqItems = [
 >
   <!-- 1. Hero -->
   <HeroClipped
-    img="/fondofijo.webp"
+    img="/precios.jpg"
     alt="Gym Trasciende - Nuestros servicios profesionales"
-    minHeight="min-h-[70vh]"
-    overlayOpacity="60"
+    minHeight="min-h-dvh"
+    overlayOpacity="70"
   >
     <div
       class="mx-auto flex w-full max-w-4xl flex-col items-center gap-6 text-center"
@@ -61,34 +71,104 @@ const faqItems = [
         >
           Nuestros Servicios
         </h1>
-        <p
-          class="text-secondary mx-auto max-w-2xl text-base leading-relaxed md:text-lg"
+
+        <!-- Lista de beneficios -->
+        <div
+          class="mx-auto mb-6 flex max-w-3xl flex-wrap items-center justify-center gap-3"
         >
-          Equipamiento de primera, entrenadores certificados y programas
-          diseñados para ayudarte a alcanzar tus objetivos de fitness de manera
-          segura y efectiva.
-        </p>
+          <span
+            class="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-4 py-2 text-sm font-semibold text-emerald-300 backdrop-blur-sm"
+          >
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            Entrenadores certificados
+          </span>
+
+          <span
+            class="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-4 py-2 text-sm font-semibold text-emerald-300 backdrop-blur-sm"
+          >
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            Programas personalizados
+          </span>
+
+          <span
+            class="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-4 py-2 text-sm font-semibold text-emerald-300 backdrop-blur-sm"
+          >
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+            Guardería y WIFI incluidos
+          </span>
+        </div>
+
+        <!-- Botones de acción -->
+        <div
+          class="grid grid-cols-2 gap-4 sm:flex sm:flex-row sm:justify-center sm:gap-6"
+        >
+          <a
+            href="#servicios"
+            class="group border-primary text-primary hover:bg-primary/20 col-span-2 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-6 py-3 font-bold transition-all duration-300 hover:scale-105 active:scale-95 sm:col-span-1"
+          >
+            <span class="text-base font-semibold">Ver Servicios</span>
+            <ArrowAnimation class="size-5" />
+          </a>
+
+          <a
+            href="#horarios"
+            class="group border-secondary text-secondary hover:bg-secondary/20 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-6 py-3 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
+          >
+            <span class="text-base font-semibold">Horarios</span>
+            <ArrowAnimation class="size-5" />
+          </a>
+
+          <a
+            href="#precios"
+            class="group border-secondary text-secondary hover:bg-secondary/20 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-6 py-3 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
+          >
+            <span class="text-base font-semibold">Precios</span>
+            <ArrowAnimation class="size-5" />
+          </a>
+        </div>
       </div>
     </div>
   </HeroClipped>
 
-  <!-- 2. Introducción -->
-  <SectionContainer class="py-16 md:py-20">
-    <div class="mx-auto max-w-3xl text-center">
-      <Subtitle>¿Qué ofrecemos?</Subtitle>
-      <p class="text-secondary text-lg leading-relaxed">
-        En Gym Trasciende no solo ofrecemos un espacio para entrenar. Brindamos
-        una
-        <span class="text-primary font-semibold"
-          >experiencia completa de transformación</span
-        >
-        con servicios especializados, profesionales certificados y el mejor equipamiento.
-      </p>
-    </div>
-  </SectionContainer>
-
   <!-- 3. Grid de Servicios (BentoInfo) -->
-  <BentoInfo />
+  <div id="servicios">
+    <BentoInfo />
+  </div>
+
+  <PrecingPlan />
 
   <!-- 4. Por qué elegirnos -->
   <SectionContainer class="py-16 md:py-20">
@@ -210,6 +290,12 @@ const faqItems = [
           </div>
         </div>
       </div>
+    </div>
+  </SectionContainer>
+
+  <SectionContainer id="horarios" class="py-16 md:py-20">
+    <div class="mx-auto max-w-2xl">
+      <ScheduleSection schedule={schedule} />
     </div>
   </SectionContainer>
 
