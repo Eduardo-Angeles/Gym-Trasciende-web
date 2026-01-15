@@ -1,15 +1,47 @@
 ---
 import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
 import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
+
+// Configuración de imágenes del hero
+const heroImages = ["/hero/hero-1.webp", "/hero/hero-2.webp"];
 ---
 
-<!-- Hero: pantalla completa con imagen de fondo -->
+<!-- Hero: pantalla completa con imagen cambiante -->
 <section
-  class="flex min-h-dvh flex-col justify-between bg-cover bg-center bg-no-repeat p-4 md:p-12 lg:p-16"
-  style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), var(--background-image-hero-pattern);"
+  id="hero-section"
+  class="relative flex min-h-dvh flex-col justify-between p-4 md:p-12 lg:p-16"
 >
+  <!-- Imagen de fondo (siempre visible) -->
+  <img
+    id="hero-img-1"
+    src={heroImages[0]}
+    alt="Gym Trasciende - Transforma tu vida"
+    class="absolute inset-0 h-full w-full object-cover object-center"
+    fetchpriority="high"
+    loading="eager"
+  />
+
+  <!-- Imagen superpuesta (para crossfade) - empieza oculta -->
+  <img
+    id="hero-img-2"
+    src={heroImages[0]}
+    alt="Gym Trasciende"
+    class="absolute inset-0 h-full w-full object-cover object-center"
+    loading="eager"
+    style="opacity: 0;"
+  />
+
+  <!-- Overlay oscuro -->
+  <div
+    class="pointer-events-none absolute inset-0 bg-black"
+    style="opacity: 0.55;"
+  >
+  </div>
+
   <!-- Contenedor del contenido -->
-  <div class="mx-auto flex w-full max-w-7xl grow items-center px-4 lg:px-8">
+  <div
+    class="relative z-10 mx-auto flex w-full max-w-7xl grow items-center px-4 lg:px-8"
+  >
     <div>
       <!-- Subtítulo arriba del H1 -->
       <p
@@ -77,3 +109,133 @@ import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
     </div>
   </div>
 </section>
+
+<script define:vars={{ heroImages }}>
+  // Función de inicialización que se ejecuta en cada carga de página
+  function initHeroCarousel() {
+    let currentIndex = 0;
+    let intervalId = null;
+    let activeImage = 1;
+    const heroImg1 = document.getElementById("hero-img-1");
+    const heroImg2 = document.getElementById("hero-img-2");
+
+    // Si no encuentra las imágenes, salir (no estamos en la página del hero)
+    if (!heroImg1 || !heroImg2) return;
+
+    const totalImages = heroImages.length;
+
+    // Preload todas las imágenes en segundo plano (después de la primera)
+    function preloadImages() {
+      heroImages.forEach((src, index) => {
+        if (index === 0) return; // Primera ya está cargada
+        const img = new Image();
+        img.src = src;
+      });
+    }
+
+    // Cambiar imagen con crossfade usando dos imágenes superpuestas
+    function changeHeroImage() {
+      currentIndex = (currentIndex + 1) % totalImages;
+      const nextSrc = heroImages[currentIndex];
+
+      // Alternar entre las dos imágenes
+      if (activeImage === 1) {
+        heroImg2.src = nextSrc;
+        requestAnimationFrame(() => {
+          heroImg1.style.opacity = "0";
+          heroImg2.style.opacity = "1";
+        });
+        activeImage = 2;
+      } else {
+        heroImg1.src = nextSrc;
+        requestAnimationFrame(() => {
+          heroImg2.style.opacity = "0";
+          heroImg1.style.opacity = "1";
+        });
+        activeImage = 1;
+      }
+    }
+
+    // Iniciar carousel
+    function startCarousel() {
+      if (intervalId) return;
+      intervalId = setInterval(changeHeroImage, 5000);
+    }
+
+    // Detener carousel
+    function stopCarousel() {
+      if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+    }
+
+    // Handler para visibilitychange
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        stopCarousel();
+      } else {
+        startCarousel();
+      }
+    };
+
+    // Pausar cuando la pestaña no es visible
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    // Pausar cuando el hero no es visible en viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            startCarousel();
+          } else {
+            stopCarousel();
+          }
+        });
+      },
+      { threshold: 0.3 },
+    );
+
+    const heroSection = document.getElementById("hero-section");
+    if (heroSection) {
+      observer.observe(heroSection);
+    }
+
+    // Iniciar carousel
+    startCarousel();
+
+    // Preload de imágenes en idle time para no bloquear
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(preloadImages);
+    } else {
+      setTimeout(preloadImages, 1500);
+    }
+
+    // Limpiar recursos cuando se cambia de página (View Transitions)
+    document.addEventListener(
+      "astro:before-preparation",
+      () => {
+        stopCarousel();
+        document.removeEventListener(
+          "visibilitychange",
+          handleVisibilityChange,
+        );
+        if (observer && heroSection) {
+          observer.disconnect();
+        }
+      },
+      { once: true },
+    );
+  }
+
+  // Ejecutar en carga inicial y después de cada transición de página
+  document.addEventListener("astro:page-load", initHeroCarousel);
+</script>
+
+<style>
+  /* Crossfade suave y elegante - Solo fade sin zoom */
+  #hero-img-1,
+  #hero-img-2 {
+    transition: opacity 0.5s ease-in-out;
+  }
+</style>
