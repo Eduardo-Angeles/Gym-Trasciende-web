@@ -22,6 +22,7 @@ import ScheduleSection from "@components/sections/ScheduleSection.astro";
 import PricingPlan from "@components/sections/PricingPlan.astro";
 import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
 import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
+import MobileBottomNav from "@components/layout/MobileBottomNav.tsx";
 
 // 👇 INFORMACIÓN DEL SLIDER - EDITA AQUÍ
 const infoSlides = [
@@ -74,6 +75,24 @@ const schedule = [
   { days: "Lunes a Viernes", hours: "5:00 AM - 10:00 PM" },
   { days: "Sábado", hours: "6:00 AM - 5:00 PM" },
   { days: "Domingo", hours: "12:00 PM - 4:00 PM" },
+];
+
+// Configuración de navegación móvil
+const mobileNavItems = [
+  {
+    id: "horarios",
+    label: "Horarios",
+    href: "#horarios",
+    icon: "clock" as const,
+  },
+  { id: "precios", label: "Precios", href: "#precios", icon: "tag" as const },
+  {
+    id: "inscribirse",
+    label: "Inscríbete",
+    href: "/contacto",
+    icon: "star" as const,
+  },
+  { id: "servicios", label: "Más", href: "/servicios", icon: "grid" as const },
 ];
 ---
 
@@ -161,7 +180,9 @@ const schedule = [
   </SectionContainer>
 
   {/* 5. Precios */}
-  <PricingPlan />
+  <div id="precios">
+    <PricingPlan />
+  </div>
 
   {/* 6. CTA Final */}
   <SectionContainer class="py-20 md:py-32">
@@ -221,6 +242,14 @@ const schedule = [
           </p>
         </div>
       </div>
+
+      {/* Navegación móvil inferior */}
+      <MobileBottomNav
+        client:load
+        items={mobileNavItems}
+        hideOnScroll={true}
+        vibration={true}
+      />
     </div>
   </SectionContainer>
 </Layout>
