@@ -17,6 +17,9 @@ import SectionContainer from "@components/layout/SectionContainer.astro";
 import Subtitle from "@components/ui/Subtitle.astro";
 import FAQ from "@components/sections/FAQ.astro";
 import CountdownTimer from "@components/ui/CountdownTimer";
+import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
+import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
+import MobileBottomNav from "@components/layout/MobileBottomNav.tsx";
 
 // ========== PROMOCIONES TEMPORALES (Con fecha límite) ==========
 const promosEnero = [
@@ -162,6 +165,34 @@ const steps = [
       "Completen su inscripción al mismo tiempo y aprovechen el precio especial.",
   },
 ];
+
+// Configuración de navegación móvil
+const mobileNavItems = [
+  {
+    id: "promos-enero",
+    label: "Enero",
+    href: "#promociones-enero",
+    icon: "clock" as const,
+  },
+  {
+    id: "permanentes",
+    label: "Siempre",
+    href: "#promociones-permanentes",
+    icon: "tag" as const,
+  },
+  {
+    id: "faq",
+    label: "FAQ",
+    href: "#faq",
+    icon: "grid" as const,
+  },
+  {
+    id: "inscribirse",
+    label: "Inscríbete",
+    href: "/contacto",
+    icon: "star" as const,
+  },
+];
 ---
 
 <Layout
@@ -174,53 +205,56 @@ const steps = [
   <HeroClipped
     img="/precios.jpg"
     alt="Promociones especiales Trasciende Gym"
-    minHeight="min-h-dvh"
+    minHeight="min-h-screen"
     overlayOpacity="70"
   >
-    <div
-      class="mx-auto flex w-full max-w-5xl flex-col items-center gap-8 text-center"
-    >
-      <div class="rounded-2xl bg-white/5 p-8 backdrop-blur-md md:p-12">
-        <!-- Badge de oferta limitada -->
-        <div
-          class="mb-6 inline-block animate-pulse rounded-full bg-linear-to-r from-orange-500 to-red-500 px-6 py-2"
-        >
-          <span class="text-sm font-bold tracking-wide text-white uppercase">
-            🔥 Ofertas Especiales de Enero 2026
+    <div class="mx-auto w-full max-w-7xl px-4">
+      <div class="flex w-full flex-col gap-8">
+        {/* Badge minimalista con animación */}
+        <div class="inline-flex items-center gap-2">
+          <div class="bg-primary h-px w-12 animate-pulse"></div>
+          <span
+            class="text-primary animate-pulse text-sm font-semibold tracking-widest uppercase"
+          >
+            🔥 Ofertas Limitadas de Enero 2026
           </span>
         </div>
 
+        {/* Título */}
         <h1
-          class="text-secondary mb-4 text-4xl leading-tight font-bold md:mb-6 md:text-6xl"
+          class="text-secondary text-5xl leading-tight font-bold tracking-wide md:text-7xl lg:text-8xl"
         >
           Promociones Todo el Año
         </h1>
 
-        <p
-          class="text-secondary mx-auto mb-8 max-w-2xl text-lg leading-relaxed md:text-xl"
-        >
+        {/* Subtítulo */}
+        <p class="text-secondary max-w-2xl text-lg leading-relaxed md:text-xl">
           Inscripción gratis siempre + Promociones especiales de enero para
-          entrenar en grupo.
+          entrenar en grupo. ¡No dejes pasar estas ofertas!
         </p>
 
-        <a
-          href="#promociones-enero"
-          class="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-500 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-emerald-400"
-        >
-          Ver Promociones
-          <svg
-            class="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+        {/* CTAs con estilo consistente */}
+        <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
+          <a
+            href="#promociones-enero"
+            class="group border-primary text-primary hover:bg-primary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"></path>
-          </svg>
-        </a>
+            <span class="text-base font-semibold">Ver Promociones</span>
+            <ButtonAnimation
+              width={24}
+              height={24}
+              class="transition-transform group-hover:scale-110"
+            />
+          </a>
+
+          <a
+            href="/contacto"
+            class="group border-secondary text-secondary hover:bg-secondary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
+          >
+            <span class="text-base font-semibold">Inscribirme ahora</span>
+            <ArrowAnimation class="size-5" />
+          </a>
+        </div>
       </div>
     </div>
   </HeroClipped>
@@ -425,7 +459,9 @@ const steps = [
   </SectionContainer>
 
   <!-- 5. FAQ -->
-  <FAQ items={faqItems} />
+  <div id="faq">
+    <FAQ items={faqItems} />
+  </div>
 
   <!-- 6. CTA Final Urgente -->
   <SectionContainer class="py-16 md:py-20">
@@ -471,4 +507,12 @@ const steps = [
       </p>
     </div>
   </SectionContainer>
+
+  {/* Navegación móvil inferior */}
+  <MobileBottomNav
+    client:load
+    items={mobileNavItems}
+    hideOnScroll={false}
+    vibration={true}
+  />
 </Layout>

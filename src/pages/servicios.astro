@@ -1,26 +1,16 @@
 ---
-/**
- * Servicios - Página principal de servicios (HUB)
- *
- * ESTRUCTURA:
- * 1. Hero - Introducción a servicios
- * 2. BentoInfo - Grid con los 4 servicios principales (links a páginas individuales)
- * 3. TrustMetrics - Estadísticas y confianza
- * 4. FAQ - Preguntas frecuentes sobre servicios
- * 5. CTA - Llamado a la acción
- */
-
 import Layout from "@layouts/Layout.astro";
 import HeroClipped from "@components/sections/HeroClipped.astro";
 import PrecingPlan from "@components/sections/PricingPlan.astro";
 import SectionContainer from "@components/layout/SectionContainer.astro";
 import TrustMetrics from "@components/sections/TrustMetrics.astro";
-import FAQ from "@components/sections/FAQ.astro";
 import Subtitle from "@components/ui/Subtitle.astro";
 import Gallery from "@components/sections/Gallery.astro";
 import ScheduleSection from "@components/sections/ScheduleSection.astro";
 import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
+import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
 import ServiceBento from "@components/services/ServiceBento.astro";
+import MobileBottomNav from "@components/layout/MobileBottomNav.tsx";
 
 // Horarios del gimnasio
 const schedule = [
@@ -29,22 +19,26 @@ const schedule = [
   { days: "Domingo", hours: "12:00 PM - 4:00 PM" },
 ];
 
-// FAQ general sobre servicios
-const faqItems = [
+// Configuración de navegación móvil
+const mobileNavItems = [
   {
-    question: "¿Qué servicios ofrece Gym Trasciende?",
-    answer:
-      "Ofrecemos 4 servicios principales: Área de Pesas y Fuerza, Clases Profesionales de Spinning, Área de Adultos Mayores, y Asesoría en Nutrición y Recuperación. Cada servicio está diseñado con profesionales certificados.",
+    id: "servicios",
+    label: "Servicios",
+    href: "#servicios",
+    icon: "grid" as const,
   },
   {
-    question: "¿Necesito experiencia previa?",
-    answer:
-      "¡No! Todos nuestros servicios están diseñados para todos los niveles. Ya seas principiante o avanzado, nuestros entrenadores adaptarán los programas a tu nivel y objetivos personales.",
+    id: "horarios",
+    label: "Horarios",
+    href: "#horarios",
+    icon: "clock" as const,
   },
+  { id: "precios", label: "Precios", href: "#precios", icon: "tag" as const },
   {
-    question: "¿Puedo probar una clase antes de inscribirme?",
-    answer:
-      "¡Por supuesto! Ofrecemos una clase por tan solo $35 para que conozcas nuestras instalaciones, entrenadores y el ambiente que te espera. Contáctanos para agendar tu visita.",
+    id: "inscribirse",
+    label: "Inscríbete",
+    href: "/contacto",
+    icon: "star" as const,
   },
 ];
 ---
@@ -59,103 +53,54 @@ const faqItems = [
   <HeroClipped
     img="/gym-9.jpg"
     alt="Gym Trasciende - Nuestros servicios profesionales"
-    minHeight="min-h-dvh"
+    minHeight="min-h-screen"
     overlayOpacity="70"
   >
-    <div
-      class="mx-auto flex w-full max-w-4xl flex-col items-center gap-6 text-center"
-    >
-      <div class="rounded-xl bg-white/10 p-8 backdrop-blur-sm md:p-10">
+    <div class="mx-auto w-full max-w-7xl px-4">
+      <div class="flex w-full flex-col gap-8">
+        {/* Badge minimalista */}
+        <div class="inline-flex items-center gap-2">
+          <div class="bg-primary h-px w-12"></div>
+          <span
+            class="text-primary text-sm font-semibold tracking-widest uppercase"
+          >
+            Todos Nuestros Servicios
+          </span>
+        </div>
+
+        {/* Título */}
         <h1
-          class="text-secondary mb-4 text-4xl leading-tight font-bold md:mb-6 md:text-6xl"
+          class="text-secondary text-5xl leading-tight font-bold tracking-wide md:text-7xl lg:text-8xl"
         >
           Nuestros Servicios
         </h1>
 
-        <!-- Lista de beneficios -->
-        <div
-          class="mx-auto mb-6 flex max-w-3xl flex-wrap items-center justify-center gap-3"
-        >
-          <span
-            class="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-4 py-2 text-sm font-semibold text-emerald-300 backdrop-blur-sm"
-          >
-            <svg
-              class="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 13l4 4L19 7"></path>
-            </svg>
-            Entrenadores certificados
-          </span>
+        {/* Subtítulo */}
+        <p class="text-secondary max-w-2xl text-lg leading-relaxed md:text-xl">
+          Descubre todo lo que Trasciende Gym tiene para ti: pesas, spinning,
+          nutrición y programas especiales. Entrenadores certificados y
+          equipamiento de primera.
+        </p>
 
-          <span
-            class="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-4 py-2 text-sm font-semibold text-emerald-300 backdrop-blur-sm"
-          >
-            <svg
-              class="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 13l4 4L19 7"></path>
-            </svg>
-            Programas personalizados
-          </span>
-
-          <span
-            class="inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-4 py-2 text-sm font-semibold text-emerald-300 backdrop-blur-sm"
-          >
-            <svg
-              class="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 13l4 4L19 7"></path>
-            </svg>
-            Guardería y WIFI incluidos
-          </span>
-        </div>
-
-        <!-- Botones de acción -->
-        <div
-          class="grid grid-cols-2 gap-4 sm:flex sm:flex-row sm:justify-center sm:gap-6"
-        >
+        {/* CTAs con estilo consistente */}
+        <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
           <a
             href="#servicios"
-            class="group border-primary text-primary hover:bg-primary/20 col-span-2 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-6 py-3 font-bold transition-all duration-300 hover:scale-105 active:scale-95 sm:col-span-1"
+            class="group border-primary text-primary hover:bg-primary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
           >
             <span class="text-base font-semibold">Ver Servicios</span>
-            <ArrowAnimation class="size-5" />
+            <ButtonAnimation
+              width={24}
+              height={24}
+              class="transition-transform group-hover:scale-110"
+            />
           </a>
 
           <a
             href="#horarios"
-            class="group border-secondary text-secondary hover:bg-secondary/20 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-6 py-3 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
+            class="group border-secondary text-secondary hover:bg-secondary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
           >
-            <span class="text-base font-semibold">Horarios</span>
-            <ArrowAnimation class="size-5" />
-          </a>
-
-          <a
-            href="#precios"
-            class="group border-secondary text-secondary hover:bg-secondary/20 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-6 py-3 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
-          >
-            <span class="text-base font-semibold">Precios</span>
+            <span class="text-base font-semibold">Ver horarios</span>
             <ArrowAnimation class="size-5" />
           </a>
         </div>
@@ -168,7 +113,9 @@ const faqItems = [
     <ServiceBento />
   </div>
 
-  <PrecingPlan />
+  <div id="precios">
+    <PrecingPlan />
+  </div>
 
   <!-- 4. Por qué elegirnos -->
   <SectionContainer class="py-16 md:py-20">
@@ -302,21 +249,20 @@ const faqItems = [
   <!-- 5. Métricas -->
   <TrustMetrics />
 
-  <!-- 6. FAQ -->
-  <FAQ items={faqItems} />
-
-  <!-- 7. CTA Final -->
+  <!-- 6. CTA Final -->
   <SectionContainer class="py-20 md:py-24">
     <div
       class="mx-auto max-w-4xl rounded-2xl border border-emerald-500/30 bg-linear-to-br from-gray-900/80 to-gray-800/80 p-8 text-center backdrop-blur-sm md:p-12"
     >
       <h2 class="text-secondary mb-4 text-3xl font-bold md:text-4xl">
-        ¿Listo para comenzar?
+        ¡Únete a nosotros!
       </h2>
       <p class="text-secondary mx-auto mb-8 max-w-2xl text-lg leading-relaxed">
-        Agenda una visita y prueba cualquiera de nuestros servicios. Descubre
-        por qué somos el gimnasio favorito de todo Ocotlán.
+        Ven a conocernos y elige el plan que mejor se adapte a tus objetivos. Tu
+        camino hacia una vida más saludable comienza aquí, en el corazón de
+        Ocotlán.
       </p>
+
       <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
         <a
           href="/contacto"
@@ -337,14 +283,21 @@ const faqItems = [
           </svg>
         </a>
         <a
-          href="/#pricing"
+          href="/promociones"
           class="inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-emerald-500 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-emerald-500/10 sm:w-auto"
         >
-          Ver Planes y Precios
+          Ver Promociones especiales!
         </a>
       </div>
     </div>
   </SectionContainer>
-
   <Gallery />
 </Layout>
+
+{/* Navegación móvil inferior */}
+<MobileBottomNav
+  client:load
+  items={mobileNavItems}
+  hideOnScroll={false}
+  vibration={true}
+/>

@@ -5,17 +5,45 @@ import Layout from "@layouts/Layout.astro";
 import Reviews from "@components/sections/Reviews.astro";
 import PrecingPlan from "@components/sections/PricingPlan.astro";
 import TrustMetrics from "@components/sections/TrustMetrics.astro";
-import About from "@components/ui/About.astro";
 import Gallery from "@components/sections/Gallery.astro";
 import SectionContainer from "@components/layout/SectionContainer.astro";
 import ScheduleSection from "@components/sections/ScheduleSection.astro";
 import ServiceBento from "@components/services/ServiceBento.astro";
+import MobileBottomNav from "@components/layout/MobileBottomNav.tsx";
 
 // Horarios del gimnasio
 const schedule = [
   { days: "Lunes a Viernes", hours: "5:00 AM - 10:00 PM" },
   { days: "Sábado", hours: "6:00 AM - 5:00 PM" },
   { days: "Domingo", hours: "12:00 PM - 4:00 PM" },
+];
+
+// Configuración de navegación móvil
+const mobileNavItems = [
+  {
+    id: "servicios",
+    label: "Servicios",
+    href: "/#servicios",
+    icon: "grid" as const,
+  },
+  {
+    id: "precios",
+    label: "Precios",
+    href: "/#precios",
+    icon: "tag" as const,
+  },
+  {
+    id: "reviews",
+    label: "Reviews",
+    href: "#reviews",
+    icon: "clock" as const,
+  },
+  {
+    id: "contacto",
+    label: "Contacto",
+    href: "/contacto",
+    icon: "star" as const,
+  },
 ];
 ---
 
@@ -36,4 +64,12 @@ const schedule = [
   <Reviews />
   <Gallery />
   <SocialBest />
+
+  {/* Navegación móvil inferior */}
+  <MobileBottomNav
+    client:load
+    items={mobileNavItems}
+    hideOnScroll={false}
+    vibration={true}
+  />
 </Layout>
