@@ -1,436 +1,260 @@
 ---
 /**
- * PLANTILLA: Área de Adultos Mayores
- * TODO: Personalizar contenido con información específica
+ * Área de Adultos Mayores - Página del servicio
+ * Diseño minimalista card-first approach
  *
- * Sigue la misma estructura que spinning.astro
- * IMPORTANTE: Enfoque en seguridad, bajo impacto, socialización
- */
-
-// TODO: 1. Importar componentes necesarios
-// TODO: 2. Definir features específicos (salud, movilidad, socialización)
-// TODO: 3. Definir horarios preferentes para adultos mayores
-// TODO: 4. Crear FAQ específico
-// TODO: 5. Actualizar meta tags
-// TODO: 6. Cambiar imagen del hero a "/bento-info/entrenadores.webp"
-// TODO: 7. Enfocarse en beneficios para adultos mayores
-// TODO: 8. Mencionar adaptaciones y modificaciones
-// TODO: 9. Destacar ambiente amigable y social
-// TODO: 10. Incluir testimonios de miembros de la tercera edad
-
-/**
- * FEATURES SUGERIDOS:
- * - Mejora de movilidad y flexibilidad
- * - Fortalecimiento óseo (prevención osteoporosis)
- * - Equilibrio y coordinación
- * - Salud cardiovascular
- * - Socialización y bienestar mental
- * - Ejercicios adaptados y seguros
- *
- * PROGRAMAS A DESTACAR:
- * - Gimnasia suave
- * - Fortalecimiento funcional
- * - Equilibrio y prevención de caídas
- * - Stretching y movilidad
- * - Actividades grupales
- *
- * FAQ SUGERIDOS:
- * - ¿Es seguro para mi edad?
- * - ¿Necesito condición física previa?
- * - ¿Qué tipo de ejercicios hacemos?
- * - ¿Hay supervisión médica?
- * - ¿Puedo ir a mi propio ritmo?
+ * ESTRUCTURA:
+ * 1. Hero con HeroClipped (imagen de fondo)
+ * 2. InfoSlider - ¿Por qué entrenar con nosotros?
+ * 3. TrustMetrics - Métricas de confianza
+ * 4. Horarios - ScheduleSection
+ * 5. Precios - PricingPlan
+ * 6. CTA Final
  */
 
 import Layout from "@layouts/Layout.astro";
 import HeroClipped from "@components/sections/HeroClipped.astro";
 import SectionContainer from "@components/layout/SectionContainer.astro";
+import TrustMetrics from "@components/sections/TrustMetrics.astro";
+import InfoSlider from "@components/services/InfoSlider.tsx";
 import Subtitle from "@components/ui/Subtitle.astro";
-import ServiceFeatures from "@components/services/ServiceFeatures.astro";
 import ScheduleSection from "@components/sections/ScheduleSection.astro";
-import Gallery from "@components/sections/Gallery.astro";
-import Reviews from "@components/sections/Reviews.astro";
-import FAQ from "@components/sections/FAQ.astro";
 import PricingPlan from "@components/sections/PricingPlan.astro";
+import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
+import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
+import MobileBottomNav from "@components/layout/MobileBottomNav.tsx";
 
-// Características/beneficios del área de adultos mayores
-const adultosFeatures = [
+// 👇 INFORMACIÓN DEL SLIDER - EDITA AQUÍ
+const infoSlides = [
   {
-    icon: "heart",
-    title: "Salud Cardiovascular",
-    description:
-      "Ejercicios adaptados para mejorar la salud del corazón y la circulación, con bajo impacto y máxima seguridad.",
+    title: "Ejercicio Seguro y Adaptado",
+    description: "Rutinas diseñadas específicamente para adultos mayores.",
+    items: [
+      "Ejercicios de bajo impacto para cuidar articulaciones",
+      "Supervisión profesional en cada sesión",
+      "Adaptamos cada rutina a tu nivel y capacidad",
+    ],
+    image: "/fondofijo.webp", // 👈 CAMBIAR: Imagen para este slide
   },
   {
-    icon: "shield",
-    title: "Fortalecimiento Óseo",
-    description:
-      "Prevención de osteoporosis y caídas mediante rutinas de fuerza y equilibrio supervisadas.",
+    title: "Mejora tu Movilidad y Equilibrio",
+    description: "Prevención de caídas y fortalecimiento funcional.",
+    items: [
+      "Fortalecimiento óseo y muscular",
+      "Ejercicios de equilibrio y coordinación",
+      "Mejora de flexibilidad y movilidad articular",
+    ],
+    image: "/gym-9.jpg", // 👈 CAMBIAR: Imagen para este slide
   },
   {
-    icon: "users",
-    title: "Ambiente Social",
-    description:
-      "Clases grupales y actividades que fomentan la socialización y el bienestar emocional.",
+    title: "Ambiente Social y Motivador",
+    description: "Disfruta del ejercicio en compañía.",
+    items: [
+      "Clases grupales con ambiente amigable",
+      "Socialización y bienestar emocional",
+      "Actividades recreativas y dinámicas",
+    ],
+    image: "/gym-12.jpg", // 👈 CAMBIAR: Imagen para este slide
   },
   {
-    icon: "star",
-    title: "Movilidad y Flexibilidad",
-    description:
-      "Mejora de la movilidad articular y flexibilidad con ejercicios suaves y personalizados.",
-  },
-  {
-    icon: "clock",
-    title: "Horarios Preferentes",
-    description:
-      "Sesiones en horarios cómodos y con cupo limitado para mayor atención y seguridad.",
-  },
-  {
-    icon: "music",
-    title: "Bienestar Integral",
-    description:
-      "Actividades recreativas, música y dinámicas para disfrutar el ejercicio y mejorar el ánimo.",
+    title: "¿Qué Necesito Para Asistir?",
+    description: "Solo lo básico para entrenar cómodo y seguro.",
+    items: [
+      "Ropa deportiva cómoda y fresca",
+      "Toalla y botella de agua",
+      "Tus ganas de sentirte mejor cada día",
+    ],
+    image: "/nosotros.jpg", // 👈 CAMBIAR: Imagen para este slide
   },
 ];
 
-// Horarios sugeridos (puedes personalizar)
-const adultosSchedule = [
+// Horarios para adultos mayores
+const schedule = [
   { days: "Lunes a Viernes", hours: "8:00 AM - 12:00 PM" },
   { days: "Sábado", hours: "9:00 AM - 11:00 AM" },
 ];
 
-// FAQ específico de adultos mayores
-const adultosFAQ = [
+// Configuración de navegación móvil
+const mobileNavItems = [
   {
-    question: "¿Es seguro para mi edad?",
-    answer:
-      "Sí, todas las actividades están adaptadas y supervisadas por profesionales para garantizar tu seguridad y bienestar.",
+    id: "horarios",
+    label: "Horarios",
+    href: "#horarios",
+    icon: "clock" as const,
   },
+  { id: "precios", label: "Precios", href: "#precios", icon: "tag" as const },
   {
-    question: "¿Necesito condición física previa?",
-    answer:
-      "No, puedes comenzar desde cualquier nivel. Adaptamos los ejercicios a tus capacidades y objetivos.",
+    id: "inscribirse",
+    label: "Inscríbete",
+    href: "/contacto",
+    icon: "star" as const,
   },
-  {
-    question: "¿Qué tipo de ejercicios hacemos?",
-    answer:
-      "Realizamos gimnasia suave, fortalecimiento funcional, equilibrio, movilidad y actividades recreativas en grupo.",
-  },
-  {
-    question: "¿Hay supervisión médica?",
-    answer:
-      "Contamos con personal capacitado y, si lo requieres, podemos coordinar con tu médico de cabecera.",
-  },
-  {
-    question: "¿Puedo ir a mi propio ritmo?",
-    answer:
-      "Por supuesto, cada participante avanza a su ritmo y recibe atención personalizada.",
-  },
+  { id: "servicios", label: "Más", href: "/servicios", icon: "grid" as const },
 ];
 ---
 
 <Layout
-  title="Área de Adultos Mayores | Gym Trasciende - Salud, movilidad y bienestar"
-  description="Mejora tu salud y movilidad en Trasciende Gym Ocotlán. Ejercicio seguro para adultos mayores con atención personalizada. ¡Siéntete vital y fuerte con nosotros!"
-  keywords="adultos mayores, tercera edad, movilidad, salud, ejercicios adaptados, prevención caídas, bienestar, socialización, gimnasio seguro, horarios preferentes"
+  title="Área de Adultos Mayores | Gym Trasciende - Salud y Bienestar"
+  description="Mejora tu salud y movilidad en Trasciende Gym Ocotlán. Ejercicio seguro para adultos mayores con atención personalizada. ¡Siéntete vital y fuerte!"
+  keywords="adultos mayores, tercera edad, movilidad, salud, ejercicios adaptados, prevención caídas, bienestar, socialización, gimnasio seguro"
   type="website"
 >
-  {/* 1. Hero principal */}
+  {/* 1. Hero con HeroClipped */}
   <HeroClipped
     img="/bento-info/entrenadores.webp"
     alt="Área de adultos mayores en Gym Trasciende"
-    minHeight="min-h-[80vh]"
-    overlayOpacity="50"
+    minHeight="min-h-screen"
+    overlayOpacity="70"
   >
-    <div
-      class="mx-auto flex w-full max-w-5xl flex-col items-center gap-6 text-center"
-    >
-      <div class="rounded-xl bg-white/10 p-8 backdrop-blur-sm md:p-12">
-        <div class="mb-4 inline-block rounded-full bg-emerald-500/20 px-4 py-2">
-          <span class="text-primary text-sm font-bold tracking-wide uppercase">
-            Enfoque en Bienestar
+    <div class="mx-auto w-full max-w-7xl px-4">
+      <div class="flex w-full flex-col gap-8">
+        {/* Badge minimalista */}
+        <div class="inline-flex items-center gap-2">
+          <div class="bg-primary h-px w-12"></div>
+          <span
+            class="text-primary text-sm font-semibold tracking-widest uppercase"
+          >
+            Salud y Bienestar
           </span>
         </div>
+
+        {/* Título */}
         <h1
-          class="text-secondary mb-4 text-4xl leading-tight font-bold md:mb-6 md:text-6xl lg:text-7xl"
+          class="text-secondary text-5xl leading-tight font-bold tracking-wide md:text-7xl lg:text-8xl"
         >
           Área de Adultos Mayores
         </h1>
-        <p
-          class="text-secondary mx-auto mb-6 max-w-2xl text-lg leading-relaxed md:text-xl"
-        >
-          Ejercicios adaptados, ambiente social y atención profesional para que
-          mejores tu salud y calidad de vida a cualquier edad.
+
+        {/* Subtítulo */}
+        <p class="text-secondary max-w-2xl text-lg leading-relaxed md:text-xl">
+          Ejercicios adaptados, ambiente social y atención profesional para
+          mejorar tu salud y calidad de vida a cualquier edad.
         </p>
-        <div class="flex flex-col gap-3 sm:flex-row sm:justify-center">
+
+        {/* CTAs con estilo Hero.astro */}
+        <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
           <a
-            href="#reserva"
-            class="bg-primary hover:bg-secondary inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-lg font-bold text-black transition-all duration-300 hover:scale-105"
+            href="/contacto"
+            class="group border-primary text-primary hover:bg-primary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
           >
-            Reserva tu Clase
-            <svg
-              class="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-            </svg>
+            <span class="text-base font-semibold">¡Quiero empezar!</span>
+            <ButtonAnimation
+              width={24}
+              height={24}
+              class="transition-transform group-hover:scale-110"
+            />
           </a>
+
           <a
             href="#horarios"
-            class="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-white/10"
+            class="group border-secondary text-secondary hover:bg-secondary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
           >
-            Ver Horarios
+            <span class="text-base font-semibold">Ver horarios</span>
+            <ArrowAnimation class="size-5" />
           </a>
         </div>
       </div>
     </div>
   </HeroClipped>
 
-  {/* 2. ¿Por qué ejercitarse en la tercera edad? */}
-  <SectionContainer class="py-16 md:py-20">
-    <div class="mx-auto max-w-4xl">
-      <Subtitle>¿Por qué ejercitarse en la tercera edad?</Subtitle>
-      <div class="grid gap-8 md:grid-cols-2">
-        <div>
-          <p class="text-secondary mb-4 text-lg leading-relaxed">
-            El ejercicio regular mejora la movilidad, previene enfermedades y
-            fortalece la independencia en la vida diaria.
-          </p>
-          <p class="text-secondary text-base leading-relaxed">
-            Nuestro equipo adapta cada rutina a tus necesidades, priorizando la
-            seguridad y el disfrute en cada sesión.
-          </p>
-        </div>
-        <div
-          class="rounded-xl border border-emerald-500/20 bg-gray-900/50 p-6 backdrop-blur-sm"
-        >
-          <h3 class="mb-4 text-xl font-bold text-white">Beneficios clave:</h3>
-          <ul class="space-y-3">
-            <li class="flex items-start gap-3">
-              <svg
-                class="text-primary mt-1 h-5 w-5 shrink-0"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span class="text-gray-300"
-                >Mejora de movilidad y flexibilidad</span
-              >
-            </li>
-            <li class="flex items-start gap-3">
-              <svg
-                class="text-primary mt-1 h-5 w-5 shrink-0"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span class="text-gray-300"
-                >Fortalecimiento óseo y prevención de caídas</span
-              >
-            </li>
-            <li class="flex items-start gap-3">
-              <svg
-                class="text-primary mt-1 h-5 w-5 shrink-0"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span class="text-gray-300">Salud cardiovascular y mental</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg
-                class="text-primary mt-1 h-5 w-5 shrink-0"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span class="text-gray-300">Ambiente social y motivador</span>
-            </li>
-          </ul>
-        </div>
+  {/* 2. ¿Por Qué Entrenar Con Nosotros? - Info Slider */}
+  <SectionContainer class="py-20 md:py-32">
+    <div class="mx-auto max-w-7xl">
+      <Subtitle>¿Por Qué Entrenar Con Nosotros?</Subtitle>
+      <InfoSlider client:visible slides={infoSlides} />
+    </div>
+  </SectionContainer>
+
+  {/* 3. Métricas de confianza */}
+  <TrustMetrics />
+
+  {/* 4. Horarios */}
+  <SectionContainer id="horarios" class="py-20 md:py-32">
+    <div class="mx-auto max-w-3xl">
+      <Subtitle>Horarios Preferentes</Subtitle>
+      <p class="text-secondary mb-8 text-center">
+        Clases en horarios cómodos con atención personalizada.
+      </p>
+      <ScheduleSection schedule={schedule} />
+      <div class="mt-6 text-center">
+        <p class="text-sm text-zinc-400">
+          💡 Horarios matutinos ideales para adultos mayores.
+        </p>
       </div>
     </div>
   </SectionContainer>
 
-  {/* 3. Beneficios */}
-  <ServiceFeatures
-    title="Beneficios para Adultos Mayores"
-    features={adultosFeatures}
-  />
+  {/* 5. Precios */}
+  <div id="precios">
+    <PricingPlan />
+  </div>
 
-  {/* 4. Programas y actividades */}
-  <SectionContainer class="py-16 md:py-20">
-    <Subtitle>Programas y Actividades</Subtitle>
-    <div class="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
-      {/* Gimnasia suave */}
+  {/* 6. CTA Final */}
+  <SectionContainer class="py-20 md:py-32">
+    <div class="mx-auto max-w-3xl">
       <div
-        class="rounded-xl border border-emerald-500/20 bg-gray-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-emerald-400/40"
+        class="border-primary/30 shadow-primary/10 relative overflow-hidden rounded-3xl border bg-linear-to-br from-zinc-900 via-zinc-900 to-black p-10 text-center shadow-2xl backdrop-blur-sm md:p-16"
       >
-        <div class="mb-4 inline-block rounded-lg bg-emerald-500/20 px-3 py-1">
-          <span class="text-primary text-sm font-bold">GIMNASIA SUAVE</span>
-        </div>
-        <h3 class="mb-3 text-xl font-bold text-white">
-          Movilidad y Flexibilidad
-        </h3>
-        <p class="mb-4 text-sm text-gray-300">
-          Ejercicios suaves para mantener y mejorar la movilidad articular y la
-          flexibilidad.
-        </p>
-        <ul class="space-y-2 text-sm text-gray-400">
-          <li>✓ Rutinas adaptadas</li>
-          <li>✓ Supervisión profesional</li>
-          <li>✓ Ambiente seguro</li>
-        </ul>
-      </div>
-      {/* Fortalecimiento funcional */}
-      <div
-        class="rounded-xl border border-teal-500/20 bg-gray-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-teal-400/40"
-      >
-        <div class="mb-4 inline-block rounded-lg bg-teal-500/20 px-3 py-1">
-          <span class="text-sm font-bold text-teal-400">FUNCIONAL</span>
-        </div>
-        <h3 class="mb-3 text-xl font-bold text-white">
-          Fortalecimiento y Equilibrio
-        </h3>
-        <p class="mb-4 text-sm text-gray-300">
-          Rutinas para fortalecer músculos y mejorar el equilibrio, reduciendo
-          el riesgo de caídas.
-        </p>
-        <ul class="space-y-2 text-sm text-gray-400">
-          <li>✓ Prevención de caídas</li>
-          <li>✓ Trabajo de fuerza</li>
-          <li>✓ Coordinación</li>
-        </ul>
-      </div>
-      {/* Actividades grupales */}
-      <div
-        class="rounded-xl border border-cyan-500/20 bg-gray-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-cyan-400/40"
-      >
-        <div class="mb-4 inline-block rounded-lg bg-cyan-500/20 px-3 py-1">
-          <span class="text-sm font-bold text-cyan-400">GRUPALES</span>
-        </div>
-        <h3 class="mb-3 text-xl font-bold text-white">
-          Socialización y Bienestar
-        </h3>
-        <p class="mb-4 text-sm text-gray-300">
-          Actividades recreativas, música y dinámicas para disfrutar el
-          ejercicio y mejorar el ánimo.
-        </p>
-        <ul class="space-y-2 text-sm text-gray-400">
-          <li>✓ Dinámicas grupales</li>
-          <li>✓ Música y recreación</li>
-          <li>✓ Apoyo emocional</li>
-        </ul>
-      </div>
-    </div>
-  </SectionContainer>
-
-  {/* 5. Horarios */}
-  <section id="horarios">
-    <SectionContainer class="py-16 md:py-20">
-      <div class="mx-auto max-w-3xl">
-        <Subtitle>Horarios para Adultos Mayores</Subtitle>
-        <p class="text-secondary mb-8 text-center">
-          Clases y actividades en horarios preferentes para tu comodidad y
-          seguridad.
-        </p>
-        <ScheduleSection schedule={adultosSchedule} />
-      </div>
-    </SectionContainer>
-  </section>
-
-  {/* 6. Galería */}
-  <Gallery />
-
-  {/* 7. Testimonios */}
-  <Reviews />
-
-  {/* 8. FAQ */}
-  <FAQ items={adultosFAQ} />
-
-  {/* 9. Precios */}
-  <PricingPlan />
-
-  {/* 10. CTA Final */}
-  <section id="reserva">
-    <SectionContainer class="py-20 md:py-24">
-      <div
-        class="mx-auto max-w-4xl rounded-2xl border border-emerald-500/30 bg-linear-to-br from-gray-900/80 to-gray-800/80 p-8 text-center backdrop-blur-sm md:p-12"
-      >
-        <h2
-          class="text-secondary mb-4 text-3xl font-bold md:text-4xl lg:text-5xl"
-        >
-          ¡Empieza a moverte y sentirte mejor!
-        </h2>
-        <p
-          class="text-secondary mx-auto mb-8 max-w-2xl text-lg leading-relaxed"
-        >
-          Agenda una clase de prueba gratuita y descubre los beneficios de
-          ejercitarte en un ambiente seguro y amigable.
-        </p>
+        {/* Efecto de brillo */}
         <div
-          class="flex flex-col items-center justify-center gap-4 sm:flex-row"
+          class="via-primary/5 absolute inset-0 bg-linear-to-r from-transparent to-transparent"
         >
-          <a
-            href="/contacto"
-            class="bg-primary hover:bg-secondary inline-flex w-full items-center justify-center gap-2 rounded-lg px-8 py-4 text-lg font-bold text-black transition-all duration-300 hover:scale-105 sm:w-auto"
+        </div>
+
+        <div class="relative z-10">
+          <h2 class="mb-4 text-3xl font-bold text-white md:text-5xl">
+            Vive la Experiencia Única
+          </h2>
+          <p
+            class="mx-auto mb-8 max-w-xl text-lg leading-relaxed text-zinc-300"
           >
-            Solicitar Clase
-            <svg
-              class="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            Ven a conocernos y entrena en un ambiente amigable donde cada rutina
+            está pensada para tu bienestar y seguridad. ¡Te esperamos!
+          </p>
+
+          <div
+            class="flex flex-col items-center justify-center gap-4 sm:flex-row"
+          >
+            <a
+              href="/contacto"
+              class="bg-primary hover:shadow-primary/20 inline-flex w-full items-center justify-center gap-2 rounded-xl px-8 py-4 text-lg font-bold text-black transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:w-auto"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-            </svg>
-          </a>
-          <a
-            href="/servicios"
-            class="inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-emerald-500 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-emerald-500/10 sm:w-auto"
-          >
-            Ver Otros Servicios
-          </a>
+              ¡Empieza hoy!
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                stroke-width="2.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+              </svg>
+            </a>
+
+            <a
+              href="/servicios"
+              class="border-primary hover:bg-primary/10 inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 sm:w-auto"
+            >
+              Ver Otros Servicios
+            </a>
+          </div>
+
+          <p class="mt-6 text-sm text-zinc-400">
+            📱 Mandanos mensaje a través de cualquier red social
+          </p>
         </div>
-        <p class="mt-6 text-sm text-gray-400">
-          📱 También puedes llamarnos o escribirnos por WhatsApp para más
-          información
-        </p>
       </div>
-    </SectionContainer>
-  </section>
+    </div>
+  </SectionContainer>
+
+  {/* Navegación móvil inferior */}
+  <MobileBottomNav
+    client:load
+    items={mobileNavItems}
+    hideOnScroll={false}
+    vibration={true}
+  />
 </Layout>
