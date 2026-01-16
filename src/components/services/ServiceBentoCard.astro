@@ -1,0 +1,83 @@
+---
+import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
+
+interface Props {
+  href: string;
+  image: string;
+  title: string;
+  price: string;
+  schedule: string;
+  feature: string;
+  gridClass?: string;
+}
+
+const { href, image, title, price, schedule, feature, gridClass } = Astro.props;
+
+// Procesar el horario para convertirlo en array si tiene separador
+const scheduleLines = schedule.split("|").map((line) => line.trim());
+---
+
+<a
+  href={href}
+  class:list={[
+    "group flex h-full w-full flex-col overflow-hidden rounded-2xl bg-zinc-900 transition-all duration-150 active:scale-[0.98] active:brightness-95",
+    gridClass,
+  ]}
+>
+  <!-- Imagen arriba -->
+  <div class="relative flex-1 overflow-hidden">
+    <img
+      src={image}
+      alt={title}
+      class="h-full w-full object-cover transition-transform duration-300 ease-in-out md:group-hover:scale-110"
+    />
+    <!-- Badge de precio - esquina superior derecha -->
+    <div class="absolute top-4 right-4 z-10">
+      <span
+        class="rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 px-4 py-2 text-sm font-semibold text-white shadow-lg"
+      >
+        {price}
+      </span>
+    </div>
+  </div>
+
+  <!-- Información abajo con degradado sutil -->
+  <div
+    class="flex flex-col gap-3 bg-gradient-to-b from-emerald-950/40 via-zinc-900/95 to-black p-5 text-white"
+  >
+    <!-- Título -->
+    <h3 class="text-2xl leading-tight font-semibold text-pretty">
+      {title}
+    </h3>
+
+    <!-- Característica -->
+    <p class="text-sm font-medium text-emerald-400">
+      {feature}
+    </p>
+
+    <!-- Horario y Botón -->
+    <div
+      class="flex items-center justify-between gap-3 border-t border-zinc-700/50 pt-2"
+    >
+      <!-- Horario -->
+      <div class="flex flex-1 flex-col gap-1">
+        <span class="text-xs font-medium text-zinc-400">Horario</span>
+        <div class="text-sm leading-snug font-semibold text-zinc-200">
+          {
+            scheduleLines.map((line) => (
+              <div class="leading-relaxed">{line}</div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Botón Más info -->
+      <div
+        class="flex items-center gap-2 rounded-lg bg-emerald-500 px-4 py-2 transition-all duration-200 md:group-hover:bg-emerald-400"
+      >
+        <span class="text-sm font-semibold">Más info</span>
+        <ArrowAnimation class="size-5" />
+      </div>
+    </div>
+  </div>
+</a>

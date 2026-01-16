@@ -37,12 +37,12 @@ interface PricingCard {
 const areas: Area[] = [
   {
     id: "area1",
-    name: "Área de Pesas",
+    name: "Clases de Spinning",
     gradient: "from-gray-900/50 via-emerald-600/60 to-gray-900/50",
   },
   {
     id: "area2",
-    name: "Área de Spinning",
+    name: "Fuerza y Pesas",
     gradient: "from-gray-900/50 via-teal-600/60 to-gray-900/50",
   },
   {
@@ -59,7 +59,7 @@ const areas: Area[] = [
 
 // Datos de precios por área (ejemplo - ajusta según tus precios reales)
 const pricingData: Record<AreaId, PricingCard[]> = {
-  area1: [
+  area2: [
     {
       type: "Semanal",
       price: "$110",
@@ -95,7 +95,7 @@ const pricingData: Record<AreaId, PricingCard[]> = {
       ],
     },
   ],
-  area2: [
+  area1: [
     {
       type: "Mensual",
       price: "$500",

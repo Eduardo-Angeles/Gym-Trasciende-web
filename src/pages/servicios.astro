@@ -21,6 +21,7 @@ import Subtitle from "@components/ui/Subtitle.astro";
 import Gallery from "@components/sections/Gallery.astro";
 import ScheduleSection from "@components/sections/ScheduleSection.astro";
 import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
+import ServiceBento from "@components/services/ServiceBento.astro";
 
 // Horarios del gimnasio
 const schedule = [
@@ -57,7 +58,7 @@ const faqItems = [
 >
   <!-- 1. Hero -->
   <HeroClipped
-    img="/precios.jpg"
+    img="/gym-9.jpg"
     alt="Gym Trasciende - Nuestros servicios profesionales"
     minHeight="min-h-dvh"
     overlayOpacity="70"
@@ -165,7 +166,7 @@ const faqItems = [
 
   <!-- 3. Grid de Servicios (BentoInfo) -->
   <div id="servicios">
-    <BentoInfo />
+    <ServiceBento />
   </div>
 
   <PrecingPlan />
