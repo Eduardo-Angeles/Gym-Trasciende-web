@@ -1,0 +1,171 @@
+---
+/**
+ * AreaCard - Card horizontal con imagen grande + contenido minimalista
+ * Diseñado para mostrar áreas/servicios de forma visual y moderna
+ * Layout adaptable: imagen izquierda/derecha con opción reverse
+ */
+
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  items: string[];
+  reverse?: boolean;
+  accentColor?: "primary" | "emerald" | "teal" | "cyan";
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  image,
+  items,
+  reverse = false,
+  accentColor = "primary",
+  class: className,
+} = Astro.props;
+
+// Mapa de colores para el accent
+const colorMap = {
+  primary: {
+    border: "border-primary/20",
+    borderHover: "group-hover:border-primary/40",
+    bg: "bg-primary/10",
+    text: "text-primary",
+    glow: "group-hover:shadow-primary/20",
+  },
+  emerald: {
+    border: "border-emerald-500/20",
+    borderHover: "group-hover:border-emerald-500/40",
+    bg: "bg-emerald-500/10",
+    text: "text-emerald-400",
+    glow: "group-hover:shadow-emerald-500/20",
+  },
+  teal: {
+    border: "border-teal-500/20",
+    borderHover: "group-hover:border-teal-500/40",
+    bg: "bg-teal-500/10",
+    text: "text-teal-400",
+    glow: "group-hover:shadow-teal-500/20",
+  },
+  cyan: {
+    border: "border-cyan-500/20",
+    borderHover: "group-hover:border-cyan-500/40",
+    bg: "bg-cyan-500/10",
+    text: "text-cyan-400",
+    glow: "group-hover:shadow-cyan-500/20",
+  },
+};
+
+const colors = colorMap[accentColor];
+---
+
+<article
+  class:list={[
+    "group relative overflow-hidden rounded-3xl border bg-zinc-900/50 backdrop-blur-sm transition-all duration-500 hover:scale-[1.01] hover:bg-zinc-900/70",
+    colors.border,
+    colors.borderHover,
+    `hover:shadow-2xl ${colors.glow}`,
+    className,
+  ]}
+>
+  <!-- Grid Layout -->
+  <div
+    class:list={["grid gap-0 md:grid-cols-2", reverse && "md:grid-flow-dense"]}
+  >
+    <!-- Imagen -->
+    <div
+      class:list={[
+        "relative aspect-4/3 overflow-hidden md:aspect-auto",
+        reverse && "md:col-start-2",
+      ]}
+    >
+      <img
+        src={image}
+        alt={title}
+        class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+        loading="lazy"
+      />
+      <!-- Overlay gradient para mejor legibilidad en mobile */}
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent md:hidden"
+      >
+      </div>
+    </div>
+
+    <!-- Contenido -->
+      <div
+        class:list={[
+          "flex flex-col justify-center p-8 md:p-10 lg:p-12",
+          reverse && "md:col-start-1",
+        ]}
+      >
+        <!-- Título -->
+        <h3
+          class="mb-3 text-3xl leading-tight font-bold text-white md:text-4xl lg:text-5xl"
+        >
+          {title}
+        </h3>
+
+        <!-- Descripción -->
+        <p class="mb-6 text-base leading-relaxed text-zinc-300 md:text-lg">
+          {description}
+        </p>
+
+        <!-- Lista de items -->
+        <ul class="mb-8 space-y-3">
+          {
+            items.map((item) => (
+              <li class="flex items-start gap-3">
+                {/* Check icon */}
+                <svg
+                  class:list={["mt-1 h-5 w-5 shrink-0", colors.text]}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2.5"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span class="text-sm font-medium text-zinc-200 md:text-base">
+                  {item}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+
+        <!-- Badge decorativo -->
+        <div class="flex items-center gap-3">
+          <div
+            class:list={[
+              "inline-flex items-center gap-2 rounded-full px-4 py-2",
+              colors.bg,
+            ]}
+          >
+            <span
+              class:list={[
+                "text-xs font-bold tracking-wide uppercase",
+                colors.text,
+              ]}
+            >
+              Equipamiento Premium
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Efecto de brillo en hover -->}
+    <div
+      class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+      style="background: linear-gradient(90deg, transparent, rgba(213, 251, 0, 0.03), transparent);"
+    >
+    </div>
+  </div>
+</article>

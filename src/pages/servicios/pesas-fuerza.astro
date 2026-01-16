@@ -1,419 +1,226 @@
 ---
 /**
- * PLANTILLA: Pesas y Fuerza
- * TODO: Personalizar contenido con información específica
+ * Pesas y Fuerza - Página del servicio
+ * Diseño minimalista card-first approach
  *
- * Sigue la misma estructura que spinning.astro
- * Reutiliza componentes: HeroClipped, ServiceFeatures, ScheduleSection, etc.
- */
-
-// TODO: 1. Importar componentes necesarios
-// TODO: 2. Definir features específicos de pesas/fuerza
-// TODO: 3. Definir horarios si hay horarios específicos
-// TODO: 4. Crear FAQ específico
-// TODO: 5. Actualizar meta tags (title, description, keywords)
-// TODO: 6. Cambiar imagen del hero a "/bento-info/bentopesas.webp"
-// TODO: 7. Adaptar texto introductorio
-// TODO: 8. Listar equipamiento disponible (máquinas, barras, discos, etc.)
-// TODO: 9. Agregar sección de "Áreas" (peso libre, máquinas, funcional)
-// TODO: 10. Mencionar programas (hipertrofia, fuerza, funcional)
-
-/**
- * FEATURES SUGERIDOS:
- * - Desarrollo muscular
- * - Aumento de fuerza
- * - Mejora metabólica
- * - Densidad ósea
- * - Equipamiento profesional
- * - Supervisión de entrenadores
- *
- * ÁREAS A DESTACAR:
- * - Área de peso libre (barras, discos, mancuernas)
- * - Área de máquinas (Smith, leg press, etc.)
- * - Área funcional (TRX, kettlebells, etc.)
- *
- * FAQ SUGERIDOS:
- * - ¿Necesito experiencia previa?
- * - ¿Me pueden asesorar con la técnica?
- * - ¿Hay programas de entrenamiento?
- * - ¿Qué equipamiento tienen?
+ * ESTRUCTURA:
+ * 1. Hero con HeroClipped (imagen de fondo)
+ * 2. InfoSlider - ¿Por qué entrenar con nosotros?
+ * 3. TrustMetrics - Métricas de confianza
+ * 4. Horarios - ScheduleSection
+ * 5. Precios - PricingPlan
+ * 6. CTA Final
  */
 
 import Layout from "@layouts/Layout.astro";
 import HeroClipped from "@components/sections/HeroClipped.astro";
 import SectionContainer from "@components/layout/SectionContainer.astro";
+import TrustMetrics from "@components/sections/TrustMetrics.astro";
+import InfoSlider from "@components/services/InfoSlider.tsx";
 import Subtitle from "@components/ui/Subtitle.astro";
-import ServiceFeatures from "@components/services/ServiceFeatures.astro";
 import ScheduleSection from "@components/sections/ScheduleSection.astro";
-import Gallery from "@components/sections/Gallery.astro";
-import Reviews from "@components/sections/Reviews.astro";
-import FAQ from "@components/sections/FAQ.astro";
 import PricingPlan from "@components/sections/PricingPlan.astro";
+import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
+import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
 
-// Características/beneficios del área de pesas y fuerza
-const pesasFeatures = [
+// 👇 INFORMACIÓN DEL SLIDER - EDITA AQUÍ
+const infoSlides = [
   {
-    icon: "fire",
-    title: "Desarrollo Muscular",
-    description:
-      "Entrenamientos enfocados en hipertrofia y ganancia de masa muscular con rutinas personalizadas.",
+    title: "Para Todos los Niveles",
+    description: "Desde principiantes hasta avanzados.",
+    items: [
+      "Instructores certificados siempre disponibles",
+      "Programas adaptados a tu nivel y objetivos",
+      "Inducción completa incluida para nuevos miembros",
+    ],
+    image: "/fondofijo.webp", // 👈 CAMBIAR: Imagen para este slide
   },
   {
-    icon: "chart",
-    title: "Aumento de Fuerza",
+    title: "Rutina Personalizada o Libre",
     description:
-      "Mejora tu fuerza máxima y resistencia con equipamiento profesional y programas progresivos.",
+      "Tú decides cómo entrenar: con plan personalizado o entrenamiento libre.",
+    items: [
+      "Evaluación inicial y plan customizado gratuito",
+      "Supervisión constante de entrenadores en piso",
+      "O entrena libre a tu ritmo sin restricciones",
+    ],
+    image: "/gym-9.jpg", // 👈 CAMBIAR: Imagen para este slide
   },
   {
-    icon: "shield",
-    title: "Salud Ósea",
+    title: "Flexibilidad Total",
     description:
-      "El entrenamiento con pesas incrementa la densidad ósea y previene lesiones a largo plazo.",
+      "Entrena cuando quieras con horarios amplios y acceso a todas las áreas.",
+    items: [
+      "Horarios extendidos de 5 AM a 10 PM",
+      "Acceso ilimitado a peso libre, máquinas y funcional",
+      "Sin citas previas, entrena a tu conveniencia",
+    ],
+    image: "/gym-12.jpg", // 👈 CAMBIAR: Imagen para este slide
   },
   {
-    icon: "clock",
-    title: "Metabolismo Activo",
-    description:
-      "Aumenta tu metabolismo basal y quema más calorías incluso en reposo.",
-  },
-  {
-    icon: "users",
-    title: "Supervisión Profesional",
-    description:
-      "Entrenadores certificados te asesoran en técnica, seguridad y progresión.",
-  },
-  {
-    icon: "trophy",
-    title: "Resultados Medibles",
-    description:
-      "Seguimiento de tu progreso con evaluaciones periódicas y rutinas adaptadas a tus objetivos.",
+    title: "¿Qué Necesito Para Asistir?",
+    description: "Solo lo esencial para entrenar cómodo y seguro.",
+    items: [
+      "Una toalla para tu comodidad e higiene",
+      "Botella de agua para mantenerte hidratado",
+      "Toda la actitud y ganas de superarte",
+    ],
+    image: "/nosotros.jpg", // 👈 CAMBIAR: Imagen para este slide
   },
 ];
 
-// Horarios sugeridos (puedes personalizar)
-const pesasSchedule = [
-  { days: "Lunes a Viernes", hours: "5:00 AM - 11:00 PM" },
+// Horarios del gimnasio
+const schedule = [
+  { days: "Lunes a Viernes", hours: "5:00 AM - 10:00 PM" },
   { days: "Sábado", hours: "6:00 AM - 5:00 PM" },
   { days: "Domingo", hours: "12:00 PM - 4:00 PM" },
-];
-
-// FAQ específico de pesas y fuerza
-const pesasFAQ = [
-  {
-    question: "¿Necesito experiencia previa para entrenar en pesas?",
-    answer:
-      "No es necesario. Contamos con entrenadores que te guiarán desde tu primer día, enseñándote la técnica correcta y adaptando el entrenamiento a tu nivel.",
-  },
-  {
-    question: "¿Qué equipamiento tienen disponible?",
-    answer:
-      "Área de peso libre (barras, discos, mancuernas), máquinas de fuerza (Smith, leg press, poleas), zona funcional (TRX, kettlebells, balones, bandas).",
-  },
-  {
-    question: "¿Puedo recibir una rutina personalizada?",
-    answer:
-      "Sí, nuestros entrenadores pueden diseñar rutinas personalizadas según tus objetivos: hipertrofia, fuerza, tonificación o salud general.",
-  },
-  {
-    question: "¿Hay supervisión durante el entrenamiento?",
-    answer:
-      "Siempre hay entrenadores en piso para asesorarte, corregir tu técnica y resolver dudas.",
-  },
-  {
-    question: "¿Ofrecen programas para principiantes?",
-    answer:
-      "Sí, tenemos programas de iniciación y acompañamiento para quienes nunca han entrenado con pesas.",
-  },
 ];
 ---
 
 <Layout
-  title="Área de Pesas y Fuerza | Gym Trasciende - Potencia tu cuerpo y mente"
-  description="Entrena en el área de pesas y fuerza de Gym Trasciende. Equipamiento profesional, rutinas personalizadas, supervisión de entrenadores y resultados garantizados. ¡Desarrolla músculo y fuerza de forma segura!"
-  keywords="pesas, fuerza, entrenamiento, gimnasio, hipertrofia, rutinas personalizadas, máquinas, peso libre, entrenamiento funcional, entrenadores certificados"
+  title="Pesas y Fuerza | Gym Trasciende - Transforma tu Cuerpo"
+  description="Área de pesas y fuerza con equipamiento premium. Peso libre, máquinas profesionales y zona funcional. Desarrolla músculo y fuerza de forma segura."
+  keywords="pesas, fuerza, gimnasio, hipertrofia, peso libre, máquinas, entrenamiento funcional, desarrollo muscular"
   type="website"
 >
-  {/* 1. Hero principal */}
+  {/* 1. Hero con HeroClipped */}
   <HeroClipped
     img="/bento-info/bentofuerza.webp"
     alt="Área de pesas y fuerza en Gym Trasciende"
-    minHeight="min-h-dvh"
-    overlayOpacity="30"
+    minHeight="min-h-screen"
+    overlayOpacity="70"
   >
-    <div
-      class="mx-auto flex w-full max-w-5xl flex-col items-center gap-6 text-center"
-    >
-      <div class="rounded-xl bg-white/10 p-8 backdrop-blur-sm md:p-12">
-        <div class="mb-4 inline-block rounded-full bg-emerald-500/20 px-4 py-2">
-          <span class="text-primary text-sm font-bold tracking-wide uppercase">
+    <div class="mx-auto w-full max-w-7xl px-4">
+      <div class="flex w-full flex-col gap-8">
+        {/* Badge minimalista */}
+        <div class="inline-flex items-center gap-2">
+          <div class="bg-primary h-px w-12"></div>
+          <span
+            class="text-primary text-sm font-semibold tracking-widest uppercase"
+          >
             Entrenamiento de Fuerza
           </span>
         </div>
+
+        {/* Título */}
         <h1
-          class="text-secondary mb-4 text-4xl leading-tight font-bold md:mb-6 md:text-6xl lg:text-7xl"
+          class="text-secondary text-5xl leading-tight font-bold tracking-wide md:text-7xl lg:text-8xl"
         >
-          Área de Pesas y Fuerza
+          Pesas y Fuerza
         </h1>
-        <p
-          class="text-secondary mx-auto mb-6 max-w-2xl text-lg leading-relaxed md:text-xl"
-        >
-          Desarrolla músculo, potencia tu fuerza y transforma tu cuerpo con el
-          mejor equipamiento y asesoría profesional.
+
+        {/* Subtítulo */}
+        <p class="text-secondary max-w-2xl text-lg leading-relaxed md:text-xl">
+          Desarrolla músculo, potencia tu fuerza y transforma tu cuerpo con
+          equipamiento premium y asesoría profesional.
         </p>
-        <div class="flex flex-col gap-3 sm:flex-row sm:justify-center">
+
+        {/* CTAs con estilo Hero.astro */}
+        <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
           <a
-            href="#reserva"
-            class="bg-primary hover:bg-secondary inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-lg font-bold text-black transition-all duration-300 hover:scale-105"
+            href="/contacto"
+            class="group border-primary text-primary hover:bg-primary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
           >
-            Reserva tu Rutina
-            <svg
-              class="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-            </svg>
+            <span class="text-base font-semibold">¡Quiero entrenar!</span>
+            <ButtonAnimation
+              width={24}
+              height={24}
+              class="transition-transform group-hover:scale-110"
+            />
           </a>
+
           <a
             href="#horarios"
-            class="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-white/10"
+            class="group border-secondary text-secondary hover:bg-secondary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
           >
-            Ver Horarios
+            <span class="text-base font-semibold">Ver horarios</span>
+            <ArrowAnimation class="size-5" />
           </a>
         </div>
       </div>
     </div>
   </HeroClipped>
 
-  {/* 2. ¿Por qué entrenar fuerza? */}
-  <SectionContainer class="py-16 md:py-20">
-    <div class="mx-auto max-w-4xl">
-      <Subtitle>¿Por qué entrenar fuerza?</Subtitle>
-      <div class="grid gap-8 md:grid-cols-2">
-        <div>
-          <p class="text-secondary mb-4 text-lg leading-relaxed">
-            El entrenamiento de fuerza es esencial para la salud integral:
-            mejora tu composición corporal, fortalece huesos y articulaciones, y
-            previene lesiones.
-          </p>
-          <p class="text-secondary text-base leading-relaxed">
-            En nuestro gimnasio encontrarás rutinas para todos los niveles,
-            desde principiantes hasta avanzados, con asesoría personalizada y
-            ambiente motivador.
-          </p>
-        </div>
-        <div
-          class="rounded-xl border border-emerald-500/20 bg-gray-900/50 p-6 backdrop-blur-sm"
-        >
-          <h3 class="mb-4 text-xl font-bold text-white">Áreas disponibles:</h3>
-          <ul class="space-y-3">
-            <li class="flex items-start gap-3">
-              <svg
-                class="text-primary mt-1 h-5 w-5 shrink-0"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span class="text-gray-300"
-                >Peso libre: barras, discos, mancuernas</span
-              >
-            </li>
-            <li class="flex items-start gap-3">
-              <svg
-                class="text-primary mt-1 h-5 w-5 shrink-0"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span class="text-gray-300"
-                >Máquinas de fuerza: Smith, leg press, poleas</span
-              >
-            </li>
-            <li class="flex items-start gap-3">
-              <svg
-                class="text-primary mt-1 h-5 w-5 shrink-0"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span class="text-gray-300"
-                >Zona funcional: TRX, kettlebells, bandas</span
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
+  {/* 2. ¿Por Qué Entrenar Con Nosotros? - Info Slider */}
+  <SectionContainer class="py-20 md:py-32">
+    <div class="mx-auto max-w-7xl">
+      <Subtitle>¿Por Qué Entrenar Con Nosotros?</Subtitle>
+      <InfoSlider client:visible slides={infoSlides} />
     </div>
   </SectionContainer>
 
-  {/* 3. Beneficios */}
-  <ServiceFeatures
-    title="Beneficios del Entrenamiento de Fuerza"
-    features={pesasFeatures}
-  />
+  {/* 3. Métricas de confianza */}
+  <TrustMetrics />
 
-  {/* 4. Programas y niveles */}
-  <SectionContainer class="py-16 md:py-20">
-    <Subtitle>Programas para Todos los Niveles</Subtitle>
-    <div class="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
-      {/* Principiante */}
-      <div
-        class="rounded-xl border border-emerald-500/20 bg-gray-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-emerald-400/40"
-      >
-        <div class="mb-4 inline-block rounded-lg bg-emerald-500/20 px-3 py-1">
-          <span class="text-primary text-sm font-bold">PRINCIPIANTE</span>
-        </div>
-        <h3 class="mb-3 text-xl font-bold text-white">Fuerza Básica</h3>
-        <p class="mb-4 text-sm text-gray-300">
-          Aprende la técnica correcta, conoce el equipamiento y realiza rutinas
-          seguras y efectivas.
-        </p>
-        <ul class="space-y-2 text-sm text-gray-400">
-          <li>✓ Introducción a peso libre y máquinas</li>
-          <li>✓ Rutinas guiadas</li>
-          <li>✓ Supervisión constante</li>
-        </ul>
-      </div>
-      {/* Intermedio */}
-      <div
-        class="rounded-xl border border-teal-500/20 bg-gray-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-teal-400/40"
-      >
-        <div class="mb-4 inline-block rounded-lg bg-teal-500/20 px-3 py-1">
-          <span class="text-sm font-bold text-teal-400">INTERMEDIO</span>
-        </div>
-        <h3 class="mb-3 text-xl font-bold text-white">
-          Hipertrofia y Resistencia
-        </h3>
-        <p class="mb-4 text-sm text-gray-300">
-          Aumenta masa muscular y fuerza con rutinas avanzadas y técnicas de
-          sobrecarga progresiva.
-        </p>
-        <ul class="space-y-2 text-sm text-gray-400">
-          <li>✓ Rutinas divididas</li>
-          <li>✓ Técnicas de intensidad</li>
-          <li>✓ Evaluaciones periódicas</li>
-        </ul>
-      </div>
-      {/* Avanzado */}
-      <div
-        class="rounded-xl border border-cyan-500/20 bg-gray-900/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-cyan-400/40"
-      >
-        <div class="mb-4 inline-block rounded-lg bg-cyan-500/20 px-3 py-1">
-          <span class="text-sm font-bold text-cyan-400">AVANZADO</span>
-        </div>
-        <h3 class="mb-3 text-xl font-bold text-white">Fuerza Máxima</h3>
-        <p class="mb-4 text-sm text-gray-300">
-          Entrenamientos de alto rendimiento, powerlifting y asesoría para
-          competencias.
-        </p>
-        <ul class="space-y-2 text-sm text-gray-400">
-          <li>✓ Powerlifting y fuerza máxima</li>
-          <li>✓ Rutinas personalizadas</li>
-          <li>✓ Asesoría para competencias</li>
-        </ul>
-      </div>
+  {/* 4. Horarios */}
+  <SectionContainer id="horarios" class="py-20 md:py-32">
+    <div class="mx-auto max-w-3xl">
+      <Subtitle>Horarios</Subtitle>
+      <ScheduleSection schedule={schedule} />
     </div>
   </SectionContainer>
 
-  {/* 5. Horarios */}
-  <section id="horarios">
-    <SectionContainer class="py-16 md:py-20">
-      <div class="mx-auto max-w-3xl">
-        <Subtitle>Horarios de Área de Pesas</Subtitle>
-        <p class="text-secondary mb-8 text-center">
-          Acceso libre durante todo el horario del gimnasio. Entrena cuando más
-          te convenga.
-        </p>
-        <ScheduleSection schedule={pesasSchedule} />
-      </div>
-    </SectionContainer>
-  </section>
-
-  {/* 6. Galería */}
-  <Gallery />
-
-  {/* 7. Testimonios */}
-  <Reviews />
-
-  {/* 8. FAQ */}
-  <FAQ items={pesasFAQ} />
-
-  {/* 9. Precios */}
+  {/* 5. Precios */}
   <PricingPlan />
 
-  {/* 10. CTA Final */}
-  <section id="reserva">
-    <SectionContainer class="py-20 md:py-24">
+  {/* 6. CTA Final */}
+  <SectionContainer class="py-20 md:py-32">
+    <div class="mx-auto max-w-3xl">
       <div
-        class="mx-auto max-w-4xl rounded-2xl border border-emerald-500/30 bg-linear-to-br from-gray-900/80 to-gray-800/80 p-8 text-center backdrop-blur-sm md:p-12"
+        class="border-primary/30 shadow-primary/10 relative overflow-hidden rounded-3xl border bg-linear-to-br from-zinc-900 via-zinc-900 to-black p-10 text-center shadow-2xl backdrop-blur-sm md:p-16"
       >
-        <h2
-          class="text-secondary mb-4 text-3xl font-bold md:text-4xl lg:text-5xl"
-        >
-          ¡Comienza tu transformación hoy!
-        </h2>
-        <p
-          class="text-secondary mx-auto mb-8 max-w-2xl text-lg leading-relaxed"
-        >
-          Agenda una asesoría gratuita y recibe tu rutina personalizada de
-          fuerza y pesas.
-        </p>
+        {/* Efecto de brillo */}
         <div
-          class="flex flex-col items-center justify-center gap-4 sm:flex-row"
+          class="via-primary/5 absolute inset-0 bg-linear-to-r from-transparent to-transparent"
         >
-          <a
-            href="/contacto"
-            class="bg-primary hover:bg-secondary inline-flex w-full items-center justify-center gap-2 rounded-lg px-8 py-4 text-lg font-bold text-black transition-all duration-300 hover:scale-105 sm:w-auto"
-          >
-            Solicitar Asesoría Gratis
-            <svg
-              class="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-            </svg>
-          </a>
-          <a
-            href="/servicios"
-            class="inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-emerald-500 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-emerald-500/10 sm:w-auto"
-          >
-            Ver Otros Servicios
-          </a>
         </div>
-        <p class="mt-6 text-sm text-gray-400">
-          📱 También puedes llamarnos o escribirnos por WhatsApp para más
-          información
-        </p>
+
+        <div class="relative z-10">
+          <h2 class="mb-4 text-3xl font-bold text-white md:text-5xl">
+            ¡Transforma tu Cuerpo Hoy!
+          </h2>
+          <p
+            class="mx-auto mb-8 max-w-xl text-lg leading-relaxed text-zinc-300"
+          >
+            Agenda una asesoría gratuita y recibe tu rutina personalizada de
+            fuerza.
+          </p>
+
+          <div
+            class="flex flex-col items-center justify-center gap-4 sm:flex-row"
+          >
+            <a
+              href="/contacto"
+              class="bg-primary hover:shadow-primary/20 inline-flex w-full items-center justify-center gap-2 rounded-xl px-8 py-4 text-lg font-bold text-black transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:w-auto"
+            >
+              Solicitar Asesoría Gratis
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                stroke-width="2.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+              </svg>
+            </a>
+
+            <a
+              href="/servicios"
+              class="border-primary hover:bg-primary/10 inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 sm:w-auto"
+            >
+              Ver Otros Servicios
+            </a>
+          </div>
+
+          <p class="mt-6 text-sm text-zinc-400">
+            📱 También puedes llamarnos o escribirnos por WhatsApp
+          </p>
+        </div>
       </div>
-    </SectionContainer>
-  </section>
+    </div>
+  </SectionContainer>
 </Layout>

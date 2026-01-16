@@ -1,0 +1,92 @@
+---
+/**
+ * StatsBar - Barra horizontal minimalista con estadísticas
+ * Muestra métricas clave de forma visual y moderna
+ * Reutilizable para todas las páginas de servicios
+ */
+
+import { CountUp } from "@components/ui/CountUp.tsx";
+
+interface Stat {
+  value: number;
+  suffix?: string;
+  prefix?: string;
+  label: string;
+  decimals?: number;
+}
+
+interface Props {
+  stats: Stat[];
+  variant?: "default" | "compact";
+  class?: string;
+}
+
+const { stats, variant = "default", class: className } = Astro.props;
+---
+
+<section
+  class:list={[
+    "relative overflow-hidden",
+    variant === "compact" ? "py-8" : "py-12 md:py-16",
+    className,
+  ]}
+>
+  <!-- Background sutil -->
+  <div
+    class="via-primary/5 absolute inset-0 bg-linear-to-r from-transparent to-transparent"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-4">
+    <div
+      class:list={[
+        "grid gap-8",
+        stats.length === 3
+          ? "grid-cols-1 md:grid-cols-3"
+          : "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
+      ]}
+    >
+      {
+        stats.map((stat, index) => (
+          <div
+            class="group hover:border-primary/30 relative flex flex-col items-center justify-center rounded-2xl border border-zinc-800/50 bg-zinc-900/30 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-zinc-900/50 md:p-8"
+            style={`animation-delay: ${index * 100}ms`}
+          >
+            {/* Efecto glow sutil en hover */}
+            <div class="bg-primary/0 group-hover:bg-primary/5 absolute inset-0 rounded-2xl opacity-0 blur-xl transition-all duration-500 group-hover:opacity-100" />
+
+            {/* Número grande */}
+            <div class="relative mb-2 flex items-baseline gap-1">
+              {stat.prefix && (
+                <span class="text-primary text-3xl font-bold md:text-4xl">
+                  {stat.prefix}
+                </span>
+              )}
+              <span class="text-primary text-5xl font-bold tracking-tight tabular-nums md:text-6xl lg:text-7xl">
+                <CountUp
+                  client:visible
+                  initial={0}
+                  final={stat.value}
+                  decimals={stat.decimals || 0}
+                />
+              </span>
+              {stat.suffix && (
+                <span class="text-primary text-3xl font-bold md:text-4xl">
+                  {stat.suffix}
+                </span>
+              )}
+            </div>
+
+            {/* Label */}
+            <span class="text-center text-sm font-medium tracking-wide text-zinc-400 uppercase md:text-base">
+              {stat.label}
+            </span>
+
+            {/* Línea decorativa */}
+            <div class="from-primary/0 via-primary/50 to-primary/0 mt-3 h-1 w-12 rounded-full bg-linear-to-r transition-all duration-300 group-hover:w-16" />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
