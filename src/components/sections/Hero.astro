@@ -15,7 +15,7 @@ const heroImages = ["/hero/hero-1.webp", "/hero/hero-2.webp"];
   <img
     id="hero-img-1"
     src={heroImages[0]}
-    alt="Gym Trasciende - Transforma tu vida"
+    alt="Gym Trasciende - El mejor Gimnasio en Ocotlán"
     class="absolute inset-0 h-full w-full object-cover object-center"
     fetchpriority="high"
     loading="eager"
@@ -25,7 +25,7 @@ const heroImages = ["/hero/hero-1.webp", "/hero/hero-2.webp"];
   <img
     id="hero-img-2"
     src={heroImages[0]}
-    alt="Gym Trasciende"
+    alt="Instalaciones de Gym Trasciende en Ocotlán"
     class="absolute inset-0 h-full w-full object-cover object-center"
     loading="eager"
     style="opacity: 0;"
@@ -51,8 +51,13 @@ const heroImages = ["/hero/hero-1.webp", "/hero/hero-2.webp"];
       </p>
 
       <!-- Título principal -->
-      <h1
+      <!-- Título Principal SEO (Invisible) -->
+      <h1 class="sr-only">Gimnasio Trasciende en Ocotlán de Morelos</h1>
+
+      <!-- Título Visual (Decorativo) -->
+      <div
         class="text-secondary mb-4 text-4xl leading-tight font-bold tracking-widest md:mb-6 md:text-6xl lg:text-8xl"
+        aria-hidden="true"
       >
         <span class="border-secondary inline-block border-b-4 pb-1">
           <img
@@ -62,7 +67,7 @@ const heroImages = ["/hero/hero-1.webp", "/hero/hero-2.webp"];
             style="vertical-align: baseline;"
           />RA</span
         >SCIENDE
-      </h1>
+      </div>
 
       <!-- Descripción -->
       <p
@@ -71,6 +76,12 @@ const heroImages = ["/hero/hero-1.webp", "/hero/hero-2.webp"];
         Queremos acompañarte en tu transformación personal con un plan diseñado
         solo para ti. El primer paso lo das tú, el resto lo hacemos juntos.
       </p>
+
+      <!-- Hidden SEO Text -->
+      <h2 class="sr-only">
+        Tu mejor opción de Gimnasio en Ocotlán de Morelos. Entrenamiento
+        personalizado, pesas y cardio.
+      </h2>
 
       <!-- Botones de acción -->
       <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
