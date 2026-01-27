@@ -2,193 +2,51 @@
  * PricingSelector - Componente interactivo de precios con Preact
  *
  * Funcionalidad:
- * - Grid 2x2 en móvil para selector de áreas
+ * - Filtra áreas según props
  * - Cambio de fondo dinámico según área seleccionada
- * - Transiciones suaves (700ms)
  * - Muestra tarjetas de precios por área
  */
 
 import { useState } from "preact/hooks";
+import {
+  type AreaId,
+  type Area,
+  type PricingCard,
+  areas as allAreas,
+  pricingData,
+} from "../../data/pricing";
 
-// Definición de tipos
-type AreaId = "area1" | "area2" | "area3" | "area4";
-
-interface Area {
-  id: AreaId;
-  name: string;
-  gradient: string; // Clases de Tailwind para gradiente
+interface PricingSelectorProps {
+  allowedAreas?: AreaId[]; // IDs de áreas a mostrar
+  defaultArea?: AreaId; // Área seleccionada por defecto
+  showSelector?: boolean; // Si debe mostrar los botones de cambio de área
 }
 
-interface PricingCard {
-  type:
-    | "Semanal"
-    | "Quincenal"
-    | "Mensual"
-    | "Spinning+Pesas"
-    | "Mensual estudiante"
-    | "3 Meses"
-    | "6 Meses"
-    | "1 Año";
-  price: string;
-  features: string[];
-}
+export default function PricingSelector({
+  allowedAreas,
+  defaultArea,
+  showSelector = true,
+}: PricingSelectorProps) {
+  // Filtrar áreas si se proporcionan allowedAreas
+  const filteredAreas = allowedAreas
+    ? allAreas.filter((area) => allowedAreas.includes(area.id))
+    : allAreas;
 
-// Configuración de áreas - Degradados vivos y transparentes
-const areas: Area[] = [
-  {
-    id: "area1",
-    name: "Clases de Spinning",
-    gradient: "from-gray-900/50 via-emerald-600/60 to-gray-900/50",
-  },
-  {
-    id: "area2",
-    name: "Fuerza y Pesas",
-    gradient: "from-gray-900/50 via-teal-600/60 to-gray-900/50",
-  },
-  {
-    id: "area3",
-    name: "Adultos Mayores",
-    gradient: "from-gray-900/50 via-cyan-600/60 to-gray-900/50",
-  },
-  {
-    id: "area4",
-    name: "Promociones Fin de Año",
-    gradient: "from-emerald-600/60 via-teal-600/60 to-cyan-600/60",
-  },
-];
+  // Determinar el área inicial
+  const initialArea =
+    defaultArea && filteredAreas.some((a) => a.id === defaultArea)
+      ? defaultArea
+      : filteredAreas[0]?.id || "area2";
 
-// Datos de precios por área (ejemplo - ajusta según tus precios reales)
-const pricingData: Record<AreaId, PricingCard[]> = {
-  area2: [
-    {
-      type: "Semanal",
-      price: "$110",
-      features: [
-        "Asesoría personalizada en rutinas",
-        "Acceso completo",
-        "Lun-Vie 5am-10pm",
-        "Sáb 6:00am-5pm",
-        "Dom 12pm-4pm",
-      ],
-    },
-    {
-      type: "Quincenal",
-      price: "$200",
-      features: [
-        "Asesoría personalizada en rutinas",
-        "Acceso completo",
-        "Lun-Vie 5am-10pm",
-        "Sáb 6:00am-5pm",
-        "Dom 12pm-4pm",
-      ],
-    },
-    {
-      type: "Mensual",
-      price: "$380",
-      features: [
-        "Asesoría personalizada en rutinas",
-        "Acceso completo",
-        "Lun-Vie 5am-10pm",
-        "Sáb 6:00am-5pm",
-        "Dom 12pm-4pm",
-        "Promo estudiante $340",
-      ],
-    },
-  ],
-  area1: [
-    {
-      type: "Mensual",
-      price: "$500",
-      features: [
-        "Cupo limitado",
-        "Lun-Vie 6am-7am",
-        "Lun-Vie 7am-8am",
-        "Lun-Vie 6pm-7pm, 7pm-8pm",
-      ],
-    },
-    {
-      type: "Spinning+Pesas",
-      price: "$800",
-      features: [
-        "Cupo limitado",
-        "Spinning + Pesas",
-        "Todos los horarios",
-        "Acceso completo",
-      ],
-    },
-    {
-      type: "Mensual estudiante",
-      price: "$460",
-      features: [
-        "Cupo limitado",
-        "Credencial vigente",
-        "Todos los horarios",
-        "Instructor certificado",
-      ],
-    },
-  ],
-  area3: [
-    {
-      type: "Semanal",
-      price: "$140",
-      features: [
-        "Lun-Vie 8:15am-9:15am",
-        "Clases especializadas",
-        "Ambiente seguro",
-        "Seguimiento personalizado",
-      ],
-    },
-    {
-      type: "Quincenal",
-      price: "$200",
-      features: [
-        "Lun-Vie 8:15am-9:15am",
-        "Clases especializadas",
-        "Ambiente seguro",
-        "Seguimiento personalizado",
-      ],
-    },
-    {
-      type: "Mensual",
-      price: "$400",
-      features: [
-        "Lun-Vie 8:15am-9:15am",
-        "Clases especializadas",
-        "Ambiente seguro",
-        "Seguimiento personalizado",
-      ],
-    },
-  ],
-  area4: [
-    {
-      type: "3 Meses",
-      price: "$1,000",
-      features: ["Horarios de Pesas", "Todos los beneficios del área de pesas"],
-    },
-    {
-      type: "6 Meses",
-      price: "$1,900",
-      features: ["Horarios de Pesas", "Todos los beneficios del área de pesas"],
-    },
-    {
-      type: "1 Año",
-      price: "$3,750",
-      features: [
-        "Horarios de Pesas",
-        "Todos los beneficios del área de pesas",
-        "¡Mejor precio!",
-      ],
-    },
-  ],
-};
-
-export default function PricingSelector() {
-  // Estado: área seleccionada (por defecto area2)
-  const [selectedArea, setSelectedArea] = useState<AreaId>("area2");
+  // Estado: área seleccionada
+  const [selectedArea, setSelectedArea] = useState<AreaId>(initialArea);
 
   // Obtener el gradiente actual
   const currentGradient =
-    areas.find((a) => a.id === selectedArea)?.gradient || "";
+    filteredAreas.find((a) => a.id === selectedArea)?.gradient || "";
+
+  // Si no hay áreas que mostrar, no renderizar nada
+  if (filteredAreas.length === 0) return null;
 
   return (
     <div className="relative overflow-hidden rounded-3xl">
@@ -202,33 +60,35 @@ export default function PricingSelector() {
 
       {/* Contenido */}
       <div className="relative z-10 p-4 md:p-12">
-        {/* Selector de Áreas - Diseño moderno compacto */}
-        <div className="mb-8 md:mb-10">
-          <div className="mx-auto max-w-3xl">
-            <div className="grid grid-cols-2 gap-3 md:flex md:flex-wrap md:justify-center">
-              {areas.map((area) => (
-                <button
-                  key={area.id}
-                  onClick={() => setSelectedArea(area.id)}
-                  className={`group relative overflow-hidden rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-500 md:px-6 md:py-3 md:text-base ${
-                    selectedArea === area.id
-                      ? "bg-primary shadow-primary/50 scale-105 text-gray-900 shadow-lg"
-                      : "bg-white/80 text-gray-900 backdrop-blur-sm hover:bg-white/90"
-                  }`}
-                >
-                  {/* Efecto de brillo en hover */}
-                  <span className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
-                  <span className="relative">{area.name}</span>
-                </button>
-              ))}
+        {/* Selector de Áreas - Solo se muestra si showSelector es true y hay más de una área */}
+        {showSelector && filteredAreas.length > 1 && (
+          <div className="mb-8 md:mb-10">
+            <div className="mx-auto max-w-3xl">
+              <div className="grid grid-cols-2 gap-3 md:flex md:flex-wrap md:justify-center">
+                {filteredAreas.map((area) => (
+                  <button
+                    key={area.id}
+                    onClick={() => setSelectedArea(area.id)}
+                    className={`group relative overflow-hidden rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-500 md:px-6 md:py-3 md:text-base ${
+                      selectedArea === area.id
+                        ? "bg-primary shadow-primary/50 scale-105 text-gray-900 shadow-lg"
+                        : "bg-white/80 text-gray-900 backdrop-blur-sm hover:bg-white/90"
+                    }`}
+                  >
+                    {/* Efecto de brillo en hover */}
+                    <span className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
+                    <span className="relative">{area.name}</span>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Tarjetas de Precios - Scroll horizontal en móvil */}
         <div className="relative">
           <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible">
-            {pricingData[selectedArea].map((card, index) => (
+            {pricingData[selectedArea]?.map((card, index) => (
               <div
                 key={`${selectedArea}-${index}`}
                 className="group max-w-62.5 min-w-62.5 shrink-0 snap-center rounded-2xl bg-white/85 p-5 shadow-lg backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:scale-[1.03] hover:bg-linear-to-br hover:from-emerald-500/90 hover:to-teal-600/90 hover:shadow-2xl active:scale-[0.98] md:max-w-none md:min-w-0 md:hover:-translate-y-2 md:hover:scale-[1.03]"

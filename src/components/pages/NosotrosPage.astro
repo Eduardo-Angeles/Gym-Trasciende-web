@@ -26,6 +26,8 @@ import TeamSection from "@components/sections/TeamSection.astro";
 import TrustMetrics from "@components/sections/TrustMetrics.astro";
 import ScheduleSection from "@components/sections/ScheduleSection.astro";
 import FAQ from "@components/sections/FAQ.astro";
+import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
+import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
 
 // Horarios del gimnasio
 const schedule = [
@@ -75,29 +77,58 @@ const faqItems = [
   <HeroClipped
     img="/fondofijo.webp"
     alt="Gimnasio Trasciende - Nuestro equipo"
-    minHeight="min-h-dvh"
-    overlayOpacity="50"
+    minHeight="min-h-screen"
+    overlayOpacity="70"
   >
-    <div
-      class="mx-auto flex w-full max-w-4xl flex-col items-center gap-8 text-center"
-    >
-      <div class="rounded-xl bg-white/10 p-8 backdrop-blur-sm md:p-12">
+    <div class="mx-auto w-full max-w-7xl px-4">
+      <div class="flex w-full flex-col gap-8">
+        {/* Badge minimalista */}
+        <div class="inline-flex items-center gap-2">
+          <div class="bg-primary h-px w-12"></div>
+          <span
+            class="text-primary text-sm font-semibold tracking-widest uppercase"
+          >
+            Sobre Nosotros
+          </span>
+        </div>
+
+        {/* Título */}
         <h1
-          class="text-secondary mb-4 text-4xl leading-tight font-bold md:mb-6 md:text-6xl lg:text-6xl"
+          class="text-secondary text-5xl leading-tight font-bold tracking-wide md:text-7xl lg:text-8xl"
         >
           ¿Quiénes somos?
         </h1>
 
-        <p
-          class="max-w-2xl text-base leading-relaxed font-medium text-gray-100 md:text-lg"
-        >
+        {/* Subtítulo */}
+        <p class="text-secondary max-w-2xl text-lg leading-relaxed md:text-xl">
           Sabemos que empezar puede ser la parte más difícil. Por eso, hemos
           creado un entorno donde todos son bienvenidos, sin importar su nivel
           de experiencia. Queremos acompañarte en tu transformación de manera
           personal.
         </p>
 
-        <ContacSocialPils />
+        {/* CTAs con estilo unificado */}
+        <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
+          <a
+            href="/contacto"
+            class="group border-primary text-primary hover:bg-primary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
+          >
+            <span class="text-base font-semibold">Hablar con nosotros</span>
+            <ButtonAnimation
+              width={24}
+              height={24}
+              class="transition-transform group-hover:scale-110"
+            />
+          </a>
+
+          <a
+            href="/#servicios"
+            class="group border-secondary text-secondary hover:bg-secondary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
+          >
+            <span class="text-base font-semibold">Ver servicios</span>
+            <ArrowAnimation class="size-5" />
+          </a>
+        </div>
       </div>
     </div>
   </HeroClipped>
@@ -109,8 +140,9 @@ const faqItems = [
   <!-- 4. Nuestro Equipo -->
   <TeamSection />
   <!-- 3. Pilares Fundamentales -->
-
   <Pilares />
+
+  <Gallery />
 
   <!-- 6. Horarios -->
   <SectionContainer class="py-16 md:py-20">

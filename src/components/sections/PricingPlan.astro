@@ -10,11 +10,20 @@
 import SectionContainer from "@components/layout/SectionContainer.astro";
 import Subtitle from "@components/ui/Subtitle.astro";
 import PricingSelector from "@components/ui/PricingSelector";
+import type { AreaId } from "../../data/pricing";
+
+interface Props {
+  allowedAreas?: AreaId[];
+  defaultArea?: AreaId;
+  showSelector?: boolean;
+}
+
+const { allowedAreas, defaultArea = "area2", showSelector } = Astro.props;
 ---
 
 <SectionContainer
   id="precios"
-  backgroundImage="linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('/precios.jpg')"
+  backgroundImage="linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('/precios2.webp')"
   fixedBackground={true}
   class="py-12 lg:py-16"
 >
@@ -25,7 +34,12 @@ import PricingSelector from "@components/ui/PricingSelector";
       client:visible = Solo se hidrata cuando es visible (mejor rendimiento)
       Cambia a client:load si quieres que se hidrate inmediatamente
     -->
-    <PricingSelector client:visible />
+    <PricingSelector
+      client:visible
+      allowedAreas={allowedAreas}
+      defaultArea={defaultArea}
+      showSelector={showSelector}
+    />
   </div>
 </SectionContainer>
 

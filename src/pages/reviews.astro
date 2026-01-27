@@ -21,6 +21,8 @@ import SocialBest from "@components/social/SocialBest.astro";
 import FAQ from "@components/sections/FAQ.astro";
 import Subtitle from "@components/ui/Subtitle.astro";
 import ContacSocialPils from "@components/social/ContacSocialPils.astro";
+import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
+import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
 
 // FAQ sobre reseñas y testimonios
 const faqItems = [
@@ -88,32 +90,58 @@ const impactStats = [
 >
   <!-- 1. Hero principal -->
   <HeroClipped
-    img="/fondofijo.webp"
+    img="/precios2.webp"
     alt="Testimonios de miembros satisfechos de Gym Trasciende"
-    minHeight="min-h-[85vh]"
-    overlayOpacity="60"
+    minHeight="min-h-screen"
+    overlayOpacity="70"
   >
-    <div
-      class="mx-auto flex w-full max-w-4xl flex-col items-center gap-6 text-center"
-    >
-      <div class="rounded-xl bg-white/10 p-8 backdrop-blur-sm md:p-12">
-        <div class="mb-4 inline-block rounded-full bg-emerald-500/20 px-4 py-2">
-          <span class="text-primary text-sm font-bold tracking-wide uppercase">
-            ⭐ 5.0 Estrellas
+    <div class="mx-auto w-full max-w-7xl px-4">
+      <div class="flex w-full flex-col gap-8">
+        {/* Badge minimalista */}
+        <div class="inline-flex items-center gap-2">
+          <div class="bg-primary h-px w-12"></div>
+          <span
+            class="text-primary text-sm font-semibold tracking-widest uppercase"
+          >
+            ⭐ 5.0 Estrellas en Google
           </span>
         </div>
+
+        {/* Título */}
         <h1
-          class="text-secondary mb-4 text-4xl leading-tight font-bold md:mb-6 md:text-6xl"
+          class="text-secondary text-5xl leading-tight font-bold tracking-wide md:text-7xl lg:text-8xl"
         >
           Lo Que Dicen Nuestros Miembros
         </h1>
-        <p
-          class="text-secondary mx-auto max-w-2xl text-base leading-relaxed md:text-lg"
-        >
+
+        {/* Subtítulo */}
+        <p class="text-secondary max-w-2xl text-lg leading-relaxed md:text-xl">
           Historias reales de personas como tú que decidieron dar el primer paso
           hacia su transformación. Cada testimonio es auténtico y verificado.
         </p>
-        <ContacSocialPils />
+
+        {/* CTAs con estilo unificado */}
+        <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
+          <a
+            href="/contacto"
+            class="group border-primary text-primary hover:bg-primary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
+          >
+            <span class="text-base font-semibold">¡Agenda tu clase!</span>
+            <ButtonAnimation
+              width={24}
+              height={24}
+              class="transition-transform group-hover:scale-110"
+            />
+          </a>
+
+          <a
+            href="/#servicios"
+            class="group border-secondary text-secondary hover:bg-secondary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
+          >
+            <span class="text-base font-semibold">Ver servicios</span>
+            <ArrowAnimation class="size-5" />
+          </a>
+        </div>
       </div>
     </div>
   </HeroClipped>
