@@ -9,9 +9,11 @@ import Layout from "@layouts/Layout.astro";
 import Facebook from "@components/icons/Facebook.astro";
 import Instagram from "@components/icons/Instagram.astro";
 import Tiktok from "@components/icons/Tiktok.astro";
-import MapEmbed from "@components/media/MapEmbed.astro";
 import ScheduleSection from "@components/sections/ScheduleSection.astro";
 import Gallery from "@components/sections/Gallery.astro";
+import Location from "@components/sections/Location.astro";
+import MobileBottomNav from "@components/layout/MobileBottomNav.tsx";
+import PricingPlan from "@components/sections/PricingPlan.astro";
 
 // Enlaces de redes sociales y contacto
 // IMPORTANTE: Actualiza el número de WhatsApp con tu número real (formato: 52 + código de área + número)
@@ -49,6 +51,40 @@ const schedule = [
   { days: "Lunes a Viernes", hours: "5:00 AM - 10:00 PM" },
   { days: "Sábado", hours: "6:30 AM - 5:00 PM" },
   { days: "Domingo", hours: "12:00 PM - 4:00 PM" },
+];
+
+// Configuración de navegación móvil
+const mobileNavItems = [
+  {
+    id: "servicios",
+    label: "Servicios",
+    href: "/servicios",
+    icon: "grid" as const,
+  },
+  {
+    id: "precios",
+    label: "Precios",
+    href: "#precios",
+    icon: "tag" as const,
+  },
+  {
+    id: "promociones",
+    label: "Promociones",
+    href: "/promociones",
+    icon: "clock" as const,
+  },
+  {
+    id: "galeria",
+    label: "Galería",
+    href: "#galeria",
+    icon: "image" as const,
+  },
+  {
+    id: "contacto",
+    label: "Contacto",
+    href: "/contacto",
+    icon: "star" as const,
+  },
 ];
 ---
 
@@ -273,79 +309,47 @@ const schedule = [
       <ScheduleSection schedule={schedule} />
 
       <!-- Ubicación -->
-      <section
-        class="border-primary/30 mb-12 overflow-hidden rounded-2xl border bg-white/5 p-6 backdrop-blur-md"
-        aria-labelledby="location-heading"
-      >
-        <div class="mb-4 flex items-center gap-3">
-          <div
-            class="bg-primary/20 flex h-12 w-12 items-center justify-center rounded-xl"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="text-primary h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-              ></path>
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-          </div>
-          <h2 id="location-heading" class="text-2xl font-bold text-white">
-            Ubicación del Gimnasio
-          </h2>
-        </div>
-
-        <p class="mb-4 text-gray-300">
-          📍 Guillermo Prieto Sur 45, Ocotlán de Morelos, Oaxaca. Gym con
-          entrenamiento personalizado y equipamiento profesional.
-        </p>
-
-        <MapEmbed
-          height="300"
-          class="rounded-lg"
-          aria-label="Mapa interactivo con la ubicación de Gym Trasciende en Guillermo Prieto Sur 45, Ocotlán de Morelos, Oaxaca"
-        />
-      </section>
+      <Location />
     </div>
   </main>
 
+  <PricingPlan />
+
   <Gallery />
 
-  <style>
-    /* Animación sutil para el logo */
-    @keyframes pulse-subtle {
-      0%,
-      100% {
-        opacity: 0.2;
-      }
-      50% {
-        opacity: 0.3;
-      }
-    }
-
-    .animate-pulse {
-      animation: pulse-subtle 3s ease-in-out infinite;
-    }
-
-    /* Mejora de rendimiento */
-    .link-button {
-      will-change: transform;
-      transform: translateZ(0);
-    }
-
-    /* Scroll suave */
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
+  {/* Navegación móvil inferior */}
+  <MobileBottomNav
+    client:load
+    items={mobileNavItems}
+    hideOnScroll={false}
+    vibration={true}
+  />
 </Layout>
+
+<style>
+  /* Animación sutil para el logo */
+  @keyframes pulse-subtle {
+    0%,
+    100% {
+      opacity: 0.2;
+    }
+    50% {
+      opacity: 0.3;
+    }
+  }
+
+  .animate-pulse {
+    animation: pulse-subtle 3s ease-in-out infinite;
+  }
+
+  /* Mejora de rendimiento */
+  .link-button {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  /* Scroll suave */
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

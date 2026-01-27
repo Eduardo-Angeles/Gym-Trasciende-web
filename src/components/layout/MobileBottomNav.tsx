@@ -17,7 +17,7 @@ interface NavItem {
   id: string;
   label: string;
   href: string;
-  icon: "clock" | "tag" | "star" | "grid";
+  icon: "clock" | "tag" | "star" | "grid" | "image";
 }
 
 interface Props {
@@ -82,6 +82,19 @@ const Icon = ({
         <rect x="14" y="3" width="7" height="7" />
         <rect x="3" y="14" width="7" height="7" />
         <rect x="14" y="14" width="7" height="7" />
+      </svg>
+    ),
+    image: (
+      <svg
+        className={className}
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        strokeWidth="2"
+      >
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+        <circle cx="8.5" cy="8.5" r="1.5" />
+        <polyline points="21 15 16 10 5 21" />
       </svg>
     ),
   };
@@ -210,8 +223,11 @@ export default function MobileBottomNav({
       {/* Contenedor con glassmorphism */}
       <div className="border-t border-zinc-800 bg-zinc-900/95 backdrop-blur-xl">
         <div
-          className="mx-auto grid max-w-lg grid-cols-4 gap-0"
-          style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
+          className={`mx-auto grid max-w-lg gap-0`}
+          style={{
+            gridTemplateColumns: `repeat(${items.length}, minmax(0, 1fr))`,
+            paddingBottom: "env(safe-area-inset-bottom, 0px)",
+          }}
         >
           {items.map((item) => {
             const isActive = item.href.startsWith("#")

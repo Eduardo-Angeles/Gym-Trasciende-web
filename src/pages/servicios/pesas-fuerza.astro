@@ -23,6 +23,7 @@ import PricingPlan from "@components/sections/PricingPlan.astro";
 import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
 import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
 import MobileBottomNav from "@components/layout/MobileBottomNav.tsx";
+import Gallery from "@components/sections/Gallery.astro";
 
 // 👇 INFORMACIÓN DEL SLIDER - EDITA AQUÍ
 const infoSlides = [
@@ -91,6 +92,12 @@ const mobileNavItems = [
     label: "Inscríbete",
     href: "/contacto",
     icon: "star" as const,
+  },
+  {
+    id: "galeria",
+    label: "Galería",
+    href: "#galeria",
+    icon: "image" as const,
   },
   { id: "servicios", label: "Más", href: "/servicios", icon: "grid" as const },
 ];
@@ -184,6 +191,8 @@ const mobileNavItems = [
     <PricingPlan allowedAreas={["area2"]} showSelector={false} />
   </div>
 
+  <Gallery />
+
   {/* 6. CTA Final */}
   <SectionContainer class="py-20 md:py-32">
     <div class="mx-auto max-w-3xl">
@@ -242,14 +251,14 @@ const mobileNavItems = [
           </p>
         </div>
       </div>
-
-      {/* Navegación móvil inferior */}
-      <MobileBottomNav
-        client:load
-        items={mobileNavItems}
-        hideOnScroll={false}
-        vibration={true}
-      />
     </div>
   </SectionContainer>
+
+  {/* Navegación móvil inferior */}
+  <MobileBottomNav
+    client:load
+    items={mobileNavItems}
+    hideOnScroll={false}
+    vibration={true}
+  />
 </Layout>

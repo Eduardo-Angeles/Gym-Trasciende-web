@@ -28,6 +28,8 @@ import ScheduleSection from "@components/sections/ScheduleSection.astro";
 import FAQ from "@components/sections/FAQ.astro";
 import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
 import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
+import Location from "@components/sections/Location.astro";
+import MobileBottomNav from "@components/layout/MobileBottomNav.tsx";
 
 // Horarios del gimnasio
 const schedule = [
@@ -62,6 +64,40 @@ const faqItems = [
     question: "¿Cuál es su filosofía de entrenamiento?",
     answer:
       "Creemos firmemente en el progreso sostenible y seguro. Nuestra meta es que alcances tus objetivos de fitness sin riesgos, cuidando tu salud a largo plazo. Cada programa está diseñado para ser realista, efectivo y adaptado a tus necesidades individuales.",
+  },
+];
+
+// Configuración de navegación móvil para Nosotros
+const mobileNavItems = [
+  {
+    id: "horario",
+    label: "Horario",
+    href: "#horario",
+    icon: "clock" as const,
+  },
+  {
+    id: "equipo",
+    label: "Equipo",
+    href: "#equipo",
+    icon: "grid" as const,
+  },
+  {
+    id: "galeria",
+    label: "Galería",
+    href: "#galeria",
+    icon: "image" as const,
+  },
+  {
+    id: "faq",
+    label: "FAQ",
+    href: "#faq",
+    icon: "tag" as const,
+  },
+  {
+    id: "contacto",
+    label: "Contacto",
+    href: "/contacto",
+    icon: "star" as const,
   },
 ];
 ---
@@ -135,19 +171,30 @@ const faqItems = [
 
   <!-- 5. Métricas de Confianza -->
   <TrustMetrics />
-  <!-- 2. Nuestra Historia -->
 
   <!-- 4. Nuestro Equipo -->
-  <TeamSection />
+  <div id="equipo">
+    <TeamSection />
+  </div>
+
   <!-- 3. Pilares Fundamentales -->
   <Pilares />
 
-  <Gallery />
+  <div id="galeria">
+    <Gallery />
+  </div>
 
-  <!-- 6. Horarios -->
+  <div id="horario">
+    <SectionContainer class="py-16 md:py-20">
+      <div class="mx-auto max-w-2xl">
+        <ScheduleSection schedule={schedule} />
+      </div>
+    </SectionContainer>
+  </div>
+
   <SectionContainer class="py-16 md:py-20">
     <div class="mx-auto max-w-2xl">
-      <ScheduleSection schedule={schedule} />
+      <Location />
     </div>
   </SectionContainer>
 
@@ -155,7 +202,9 @@ const faqItems = [
   <SocialBest />
 
   <!-- 9. Preguntas Frecuentes -->
-  <FAQ items={faqItems} />
+  <div id="faq">
+    <FAQ items={faqItems} />
+  </div>
 
   <!-- 10. CTA Final -->
   <SectionContainer class="py-20 md:py-24">
@@ -200,4 +249,12 @@ const faqItems = [
       </div>
     </div>
   </SectionContainer>
+
+  {/* Navegación móvil inferior */}
+  <MobileBottomNav
+    client:load
+    items={mobileNavItems}
+    hideOnScroll={false}
+    vibration={true}
+  />
 </Layout>
