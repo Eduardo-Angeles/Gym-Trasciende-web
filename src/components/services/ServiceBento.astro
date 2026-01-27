@@ -50,7 +50,7 @@ const services = [
       services.map((service) => (
         <ServiceBentoCard
           {...service}
-          transitionName={`hero-${service.href.split("/").pop()}`}
+          transitionName={`title-${service.href.split("/").pop()}`}
         />
       ))
     }

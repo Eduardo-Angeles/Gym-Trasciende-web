@@ -40,7 +40,6 @@ const scheduleLines = schedule.split("|").map((line) => line.trim());
       src={image}
       alt={title}
       class="h-full w-full object-cover transition-transform duration-300 ease-in-out md:group-hover:scale-110"
-      style={transitionName ? `view-transition-name: ${transitionName}` : ""}
     />
     <!-- Badge de precio - esquina superior derecha -->
     <div class="absolute top-4 right-4 z-10">
@@ -57,7 +56,10 @@ const scheduleLines = schedule.split("|").map((line) => line.trim());
     class="flex flex-col gap-3 bg-gradient-to-b from-emerald-950/40 via-zinc-900/95 to-black p-5 text-white"
   >
     <!-- Título -->
-    <h3 class="text-2xl leading-tight font-semibold text-pretty">
+    <h3
+      class="text-2xl leading-tight font-semibold text-pretty"
+      style={transitionName ? `view-transition-name: ${transitionName}` : ""}
+    >
       {title}
     </h3>
 
