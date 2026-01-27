@@ -49,13 +49,8 @@ const services = [
     {
       services.map((service) => (
         <ServiceBentoCard
-          href={service.href}
-          image={service.image}
-          title={service.title}
-          price={service.price}
-          schedule={service.schedule}
-          feature={service.feature}
-          gridClass={service.gridClass}
+          {...service}
+          transitionName={`hero-${service.href.split("/").pop()}`}
         />
       ))
     }

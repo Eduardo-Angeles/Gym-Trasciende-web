@@ -36,6 +36,8 @@ interface Props {
   backgroundColor?: string;
   /** Clases CSS adicionales para el contenedor */
   class?: string;
+  /** Nombre para View Transitions */
+  transitionName?: string;
 }
 
 const {
@@ -46,6 +48,7 @@ const {
   objectPosition = "object-center",
   backgroundColor = "bg-background",
   class: className = "",
+  transitionName,
 } = Astro.props;
 ---
 
@@ -59,6 +62,7 @@ const {
     src={img}
     alt={alt}
     loading="eager"
+    style={transitionName ? `view-transition-name: ${transitionName}` : ""}
   />
 
   <!-- Overlay oscuro configurable sobre la imagen -->

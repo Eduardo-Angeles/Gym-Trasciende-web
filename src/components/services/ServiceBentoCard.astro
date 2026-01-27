@@ -9,9 +9,19 @@ interface Props {
   schedule: string;
   feature: string;
   gridClass?: string;
+  transitionName?: string;
 }
 
-const { href, image, title, price, schedule, feature, gridClass } = Astro.props;
+const {
+  href,
+  image,
+  title,
+  price,
+  schedule,
+  feature,
+  gridClass,
+  transitionName,
+} = Astro.props;
 
 // Procesar el horario para convertirlo en array si tiene separador
 const scheduleLines = schedule.split("|").map((line) => line.trim());
@@ -30,6 +40,7 @@ const scheduleLines = schedule.split("|").map((line) => line.trim());
       src={image}
       alt={title}
       class="h-full w-full object-cover transition-transform duration-300 ease-in-out md:group-hover:scale-110"
+      style={transitionName ? `view-transition-name: ${transitionName}` : ""}
     />
     <!-- Badge de precio - esquina superior derecha -->
     <div class="absolute top-4 right-4 z-10">
