@@ -127,8 +127,18 @@ const schemaOrgWebPage = includeSchema
     <meta name="language" content="Spanish" />
     <meta name="revisit-after" content="7 days" />
 
-    <!-- Theme Color -->
-    <meta name="theme-color" content="#1a2000" />
+    <!-- Theme Color: Define el color de la interfaz del navegador (barra de dirección, etc.) -->
+    <!-- Soporta modo claro y oscuro -->
+    <meta
+      name="theme-color"
+      content="#1a2000"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#1a2000"
+      media="(prefers-color-scheme: dark)"
+    />
     <meta name="msapplication-TileColor" content="#1a2000" />
 
     <!-- Open Graph / Facebook -->
