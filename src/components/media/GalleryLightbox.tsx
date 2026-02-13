@@ -10,6 +10,7 @@ interface GalleryImage {
 
 interface GalleryLightboxProps {
   images: GalleryImage[];
+  imageClassName?: string;
 }
 
 /**
@@ -19,6 +20,7 @@ interface GalleryLightboxProps {
  */
 export default function GalleryLightbox({
   images,
+  imageClassName,
 }: GalleryLightboxProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false); // Para controlar animaciones
@@ -202,7 +204,9 @@ export default function GalleryLightbox({
         <img
           src={currentImage.src}
           alt={currentImage.alt}
-          class="h-auto max-h-[90vh] w-auto max-w-full rounded-lg object-contain"
+          class={`h-auto max-h-[90vh] w-auto max-w-full rounded-lg object-contain ${
+            imageClassName ?? ""
+          }`}
         />
 
         {/* DESCRIPCIÓN (ALT TEXT) */}

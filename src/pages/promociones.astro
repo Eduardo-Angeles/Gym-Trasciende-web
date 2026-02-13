@@ -3,8 +3,8 @@
  * Promociones - Página de Promociones
  *
  * ESTRUCTURA ESCALABLE:
- * 1. Hero - Con countdown
- * 2. Promociones Temporales (Enero) - Con countdown visible
+ * 1. Hero - Promo de febrero
+ * 2. Promoción Temporal (Febrero)
  * 3. Promociones Permanentes - Sin fecha límite
  * 4. Cómo Aprovechar - 3 pasos simples
  * 5. FAQ - Preguntas frecuentes
@@ -20,58 +20,40 @@ import CountdownTimer from "@components/ui/CountdownTimer";
 import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
 import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
 import MobileBottomNav from "@components/layout/MobileBottomNav.tsx";
+import GalleryLightbox from "@components/media/GalleryLightbox";
 
-// ========== PROMOCIONES TEMPORALES (Con fecha límite) ==========
-const promosEnero = [
+// ========== PROMOCIÓN TEMPORAL (Febrero) ==========
+const promosFebrero = [
   {
     id: 1,
-    title: "Promo Pareja",
-    price: "$350",
-    priceDetail: "por persona/mes",
-    icon: "💑",
-    features: [
-      "Inscripción incluida",
-      "2 personas",
-      "Acceso completo",
-      "Asesoría personalizada",
-      "Horarios flexibles",
-    ],
-    badge: "Popular",
-    isTemporary: true,
+    title: "Reto Foto 1",
+    badge: "Favorita",
+    image: "/promofebrero1.webp",
+    description:
+      "Imiten esta foto en pareja, súbanla a sus redes y etiqueten a @trasciendegym.",
   },
   {
     id: 2,
-    title: "Promo Amigos 3+",
-    price: "$340",
-    priceDetail: "por persona/mes",
-    icon: "👥",
-    features: [
-      "Inscripción incluida",
-      "3 o más personas",
-      "Acceso completo",
-      "Asesoría personalizada",
-      "Horarios flexibles",
-    ],
-    badge: "Mejor Ahorro",
-    isTemporary: true,
+    title: "Reto Foto 2",
+    badge: "Creativa",
+    image: "/promofebrero2.webp",
+    description:
+      "Recrea la pose con tu persona favorita y presume el reto en redes.",
   },
   {
     id: 3,
-    title: "Paquete Familiar 3+",
-    price: "$340",
-    priceDetail: "por persona/mes",
-    icon: "👨‍👩‍👧",
-    features: [
-      "Inscripción incluida",
-      "3 o más familiares",
-      "Acceso completo",
-      "Asesoría personalizada",
-      "Horarios flexibles",
-    ],
-    badge: "Familia",
-    isTemporary: true,
+    title: "Reto Foto 3",
+    badge: "Top",
+    image: "/promofebrero3.webp",
+    description:
+      "Misma foto, misma actitud. Etiqueta a Trasciende Gym y gana tu 10%.",
   },
 ];
+
+const febreroGalleryImages = promosFebrero.map((promo) => ({
+  src: promo.image,
+  alt: promo.title,
+}));
 
 // ========== PROMOCIONES PERMANENTES (Todo el año) ==========
 const promosPermanentes = [
@@ -113,9 +95,19 @@ const promosPermanentes = [
 // FAQ sobre promociones
 const faqItems = [
   {
-    question: "¿Hasta cuándo son válidas las promociones de enero?",
+    question: "¿Hasta cuándo es válida la promo de febrero?",
     answer:
-      "Las promociones de Pareja, Amigos 3+ y Paquete Familiar son exclusivas de enero 2026. Debes inscribirte antes del 31 de enero para aprovechar estos precios especiales.",
+      "La dinámica es exclusiva de febrero 2026. Debes subir tu foto y etiquetarnos durante febrero para recibir el 10% en tu siguiente mensualidad.",
+  },
+  {
+    question: "¿Quiénes pueden participar?",
+    answer:
+      "Participan parejas de dos personas. Pueden ser amigos, pareja, hermanos o quien quiera entrenar juntos.",
+  },
+  {
+    question: "¿Qué necesito subir en redes?",
+    answer:
+      "Sube la foto imitando cualquiera de las 3 imágenes de febrero y etiqueta a @trasciendegym. Ambas personas deben aparecer en la foto.",
   },
   {
     question: "¿La inscripción siempre es gratis?",
@@ -125,17 +117,12 @@ const faqItems = [
   {
     question: "¿Puedo combinar promociones?",
     answer:
-      "Las promociones temporales de enero (Pareja, Amigos 3+, Familiar 3+) no son acumulables entre sí. Sin embargo, todas incluyen la inscripción gratis que es permanente. El descuento de cumpleaños tampoco se puede combinar con las promos de enero.",
+      "La promo de febrero no es acumulable con otras promociones temporales. Sí aplica junto con la inscripción gratis permanente.",
   },
   {
     question: "¿Cómo funciona el descuento de cumpleaños?",
     answer:
       "Durante todo tu mes de cumpleaños obtienes 10% de descuento en tu mensualidad. Solo necesitas presentar una identificación oficial que confirme tu fecha de nacimiento. Puedes renovar este beneficio cada año en tu mes.",
-  },
-  {
-    question: "¿La promoción de pareja aplica para cualquier tipo de relación?",
-    answer:
-      "¡Sí! La promo de pareja aplica para parejas, amigos, hermanos, o cualquier dupla que quiera entrenar junta. Lo importante es que se inscriban al mismo tiempo.",
   },
   {
     question: "¿Qué incluye la membresía mensual?",
@@ -148,30 +135,30 @@ const faqItems = [
 const steps = [
   {
     number: 1,
-    title: "Reúne a tu grupo",
+    title: "Elige tu foto",
     description:
-      "Junta a tu pareja, amigos o familia que quieran empezar a entrenar contigo.",
+      "Seleccionen una de las 3 fotos oficiales de febrero y prepárense para imitarla.",
   },
   {
     number: 2,
-    title: "Contáctanos",
+    title: "Imiten la pose",
     description:
-      "Escríbenos por redes o visítanos en el gimnasio antes del 31 de enero.",
+      "Tomen su foto en pareja, cuidando que se vea claramente la pose y la actitud.",
   },
   {
     number: 3,
-    title: "Inscríbanse juntos",
+    title: "Publíquenla y ganen",
     description:
-      "Completen su inscripción al mismo tiempo y aprovechen el precio especial.",
+      "Suban la foto a redes, etiqueten a @trasciendegym y obtengan 10% en su próxima mensualidad.",
   },
 ];
 
 // Configuración de navegación móvil
 const mobileNavItems = [
   {
-    id: "promos-enero",
-    label: "Enero",
-    href: "#promociones-enero",
+    id: "promos-febrero",
+    label: "Febrero",
+    href: "#promociones-febrero",
     icon: "clock" as const,
   },
   {
@@ -197,11 +184,11 @@ const mobileNavItems = [
 
 <Layout
   title="Promociones y Ofertas | Gym Trasciende - Descuentos Especiales Ocotlán"
-  description="Aprovecha nuestras promociones en Trasciende Gym Ocotlán. Inscripción gratis todo el año y ofertas especiales de enero 2026. Inscríbete en pareja, con amigos o en familia y ahorra."
-  keywords="promociones gym, descuentos gimnasio ocotlán, ofertas gym 2026, promo pareja gym, gym familiar descuento, inscripción gratis gym"
+  description="Aprovecha nuestras promociones en Trasciende Gym Ocotlán. Inscripción gratis todo el año y reto de febrero con 10% en tu próxima mensualidad al imitar nuestras fotos y etiquetarnos."
+  keywords="promociones gym, descuentos gimnasio ocotlán, ofertas gym 2026, promo febrero gym, reto fotos gym, inscripción gratis gym"
   type="website"
 >
-  <!-- 1. Hero con Countdown -->
+  <!-- 1. Hero Promo Febrero -->
   <HeroClipped
     img="/imagenfondo5.webp"
     alt="Promociones especiales Trasciende Gym"
@@ -216,7 +203,7 @@ const mobileNavItems = [
           <span
             class="text-primary animate-pulse text-sm font-semibold tracking-widest uppercase"
           >
-            🔥 Ofertas Limitadas de Enero 2026
+            🔥 Reto de Febrero 2026
           </span>
         </div>
 
@@ -228,15 +215,17 @@ const mobileNavItems = [
         </h1>
 
         {/* Subtítulo */}
-        <p class="text-secondary max-w-2xl text-lg leading-relaxed md:text-xl">
-          Inscripción gratis siempre + Promociones especiales de enero para
-          entrenar en grupo. ¡No dejes pasar estas ofertas!
+        <p
+          class="text-secondary text-semibold max-w-2xl text-lg leading-relaxed md:text-xl"
+        >
+          Inscripción gratis siempre + Promociones especiales de febrero. ¡No
+          dejes pasar estas ofertas!
         </p>
 
         {/* CTAs con estilo consistente */}
         <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
           <a
-            href="#promociones-enero"
+            href="#promociones-febrero"
             class="group border-primary text-primary hover:bg-primary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
           >
             <span class="text-base font-semibold">Ver Promociones</span>
@@ -259,20 +248,24 @@ const mobileNavItems = [
     </div>
   </HeroClipped>
 
-  <!-- 2. Promociones Temporales de Enero -->
+  <!-- 2. Promoción Temporal de Febrero -->
   <SectionContainer class="py-16 md:py-24">
-    <div id="promociones-enero">
-      <Subtitle>Promociones Exclusivas de Enero</Subtitle>
+    <div id="promociones-febrero">
+      <Subtitle
+        class="bg-linear-to-r from-pink-500 to-fuchsia-500 bg-clip-text text-transparent"
+        lineClass="bg-linear-to-r from-pink-500 to-fuchsia-500"
+      >
+        Reto de Febrero: Imita y Gana 10%
+      </Subtitle>
 
-      {/* Countdown visible en sección */}
-      <div class="mt-12 flex justify-center">
+      <div class="mt-8 flex justify-center">
         <div
-          class="rounded-xl border border-orange-500/20 bg-gray-900/50 p-6 backdrop-blur-sm"
+          class="rounded-xl border border-pink-500/20 bg-gray-900/50 p-6 backdrop-blur-sm"
         >
           <p
-            class="text-primary mb-4 text-center text-sm font-semibold tracking-wide uppercase"
+            class="mb-4 bg-linear-to-r from-pink-100 to-fuchsia-500 bg-clip-text text-center text-sm font-semibold tracking-wide text-transparent uppercase"
           >
-            ⏰ Tiempo restante para estas ofertas:
+            ⏰ Tiempo restante del reto:
           </p>
           <CountdownTimer client:load />
         </div>
@@ -281,70 +274,93 @@ const mobileNavItems = [
       <p
         class="text-secondary mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed"
       >
-        Inscríbete en grupo y ahorra. Todas incluyen inscripción gratis y acceso
-        completo.
+        ¿Se animan? Imita una de las 3 fotos oficiales, publícala y etiqueta a
+        @trasciendegym. Tú y tu acompañante reciben 10% en su próxima
+        mensualidad.
       </p>
+
+      <div
+        class="mx-auto mb-12 max-w-4xl rounded-2xl border border-pink-500/20 bg-gray-900/50 p-6 text-left backdrop-blur-sm"
+      >
+        <h3 class="mb-4 text-center text-xl font-bold text-white">
+          Solo tienes que…
+        </h3>
+        <ol class="text-secondary space-y-3">
+          <li class="flex gap-3">
+            <span class="text-primary font-bold">1.</span>
+            <span>Imitar al menos 1 de las tres fotos.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-primary font-bold">2.</span>
+            <span>Tomar la o las fotografías en nuestras instalaciones 📸.</span
+            >
+          </li>
+          <li class="flex gap-3">
+            <span class="text-primary font-bold">3.</span>
+            <span>Subirla como publicación y etiquetar a Trasciende Gym.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-primary font-bold">4.</span>
+            <span>Mostrarla en recepción 🙍🏻‍♀️.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-primary font-bold">5.</span>
+            <span>
+              Hacemos válida tu promoción y obtienen 10% de descuento en su
+              próxima mensualidad para ti y tu amigx, novix, esposx o pareja.
+            </span>
+          </li>
+        </ol>
+        <p class="text-secondary mt-6 text-center text-sm">
+          Te prometo que te vas a divertir muchísimo 🤭
+        </p>
+        <p class="mt-2 text-center text-sm font-semibold text-white">
+          Válido para publicar hasta el 14 de febrero a las 12:00 a.m. ♥️
+        </p>
+      </div>
 
       <div class="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
         {
-          promosEnero.map((promo) => (
-            <div class="group relative flex flex-col overflow-hidden rounded-2xl border-2 border-orange-500/30 bg-gray-900/50 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-orange-500/60 hover:shadow-2xl hover:shadow-orange-500/20">
+          promosFebrero.map((promo) => (
+            <div class="group relative flex flex-col overflow-hidden rounded-2xl border-2 border-pink-500/30 bg-gray-900/50 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-pink-500/60 hover:shadow-2xl hover:shadow-pink-500/20">
               {/* Badge */}
-              <div class="absolute top-4 right-4 z-10 rounded-full bg-linear-to-r from-orange-500 to-red-500 px-3 py-1 shadow-lg">
+              <div class="absolute top-4 right-4 z-10 rounded-full bg-linear-to-r from-pink-500 to-fuchsia-500 px-3 py-1 shadow-lg">
                 <span class="text-xs font-bold text-white uppercase">
                   {promo.badge}
                 </span>
               </div>
 
               <div class="p-8">
-                {/* Icono */}
-                <div class="mb-4 text-6xl transition-transform duration-300 group-hover:scale-110">
-                  {promo.icon}
-                </div>
+                {/* Imagen */}
+                <button
+                  type="button"
+                  class="mb-5 overflow-hidden rounded-xl border border-white/10 transition-transform duration-300 hover:scale-[1.01]"
+                  data-gallery-trigger
+                  data-image-index={promo.id - 1}
+                  aria-label={`Ver ${promo.title} en grande`}
+                >
+                  <img
+                    src={promo.image}
+                    alt={promo.title}
+                    class="h-56 w-full object-cover [filter:saturate(1.25)_contrast(1.1)_brightness(1.05)] transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </button>
 
                 {/* Título */}
-                <h3 class="mb-2 text-2xl font-bold text-white">
+                <h3 class="mb-3 text-2xl font-bold text-white">
                   {promo.title}
                 </h3>
-
-                {/* Precios */}
-                <div class="mb-6">
-                  <div class="flex items-baseline gap-2">
-                    <span class="text-primary text-5xl font-bold tabular-nums">
-                      {promo.price}
-                    </span>
-                    <span class="text-secondary text-sm">
-                      {promo.priceDetail}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Features */}
-                <ul class="mb-8 space-y-3">
-                  {promo.features.map((feature) => (
-                    <li class="flex items-start gap-2">
-                      <svg
-                        class="text-primary mt-1 h-5 w-5 shrink-0 transition-colors group-hover:text-orange-400"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
-                      <span class="text-secondary text-sm">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+                <p class="text-secondary mb-8 text-sm leading-relaxed">
+                  {promo.description}
+                </p>
 
                 {/* CTA */}
                 <a
                   href="/contacto"
-                  class="block w-full rounded-lg border-2 border-orange-500 bg-orange-500/10 px-6 py-3 text-center font-bold text-white transition-all duration-300 hover:bg-orange-500 hover:text-black hover:shadow-lg hover:shadow-orange-500/50"
+                  class="block w-full rounded-lg border-2 border-pink-500 bg-pink-500/10 px-6 py-3 text-center font-bold text-white transition-all duration-300 hover:bg-pink-500 hover:text-black hover:shadow-lg hover:shadow-pink-500/50"
                 >
-                  Aprovechar Ahora
+                  Participar en el Reto
                 </a>
               </div>
             </div>
@@ -439,7 +455,7 @@ const mobileNavItems = [
     fixedBackground={true}
     class="py-16 md:py-20"
   >
-    <Subtitle>¿Cómo Aprovechar las Promociones?</Subtitle>
+    <Subtitle>¿Cómo Ganar el 10% de Febrero?</Subtitle>
 
     <div class="mx-auto max-w-5xl">
       <div class="grid gap-8 md:grid-cols-3">
@@ -466,13 +482,13 @@ const mobileNavItems = [
   <!-- 6. CTA Final Urgente -->
   <SectionContainer class="py-16 md:py-20">
     <div
-      class="mx-auto max-w-4xl rounded-2xl border-2 border-orange-500/30 bg-linear-to-br from-gray-900/80 to-orange-900/20 p-8 text-center shadow-xl backdrop-blur-sm md:p-12"
+      class="mx-auto max-w-4xl rounded-2xl border-2 border-pink-500/30 bg-linear-to-br from-gray-900/80 to-pink-900/20 p-8 text-center shadow-xl backdrop-blur-sm md:p-12"
     >
       <div
-        class="mb-4 inline-block rounded-full bg-linear-to-r from-orange-500 to-red-500 px-6 py-2 shadow-lg"
+        class="mb-4 inline-block rounded-full bg-linear-to-r from-pink-500 to-fuchsia-500 px-6 py-2 shadow-lg"
       >
         <span class="text-sm font-bold tracking-wide text-white uppercase">
-          ⏰ ¡Las Ofertas de Enero Terminan Pronto!
+          📸 ¡Reto de Febrero Activo!
         </span>
       </div>
 
@@ -481,9 +497,8 @@ const mobileNavItems = [
       </h2>
 
       <p class="text-secondary mb-8 text-lg leading-relaxed">
-        Las promociones de grupo terminan el 31 de enero de 2026. La inscripción
-        gratis es permanente, pero los descuentos en planes familiares son solo
-        por tiempo limitado.
+        Imita una de las 3 fotos oficiales en pareja y etiqueta a Trasciende
+        Gym. Ambos reciben 10% de descuento en su próxima mensualidad.
       </p>
 
       <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -502,11 +517,16 @@ const mobileNavItems = [
       </div>
 
       <p class="text-secondary mt-6 text-sm">
-        💚 Inscripción gratis todo el año • Promos de enero válidas hasta el
-        31/01/2026
+        💚 Inscripción gratis todo el año • Reto válido durante febrero 2026
       </p>
     </div>
   </SectionContainer>
+
+  <GalleryLightbox
+    client:idle
+    images={febreroGalleryImages}
+    imageClassName="[filter:saturate(1.25)_contrast(1.1)_brightness(1.05)]"
+  />
 
   {/* Navegación móvil inferior */}
   <MobileBottomNav
