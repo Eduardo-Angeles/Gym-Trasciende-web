@@ -37,17 +37,12 @@ const faqSchema = {
   <Subtitle>Preguntas Frecuentes</Subtitle>
 
   <div class="mx-auto max-w-3xl">
-    <div class="space-y-4" itemscope itemtype="https://schema.org/FAQPage">
+    <div class="space-y-4">
       {
         items.map((item, index) => (
-          <details
-            class="group rounded-xl border border-white/10 bg-gray-900/50 backdrop-blur-sm transition-all duration-300 hover:border-emerald-500/30"
-            itemscope
-            itemprop="mainEntity"
-            itemtype="https://schema.org/Question"
-          >
+          <details class="group rounded-xl border border-white/10 bg-gray-900/50 backdrop-blur-sm transition-all duration-300 hover:border-emerald-500/30">
             <summary class="hover:text-primary flex cursor-pointer items-center justify-between p-6 font-semibold text-white transition-colors">
-              <span itemprop="name">{item.question}</span>
+              <span>{item.question}</span>
               <svg
                 class="h-5 w-5 transition-transform duration-300 group-open:rotate-180"
                 fill="none"
@@ -63,13 +58,8 @@ const faqSchema = {
                 />
               </svg>
             </summary>
-            <div
-              class="border-t border-white/10 px-6 pt-4 pb-6 text-gray-300"
-              itemscope
-              itemprop="acceptedAnswer"
-              itemtype="https://schema.org/Answer"
-            >
-              <p itemprop="text">{item.answer}</p>
+            <div class="border-t border-white/10 px-6 pt-4 pb-6 text-gray-300">
+              <p>{item.answer}</p>
             </div>
           </details>
         ))
