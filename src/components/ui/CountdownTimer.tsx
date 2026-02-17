@@ -1,5 +1,5 @@
 /**
- * CountdownTimer - Countdown minimalista hasta 14 de febrero 2026
+ * CountdownTimer - Countdown minimalista hasta fin de febrero 2026
  * Componente Preact para mostrar cuenta regresiva
  */
 
@@ -21,8 +21,8 @@ export default function CountdownTimer() {
   });
 
   useEffect(() => {
-    // Fecha límite: 14 de febrero 2026, 00:00:00
-    const targetDate = new Date("2026-02-14T00:00:00").getTime();
+    // Fecha límite: 28 de febrero 2026, 23:59:59
+    const targetDate = new Date("2026-02-28T23:59:59").getTime();
 
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
