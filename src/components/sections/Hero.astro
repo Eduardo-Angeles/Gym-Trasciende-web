@@ -1,179 +1,222 @@
 ---
-import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
-import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
-
+import ButtonAnimation from "../icons/ButtonAnimation.astro";
 // Configuración de imágenes del hero
 const heroImages = ["/hero/hero-2.webp", "/hero/hero-3.webp"];
 ---
 
-<!-- Hero: pantalla completa con imagen cambiante -->
+<!-- Hero: mobile = nutrition style, desktop = full-bleed editorial -->
 <section
   id="hero-section"
-  class="relative flex min-h-dvh flex-col justify-between p-4 md:p-12 lg:p-16"
+  class="bg-background relative overflow-hidden"
+  aria-label="Gym Trasciende - Ocotlán de Morelos"
 >
-  <!-- Imagen de fondo (siempre visible) -->
-  <img
-    id="hero-img-1"
-    src={heroImages[0]}
-    alt="Gym Trasciende - El mejor Gimnasio en Ocotlán"
-    class="absolute inset-0 h-full w-full object-cover object-center"
-    fetchpriority="high"
-    loading="eager"
-  />
+  <!-- ══════════════════════════════════════
+       MOBILE ONLY: imagen cubre ~72% superior
+       ══════════════════════════════════════ -->
+  <div class="absolute inset-0 lg:hidden" aria-hidden="true">
+    <img
+      id="hero-img-mobile-1"
+      src={heroImages[0]}
+      alt=""
+      class="absolute inset-0 h-full w-full object-cover object-center"
+      fetchpriority="high"
+      loading="eager"
+    />
+    <img
+      id="hero-img-mobile-2"
+      src={heroImages[0]}
+      alt=""
+      class="absolute inset-0 h-full w-full object-cover object-center"
+      loading="eager"
+      style="opacity:0;"
+    />
+    <!-- Overlay uniforme -->
+    <div class="absolute inset-0 bg-black/70"></div>
+  </div>
 
-  <!-- Imagen superpuesta (para crossfade) - empieza oculta -->
-  <img
-    id="hero-img-2"
-    src={heroImages[0]}
-    alt="Instalaciones de Gym Trasciende en Ocotlán"
-    class="absolute inset-0 h-full w-full object-cover object-center"
-    loading="eager"
-    style="opacity: 0;"
-  />
+  <!-- ══════════════════════════════════════
+       DESKTOP ONLY: imagen full-bleed
+       ══════════════════════════════════════ -->
+  <div class="absolute inset-0 hidden lg:block" aria-hidden="true">
+    <img
+      id="hero-img-1"
+      src={heroImages[0]}
+      alt="Gym Trasciende - El mejor Gimnasio en Ocotlán"
+      class="absolute inset-0 h-full w-full object-cover object-center"
+      fetchpriority="high"
+      loading="eager"
+    />
+    <img
+      id="hero-img-2"
+      src={heroImages[0]}
+      alt="Instalaciones de Gym Trasciende en Ocotlán"
+      class="absolute inset-0 h-full w-full object-cover object-center"
+      loading="eager"
+      style="opacity:0;"
+    />
+    <!-- Overlay uniforme -->
+    <div class="absolute inset-0 bg-black/50"></div>
+  </div>
 
-  <!-- Overlay oscuro -->
+  <!-- Grain texture (ambas vistas) -->
   <div
-    class="pointer-events-none absolute inset-0 bg-black"
-    style="opacity: 0.65;"
+    class="pointer-events-none absolute inset-0 z-0 opacity-[0.025]"
+    style="background-image:url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E');background-size:200px"
   >
   </div>
 
-  <!-- Contenedor del contenido -->
-  <div
-    class="relative z-10 mx-auto flex w-full max-w-7xl grow items-center px-4 lg:px-8"
-  >
-    <div>
-      <!-- Subtítulo arriba del H1 -->
-      <p
-        class="text-primary mb-2 text-sm font-semibold tracking-wide uppercase md:mb-4 md:text-xl"
-      >
-        ¡Supera tus limites!
-      </p>
-
-      <!-- Título principal -->
-      <!-- Título Principal SEO (Invisible) -->
-      <h1 class="sr-only">Gimnasio Trasciende en Ocotlán de Morelos</h1>
-
-      <!-- Título Visual (Decorativo) -->
+  <!-- ══════════════════════════════════════
+       CONTENIDO
+       ══════════════════════════════════════ -->
+  <div class="relative z-10 mx-auto max-w-7xl px-4 lg:px-8">
+    <div
+      class="flex min-h-dvh flex-col justify-center lg:flex-row lg:items-center lg:py-0"
+    >
+      <!-- Columna de texto -->
+      <!-- Mobile: mt-auto empuja al fondo. Desktop: columna izquierda centrada -->
       <div
-        class="text-secondary mb-4 text-4xl leading-tight font-bold tracking-widest md:mb-6 md:text-6xl lg:text-8xl"
-        aria-hidden="true"
+        class="flex w-full flex-col gap-7 py-10 lg:max-w-[52%] lg:gap-10 lg:py-24"
       >
-        <span class="border-secondary inline-block border-b-4 pb-1">
-          <img
-            src="/t.svg"
-            alt="T"
-            class="inline-block h-[1em] w-auto translate-y-[0.1em]"
-            style="vertical-align: baseline;"
-          />RA</span
-        >SCIENDE
+        <!-- H1 SEO oculto -->
+        <h1 class="sr-only">Gimnasio Trasciende en Ocotlán de Morelos</h1>
+
+        <!-- Tagline encima del wordmark -->
+        <div class="flex items-center gap-3">
+          <div class="bg-primary h-px w-10"></div>
+          <p
+            class="text-primary text-sm font-semibold tracking-widest uppercase"
+          >
+            ¡Supera tus límites!
+          </p>
+        </div>
+
+        <!-- Wordmark visual -->
+        <div
+          class="text-5xl leading-[0.95] font-black tracking-tight sm:text-6xl md:text-6xl lg:text-7xl lg:whitespace-nowrap xl:text-8xl"
+          aria-hidden="true"
+        >
+          <span class="text-white">
+            <span class="inline-block border-b-[3px] border-white pb-0.5">
+              <img
+                src="/t.svg"
+                alt="T"
+                class="inline-block h-[1em] w-auto translate-y-[0.08em]"
+                style="vertical-align:baseline;"
+              />RA
+            </span>SCIENDE
+          </span>
+        </div>
+
+        <!-- Descripción -->
+        <p class="max-w-lg text-lg leading-relaxed text-zinc-300 lg:text-xl">
+          Queremos acompañarte en tu transformación personal con un plan
+          diseñado solo para ti. El primer paso lo das tú, el resto lo hacemos
+          juntos.
+        </p>
+
+        <!-- H2 SEO oculto -->
+        <h2 class="sr-only">
+          Tu mejor opción de Gimnasio en Ocotlán de Morelos. Entrenamiento
+          personalizado, pesas y cardio.
+        </h2>
+
+        <!-- CTAs -->
+        <div class="flex flex-col gap-4 pt-6 sm:flex-row">
+          <a
+            href="/#servicios"
+            role="button"
+            aria-label="Ver servicios del gym"
+            class="bg-primary text-background hover:bg-primary/90 group inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-base font-bold shadow-lg shadow-black/30 transition-all duration-300 hover:scale-105 active:scale-95"
+          >
+            ¡Quiero entrenar!
+            <ButtonAnimation width={26} height={26} class="brightness-0" />
+          </a>
+          <a
+            href="/#precios"
+            role="button"
+            aria-label="Ver precios y planes"
+            class="border-primary/50 text-primary hover:bg-primary/10 inline-flex items-center justify-center gap-2 rounded-xl border-2 px-7 py-3.5 text-base font-bold transition-all duration-300 hover:scale-105 active:scale-95"
+          >
+            Ver precios
+          </a>
+        </div>
       </div>
 
-      <!-- Descripción -->
-      <p
-        class="text-secondary mb-6 max-w-2xl text-base leading-relaxed font-medium md:mb-8 md:text-xl"
+      <!-- Indicadores de slide (desktop, esquina inferior derecha) -->
+      <div
+        class="absolute right-8 bottom-8 z-10 hidden gap-2 lg:flex"
+        id="hero-dots"
       >
-        Queremos acompañarte en tu transformación personal con un plan diseñado
-        solo para ti. El primer paso lo das tú, el resto lo hacemos juntos.
-      </p>
-
-      <!-- Hidden SEO Text -->
-      <h2 class="sr-only">
-        Tu mejor opción de Gimnasio en Ocotlán de Morelos. Entrenamiento
-        personalizado, pesas y cardio.
-      </h2>
-
-      <!-- Botones de acción -->
-      <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-        <!-- Botón de contacto -->
-        <a
-          href="/#servicios"
-          role="button"
-          aria-label="Ir a página de contacto"
-          class="group border-primary text-primary hover:bg-primary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
-        >
-          <span
-            class="relative text-base font-semibold transition-all duration-300"
-            >¡Quiero entrenar!</span
-          >
-          <ButtonAnimation
-            width={24}
-            height={24}
-            class="transition-transform group-hover:scale-110"
-          />
-        </a>
-
-        <!-- Botón de precios -->
-        <a
-          href="/#precios"
-          role="button"
-          aria-label="Ver precios y planes"
-          class="group border-secondary text-secondary hover:bg-secondary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
-        >
-          <span
-            class="relative text-base font-semibold transition-all duration-300"
-            >Ver precios</span
-          >
-          <ArrowAnimation class="size-5" />
-        </a>
+        <span
+          class="hero-dot bg-primary h-1.5 w-6 rounded-full opacity-100 transition-all duration-300"
+        ></span>
+        <span
+          class="hero-dot h-1.5 w-1.5 rounded-full bg-white/40 transition-all duration-300"
+        ></span>
       </div>
     </div>
   </div>
 </section>
 
 <script define:vars={{ heroImages }}>
-  // Función de inicialización que se ejecuta en cada carga de página
   function initHeroCarousel() {
     let currentIndex = 0;
     let intervalId = null;
     let activeImage = 1;
-    const heroImg1 = document.getElementById("hero-img-1");
-    const heroImg2 = document.getElementById("hero-img-2");
 
-    // Si no encuentra las imágenes, salir (no estamos en la página del hero)
-    if (!heroImg1 || !heroImg2) return;
+    // Desktop pair
+    const img1 = document.getElementById("hero-img-1");
+    const img2 = document.getElementById("hero-img-2");
+    // Mobile pair
+    const mob1 = document.getElementById("hero-img-mobile-1");
+    const mob2 = document.getElementById("hero-img-mobile-2");
+    // Dots
+    const dots = document.querySelectorAll(".hero-dot");
+
+    if (!img1 && !mob1) return;
 
     const totalImages = heroImages.length;
 
-    // Preload todas las imágenes en segundo plano (después de la primera)
-    function preloadImages() {
-      heroImages.forEach((src, index) => {
-        if (index === 0) return; // Primera ya está cargada
-        const img = new Image();
-        img.src = src;
+    function updateDots(index) {
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.add("bg-primary", "w-6", "opacity-100");
+          dot.classList.remove("bg-white/40", "w-1.5");
+        } else {
+          dot.classList.remove("bg-primary", "w-6", "opacity-100");
+          dot.classList.add("bg-white/40", "w-1.5");
+        }
       });
     }
 
-    // Cambiar imagen con crossfade usando dos imágenes superpuestas
-    function changeHeroImage() {
-      currentIndex = (currentIndex + 1) % totalImages;
-      const nextSrc = heroImages[currentIndex];
-
-      // Alternar entre las dos imágenes
-      if (activeImage === 1) {
-        heroImg2.src = nextSrc;
-        requestAnimationFrame(() => {
-          heroImg1.style.opacity = "0";
-          heroImg2.style.opacity = "1";
-        });
-        activeImage = 2;
-      } else {
-        heroImg1.src = nextSrc;
-        requestAnimationFrame(() => {
-          heroImg2.style.opacity = "0";
-          heroImg1.style.opacity = "1";
-        });
-        activeImage = 1;
-      }
+    function crossfade(from, to, src) {
+      if (!from || !to) return;
+      to.src = src;
+      requestAnimationFrame(() => {
+        from.style.opacity = "0";
+        to.style.opacity = "1";
+      });
     }
 
-    // Iniciar carousel
+    function changeHeroImage() {
+      currentIndex = (currentIndex + 1) % totalImages;
+      const next = heroImages[currentIndex];
+      if (activeImage === 1) {
+        crossfade(img1, img2, next);
+        crossfade(mob1, mob2, next);
+        activeImage = 2;
+      } else {
+        crossfade(img2, img1, next);
+        crossfade(mob2, mob1, next);
+        activeImage = 1;
+      }
+      updateDots(currentIndex);
+    }
+
     function startCarousel() {
       if (intervalId) return;
       intervalId = setInterval(changeHeroImage, 5000);
     }
-
-    // Detener carousel
     function stopCarousel() {
       if (intervalId) {
         clearInterval(intervalId);
@@ -181,72 +224,54 @@ const heroImages = ["/hero/hero-2.webp", "/hero/hero-3.webp"];
       }
     }
 
-    // Handler para visibilitychange
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        stopCarousel();
-      } else {
-        startCarousel();
-      }
-    };
-
-    // Pausar cuando la pestaña no es visible
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-
-    // Pausar cuando el hero no es visible en viewport
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            startCarousel();
-          } else {
-            stopCarousel();
-          }
-        });
-      },
-      { threshold: 0.3 },
-    );
+    const handleVisibility = () =>
+      document.hidden ? stopCarousel() : startCarousel();
+    document.addEventListener("visibilitychange", handleVisibility);
 
     const heroSection = document.getElementById("hero-section");
-    if (heroSection) {
-      observer.observe(heroSection);
-    }
+    const observer = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) =>
+          e.isIntersecting ? startCarousel() : stopCarousel(),
+        ),
+      { threshold: 0.3 },
+    );
+    if (heroSection) observer.observe(heroSection);
 
-    // Iniciar carousel
+    updateDots(0);
     startCarousel();
 
-    // Preload de imágenes en idle time para no bloquear
-    if ("requestIdleCallback" in window) {
-      requestIdleCallback(preloadImages);
-    } else {
-      setTimeout(preloadImages, 1500);
+    function preload() {
+      heroImages.forEach((src, i) => {
+        if (i > 0) {
+          const t = new Image();
+          t.src = src;
+        }
+      });
     }
+    "requestIdleCallback" in window
+      ? requestIdleCallback(preload)
+      : setTimeout(preload, 1500);
 
-    // Limpiar recursos cuando se cambia de página (View Transitions)
     document.addEventListener(
       "astro:before-preparation",
       () => {
         stopCarousel();
-        document.removeEventListener(
-          "visibilitychange",
-          handleVisibilityChange,
-        );
-        if (observer && heroSection) {
-          observer.disconnect();
-        }
+        document.removeEventListener("visibilitychange", handleVisibility);
+        if (heroSection) observer.disconnect();
       },
       { once: true },
     );
   }
 
-  // Ejecutar en carga inicial y después de cada transición de página
   document.addEventListener("astro:page-load", initHeroCarousel);
 </script>
 
 <style>
-  /* Crossfade suave y elegante - Solo fade sin zoom */
   #hero-img-1,
-  #hero-img-2 {
-    transition: opacity 0.5s ease-in-out;
+  #hero-img-2,
+  #hero-img-mobile-1,
+  #hero-img-mobile-2 {
+    transition: opacity 0.6s ease-in-out;
   }
 </style>
