@@ -10,6 +10,8 @@ interface Props {
   feature: string;
   gridClass?: string;
   transitionName?: string;
+  imageBg?: string;
+  imgClass?: string;
 }
 
 const {
@@ -21,6 +23,8 @@ const {
   feature,
   gridClass,
   transitionName,
+  imageBg = "",
+  imgClass = "h-full w-full object-cover transition-transform duration-300 ease-in-out md:group-hover:scale-110",
 } = Astro.props;
 
 // Procesar el horario para convertirlo en array si tiene separador
@@ -35,12 +39,8 @@ const scheduleLines = schedule.split("|").map((line) => line.trim());
   ]}
 >
   <!-- Imagen arriba -->
-  <div class="relative flex-1 overflow-hidden">
-    <img
-      src={image}
-      alt={title}
-      class="h-full w-full object-cover transition-transform duration-300 ease-in-out md:group-hover:scale-110"
-    />
+  <div class:list={["relative flex-1 overflow-hidden", imageBg]}>
+    <img src={image} alt={title} class={imgClass} />
     <!-- Badge de precio - esquina superior derecha -->
     <div class="absolute top-4 right-4 z-10">
       <span

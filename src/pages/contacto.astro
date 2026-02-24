@@ -1,59 +1,93 @@
 ---
 /**
- * Links Page - Estilo Linktree para Gym Trasciende
- * Optimizado para rendimiento con Astro 5 SSG y SEO Local
- * Página de contacto optimizada para búsquedas: "contacto gym trasciende", "gimnasio ocotlán"
+ * Contacto — Rediseño editorial dark, filosofía nutrición
+ *
+ * ESTRUCTURA:
+ * 1. Hero — headline + CTAs directos
+ * 2. Contact Cards — grid de canales de contacto
+ * 3. Info rápida — dirección, horarios, teléfono
+ * 4. Mapa + Horarios (2 col)
+ * 5. Galería
+ * 6. Precios
  */
 
 import Layout from "@layouts/Layout.astro";
-import Facebook from "@components/icons/Facebook.astro";
-import Instagram from "@components/icons/Instagram.astro";
-import Tiktok from "@components/icons/Tiktok.astro";
 import ScheduleSection from "@components/sections/ScheduleSection.astro";
 import Gallery from "@components/sections/Gallery.astro";
 import Location from "@components/sections/Location.astro";
 import MobileBottomNav from "@components/layout/MobileBottomNav.tsx";
 import PricingPlan from "@components/sections/PricingPlan.astro";
+import SectionContainer from "@components/layout/SectionContainer.astro";
 
-// Enlaces de redes sociales y contacto
-// IMPORTANTE: Actualiza el número de WhatsApp con tu número real (formato: 52 + código de área + número)
+const whatsappUrl =
+  "https://wa.me/529514980492?text=Hola,%20quiero%20información%20sobre%20Gym%20Trasciende";
+
 const socialLinks = [
   {
+    name: "WhatsApp",
+    handle: "951 498 0492",
+    url: whatsappUrl,
+    description: "Respuesta inmediata · Lunes a Sábado",
+    color: "from-green-600 to-emerald-500",
+    glow: "hover:shadow-green-500/20",
+    border: "border-green-500/30 hover:border-green-400/60",
+    iconBg: "bg-green-500",
+    hoverRow: "hover:bg-green-950/50",
+    accentText: "group-hover:text-green-400",
+    accentBorder: "group-hover:border-l-green-500",
+    icon: `<svg class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`,
+    featured: true,
+  },
+  {
     name: "Instagram",
+    handle: "@trasciendegym",
     url: "https://www.instagram.com/trasciendegym?igsh=MmJxaHRjM2w2cG1p",
-    icon: Instagram,
-    color: "from-primary to-accent",
+    description: "Contenido diario · Rutinas · Resultados",
+    color: "from-purple-600 to-pink-500",
+    glow: "hover:shadow-pink-500/20",
+    border: "border-pink-500/30 hover:border-pink-400/60",
+    iconBg: "bg-gradient-to-br from-purple-600 to-pink-500",
+    hoverRow: "hover:bg-purple-950/50",
+    accentText: "group-hover:text-pink-400",
+    accentBorder: "group-hover:border-l-pink-500",
+    icon: `<svg class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>`,
   },
   {
     name: "Facebook",
+    handle: "Gym Trasciende",
     url: "https://www.facebook.com/profile.php?id=61583792785523",
-    icon: Facebook,
-    color: "from-blue-600 to-blue-500",
+    description: "Comunidad · Eventos · Promociones",
+    color: "from-blue-700 to-blue-500",
+    glow: "hover:shadow-blue-500/20",
+    border: "border-blue-500/30 hover:border-blue-400/60",
+    iconBg: "bg-blue-600",
+    hoverRow: "hover:bg-blue-950/50",
+    accentText: "group-hover:text-blue-400",
+    accentBorder: "group-hover:border-l-blue-500",
+    icon: `<svg class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`,
   },
   {
     name: "TikTok",
+    handle: "@trasciende.gym",
     url: "https://www.tiktok.com/@trasciende.gym",
-    icon: Tiktok,
-    color: "from-black via-[#ff0050] to-[#00f2ea]",
-  },
-  {
-    name: "WhatsApp",
-    url: "https://wa.me/529514980492?text=Hola,%20quiero%20información%20sobre%20Gym%20Trasciende",
-    icon: null,
-    color: "from-green-600 to-green-500",
-    whatsapp: true,
-    special: true,
+    description: "Videos · Tips de entrenamiento · Humor",
+    color: "from-zinc-900 via-[#ff0050] to-[#00f2ea]",
+    glow: "hover:shadow-pink-500/20",
+    border: "border-zinc-600/30 hover:border-zinc-400/60",
+    iconBg: "bg-zinc-900",
+    hoverRow: "hover:bg-zinc-800/60",
+    accentText: "group-hover:text-zinc-200",
+    accentBorder: "group-hover:border-l-zinc-400",
+    icon: `<svg class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.22 8.22 0 004.84 1.56V6.79a4.85 4.85 0 01-1.07-.1z"/></svg>`,
   },
 ];
 
-// Horarios del gimnasio
 const schedule = [
   { days: "Lunes a Viernes", hours: "5:00 AM - 10:00 PM" },
   { days: "Sábado", hours: "6:30 AM - 5:00 PM" },
   { days: "Domingo", hours: "12:00 PM - 4:00 PM" },
 ];
 
-// Configuración de navegación móvil
 const mobileNavItems = [
   {
     id: "servicios",
@@ -61,15 +95,10 @@ const mobileNavItems = [
     href: "/servicios",
     icon: "grid" as const,
   },
-  {
-    id: "precios",
-    label: "Precios",
-    href: "#precios",
-    icon: "tag" as const,
-  },
+  { id: "precios", label: "Precios", href: "#precios", icon: "tag" as const },
   {
     id: "promociones",
-    label: "Promociones",
+    label: "Promos",
     href: "/promociones",
     icon: "clock" as const,
   },
@@ -82,7 +111,7 @@ const mobileNavItems = [
   {
     id: "contacto",
     label: "Contacto",
-    href: "/contacto",
+    href: "#redes",
     icon: "star" as const,
   },
 ];
@@ -92,17 +121,12 @@ const mobileNavItems = [
   title="Contacto y Horarios | Gym Trasciende - Ocotlán de Morelos"
   description="¿Tienes dudas? Contacta a Trasciende Gym en Ocotlán de Morelos. Ubicación, horarios desde las 5 am y atención personalizada. ¡Visítanos y aclara tus dudas!"
 >
-  <!-- Meta Keywords para SEO -->
   <meta
     slot="head"
     name="keywords"
     content="gym trasciende, gimnasio ocotlan, gym ocotlan de morelos, fitness ocotlan, entrenamiento personalizado oaxaca, horarios gym trasciende, ubicacion gym trasciende"
   />
-
-  <!-- Canonical URL -->
   <link slot="head" rel="canonical" href="https://trasciendegym.com/contacto" />
-
-  <!-- Datos Estructurados JSON-LD para SEO Local -->
   <script
     type="application/ld+json"
     slot="head"
@@ -131,13 +155,13 @@ const mobileNavItems = [
         {
           "@type": "OpeningHoursSpecification",
           dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          opens: "06:00",
+          opens: "05:00",
           closes: "22:00",
         },
         {
           "@type": "OpeningHoursSpecification",
           dayOfWeek: "Saturday",
-          opens: "07:30",
+          opens: "06:30",
           closes: "17:00",
         },
         {
@@ -155,8 +179,6 @@ const mobileNavItems = [
       priceRange: "$$",
     })}
   />
-
-  <!-- FAQPage Schema para mejorar aparición en búsquedas de preguntas -->
   <script
     type="application/ld+json"
     slot="head"
@@ -169,7 +191,7 @@ const mobileNavItems = [
           name: "¿Cuáles son los horarios de Gym Trasciende?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Lunes a Viernes: 6:00 AM - 10:00 PM. Sábado: 7:30 AM - 5:00 PM. Domingo: 12:00 PM - 4:00 PM.",
+            text: "Lunes a Viernes: 5:00 AM - 10:00 PM. Sábado: 6:30 AM - 5:00 PM. Domingo: 12:00 PM - 4:00 PM.",
           },
         },
         {
@@ -185,139 +207,287 @@ const mobileNavItems = [
           name: "¿Cómo puedo contactar a Gym Trasciende?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Puedes contactarnos por WhatsApp, Instagram (@trasciendegym), Facebook, TikTok (@trasciende.gym) o visitarnos en nuestras instalaciones.",
+            text: "Puedes contactarnos por WhatsApp al 951 498 0492, Instagram (@trasciendegym), Facebook o TikTok (@trasciende.gym) o visitarnos directamente.",
           },
         },
       ],
     })}
   />
 
-  <main class="bg-background min-h-screen px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
-    <div class="mx-auto max-w-2xl">
-      <!-- Header con Logo y Título -->
-      <header class="mb-12 text-center">
+  {
+    /* ═══════════════════════════════════════════════════════════
+      SECCIÓN 1 — HERO
+      ═══════════════════════════════════════════════════════════ */
+  }
+  <section
+    class="bg-background relative min-h-[60vh] overflow-hidden md:min-h-[65vh]"
+    aria-label="Contacto Trasciende Gym"
+  >
+    {/* Fondo: imagen del gym con overlay oscuro */}
+    <div class="absolute inset-0" aria-hidden="true">
+      <img
+        src="/hero/hero-2.webp"
+        alt=""
+        class="h-full w-full object-cover object-center"
+        loading="eager"
+      />
+      <div
+        class="from-background/60 via-background/80 to-background absolute inset-0 bg-linear-to-b"
+      >
+      </div>
+      <div
+        class="from-background/80 to-background/80 absolute inset-0 bg-linear-to-r via-transparent"
+      >
+      </div>
+    </div>
+
+    {/* Grain */}
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.03]"
+      style="background-image:url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E');background-size:200px"
+    >
+    </div>
+
+    <div
+      class="relative z-10 mx-auto max-w-7xl px-4 pt-28 pb-14 md:pt-36 md:pb-20"
+    >
+      <div class="mx-auto max-w-3xl text-center">
+        {/* Badge */}
+        <span
+          class="border-primary/40 bg-primary/10 text-primary mb-6 inline-block rounded-full border px-4 py-1.5 text-xs font-semibold tracking-widest uppercase"
+        >
+          Ocotlán de Morelos, Oaxaca
+        </span>
+
+        {/* Logo */}
         <div class="mb-6 flex justify-center">
           <div
-            class="border-primary shadow-primary/20 ring-primary/10 relative h-28 w-28 overflow-hidden rounded-full border-2 shadow-lg ring-2"
+            class="border-primary/30 ring-primary/10 relative h-24 w-24 overflow-hidden rounded-full border-2 ring-4 md:h-28 md:w-28"
           >
             <img
               src="/logo.jpg"
-              alt="Logo de Gym Trasciende - Centro de Fitness en Ocotlán de Morelos, Oaxaca"
+              alt="Logo Gym Trasciende"
               class="h-full w-full object-cover"
               loading="eager"
             />
-            <div
-              class="from-primary/20 absolute inset-0 animate-pulse bg-linear-to-tr to-transparent"
-            >
-            </div>
           </div>
         </div>
 
-        <h1 class="mb-2 text-4xl font-bold text-white sm:text-5xl">
-          Trasciende Gym
+        <h1
+          class="mb-4 text-4xl leading-[1.05] font-black tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
+        >
+          Hablemos
+          <span class="text-primary block"> Trasciende </span>
         </h1>
-        <p class="text-lg text-gray-400">
-          Ocotlán de Morelos, Oaxaca | Contáctanos por redes sociales
-        </p>
-      </header>
 
-      <!-- Enlaces Sociales -->
-      <section class="mb-12 space-y-4" aria-label="Enlaces de redes sociales">
-        {
-          socialLinks.map((link) => (
+        <p class="mx-auto mb-8 max-w-xl text-lg leading-relaxed text-zinc-300">
+          Estamos a un mensaje de distancia. Resuelve tus dudas, conoce los
+          planes o visítanos directo en Ocotlán.
+        </p>
+
+        {/* CTA principal */}
+        <div
+          class="flex flex-col items-center justify-center gap-3 sm:flex-row"
+        >
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-primary text-background hover:bg-primary/90 inline-flex w-full items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-bold shadow-lg shadow-black/30 transition-all duration-300 hover:scale-105 sm:w-auto"
+          >
+            <svg
+              class="h-5 w-5"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+              ></path>
+            </svg>
+            Mensaje por WhatsApp
+          </a>
+          <a
+            href="#ubicacion"
+            class="border-primary/50 text-primary hover:bg-primary/10 inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 px-8 py-4 text-base font-bold transition-all duration-300 hover:scale-105 sm:w-auto"
+          >
+            Ver horarios
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              stroke-width="2.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {
+    /* ═══════════════════════════════════════════════════════════
+      SECCIÓN 2 — CANALES DE CONTACTO (lista compacta elegante)
+      ═══════════════════════════════════════════════════════════ */
+  }
+  <div
+    id="redes"
+    class="mx-auto max-w-xl px-4 py-14 md:max-w-2xl md:py-20 lg:max-w-3xl"
+  >
+    <p
+      class="text-primary mb-6 text-center text-xs font-semibold tracking-widest uppercase"
+    >
+      Encuéntranos aquí
+    </p>
+    <ul
+      class="divide-y divide-zinc-800/70 overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/50 backdrop-blur-sm"
+    >
+      {
+        socialLinks.map((link) => (
+          <li>
             <a
               href={link.url}
-              target={link.url.startsWith("http") ? "_blank" : undefined}
-              rel={
-                link.url.startsWith("http") ? "noopener noreferrer" : undefined
-              }
-              aria-label={
-                link.whatsapp
-                  ? `Contactar por WhatsApp a Gym Trasciende - Se abre en una nueva ventana`
-                  : `Visitar ${link.name} de Gym Trasciende${link.name === "Sitio Web" ? "" : " - Se abre en una nueva ventana"}`
-              }
+              target="_blank"
+              rel="noopener noreferrer"
               class:list={[
-                "link-button group relative block w-full overflow-hidden rounded-2xl backdrop-blur-md transition-all duration-300",
-                "border-primary/30 border bg-white/5 p-5",
-                "hover:border-primary hover:shadow-primary/30 hover:scale-[1.02] hover:bg-white/10 hover:shadow-lg",
-                "focus:ring-primary focus:ring-offset-background focus:ring-2 focus:ring-offset-2 focus:outline-none",
-                "active:scale-[0.98]",
-                link.special && "border-primary/60 bg-primary/10",
+                "group flex items-center gap-5 border-l-4 border-l-transparent px-6 py-5 transition-all duration-200",
+                link.hoverRow,
+                link.accentBorder,
               ]}
             >
-              {/* Gradiente de fondo animado */}
+              {/* Ícono */}
               <div
                 class:list={[
-                  "absolute inset-0 bg-linear-to-r opacity-0 transition-opacity duration-300 group-hover:opacity-10",
-                  link.color,
+                  "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl shadow-lg",
+                  link.iconBg,
                 ]}
+                set:html={link.icon.replace('class="h-6 w-6', 'class="h-5 w-5')}
               />
-
-              <div class="relative flex items-center justify-between">
-                <div class="flex items-center gap-4">
-                  {link.icon && (
-                    <div class="group-hover:bg-primary/20 flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
-                      <link.icon class="text-primary h-6 w-6 transition-colors group-hover:text-white" />
-                    </div>
-                  )}
-                  {link.whatsapp && (
-                    <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-green-500/20 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110 group-hover:bg-green-500/30">
-                      <svg
-                        class="h-7 w-7 text-green-400 transition-colors group-hover:text-white"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
-                      </svg>
-                    </div>
-                  )}
-                  <span
-                    class:list={[
-                      "text-xl font-semibold transition-colors",
-                      link.special ? "text-primary" : "text-white",
-                      "group-hover:text-primary",
-                      link.whatsapp && "text-green-400 group-hover:text-white",
-                    ]}
-                  >
-                    {link.name}
-                  </span>
-                </div>
-
-                {/* Flecha indicadora */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="group-hover:text-primary h-6 w-6 text-gray-400 transition-all duration-300 group-hover:translate-x-1"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
+              {/* Texto */}
+              <div class="min-w-0 flex-1">
+                <p
+                  class:list={[
+                    "text-base leading-tight font-bold text-white transition-colors duration-200",
+                    link.accentText,
+                  ]}
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M13 7l5 5m0 0l-5 5m5-5H6"
-                  />
-                </svg>
+                  {link.name}
+                </p>
+                <p class="mt-0.5 text-sm text-zinc-500">
+                  <span class="font-medium text-zinc-400">{link.handle}</span>
+                  <span class="mx-1.5 text-zinc-700">·</span>
+                  {link.description}
+                </p>
               </div>
+              {/* Flecha */}
+              <svg
+                class:list={[
+                  "h-5 w-5 shrink-0 text-zinc-600 transition-all duration-200 group-hover:translate-x-1",
+                  link.accentText,
+                ]}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
             </a>
-          ))
-        }
-      </section>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 
-      <!-- Horarios -->
-      <ScheduleSection schedule={schedule} />
+  {
+    /* ═══════════════════════════════════════════════════════════
+      SECCIÓN 4 — MAPA + HORARIOS (2 col)
+      ═══════════════════════════════════════════════════════════ */
+  }
+  <SectionContainer id="ubicacion" class="py-16 md:py-24">
+    <div class="mx-auto max-w-6xl">
+      <div class="mb-10 text-center">
+        <span
+          class="border-primary/30 bg-primary/10 text-primary mb-3 inline-block rounded-full border px-4 py-1 text-xs font-semibold tracking-widest uppercase"
+        >
+          Visítanos
+        </span>
+        <h2 class="text-3xl font-black text-white md:text-4xl">
+          Ubicación y Horarios
+        </h2>
+      </div>
 
-      <!-- Ubicación -->
-      <Location />
+      <div class="grid gap-8 lg:grid-cols-2">
+        {/* Horarios */}
+        <div
+          class="border-primary/20 flex flex-col justify-center rounded-3xl border bg-zinc-900/60 p-8"
+        >
+          <p
+            class="text-primary mb-2 text-xs font-semibold tracking-widest uppercase"
+          >
+            Horario de Apertura
+          </p>
+          <h3 class="mb-6 text-2xl font-black text-white">
+            Siempre hay un horario para ti
+          </h3>
+          <ScheduleSection schedule={schedule} />
+          <div class="mt-6 flex flex-col gap-3">
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-primary text-background hover:bg-primary/90 flex items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold transition-all duration-300 hover:scale-[1.02]"
+            >
+              <svg
+                class="h-4 w-4"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                ></path>
+              </svg>
+              Confirmar asistencia por WhatsApp
+            </a>
+            <a
+              href="https://maps.google.com/?q=Guillermo+Prieto+Sur+45+Ocotlan+de+Morelos+Oaxaca"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="border-primary/40 text-primary hover:bg-primary/10 flex items-center justify-center gap-2 rounded-xl border py-3.5 text-sm font-bold transition-all duration-300 hover:scale-[1.02]"
+            >
+              Abrir en Google Maps
+            </a>
+          </div>
+        </div>
+
+        {/* Mapa */}
+        <div class="overflow-hidden rounded-3xl border border-zinc-800">
+          <Location />
+        </div>
+      </div>
     </div>
-  </main>
+  </SectionContainer>
 
-  <PricingPlan />
+  {/* Precios */}
+  <div id="precios">
+    <PricingPlan />
+  </div>
 
-  <Gallery />
+  {/* Galería */}
+  <div id="galeria">
+    <Gallery />
+  </div>
 
-  {/* Navegación móvil inferior */}
   <MobileBottomNav
     client:load
     items={mobileNavItems}
@@ -325,31 +495,3 @@ const mobileNavItems = [
     vibration={true}
   />
 </Layout>
-
-<style>
-  /* Animación sutil para el logo */
-  @keyframes pulse-subtle {
-    0%,
-    100% {
-      opacity: 0.2;
-    }
-    50% {
-      opacity: 0.3;
-    }
-  }
-
-  .animate-pulse {
-    animation: pulse-subtle 3s ease-in-out infinite;
-  }
-
-  /* Mejora de rendimiento */
-  .link-button {
-    will-change: transform;
-    transform: translateZ(0);
-  }
-
-  /* Scroll suave */
-  html {
-    scroll-behavior: smooth;
-  }
-</style>
