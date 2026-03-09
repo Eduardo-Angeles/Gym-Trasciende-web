@@ -2,26 +2,27 @@
 /**
  * Promociones - Página de Promociones
  *
- * ESTRUCTURA ESCALABLE:
- * 1. Hero - Promo de febrero
- * 2. Promoción Temporal (Febrero)
- * 3. Promociones Permanentes - Sin fecha límite
- * 4. Cómo Aprovechar - 3 pasos simples
- * 5. FAQ - Preguntas frecuentes
- * 6. CTA - Final urgente
+ * ESTRUCTURA:
+ * 1. Hero - Promo Spinning Marzo 2026
+ * 2. Promoción Temporal — Spinning de Marzo (Dúo y Grupo)
+ * 3. Promociones Permanentes — Sin fecha límite
+ * 4. Cómo Aprovechar — 3 pasos
+ * 5. FAQ — Preguntas frecuentes
+ * 6. CTA — Final
  */
 
 import Layout from "@layouts/Layout.astro";
-import HeroClipped from "@components/sections/HeroClipped.astro";
 import SectionContainer from "@components/layout/SectionContainer.astro";
-import Subtitle from "@components/ui/Subtitle.astro";
 import FAQ from "@components/sections/FAQ.astro";
 import CountdownTimer from "@components/ui/CountdownTimer";
 import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
 import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
 import MobileBottomNav from "@components/layout/MobileBottomNav.tsx";
 
-// ========== PROMOCIONES TEMPORALES (Enero, disponibles en febrero) ==========
+// ═══════════════════════════════════════════════════════════════
+//  ARCHIVO — Promos de Enero/Febrero 2026 (guardadas para futuro uso)
+// ═══════════════════════════════════════════════════════════════
+/*
 const promosFebrero = [
   {
     id: 1,
@@ -72,111 +73,147 @@ const promosFebrero = [
     isTemporary: true,
   },
 ];
+*/
 
-// ========== PROMOCIONES PERMANENTES (Todo el año) ==========
-const promosPermanentes = [
+// ═══════════════════════════════════════════════════════════════
+//  PROMO TEMPORAL — Spinning Marzo 2026
+// ═══════════════════════════════════════════════════════════════
+const promosMarzoPlan = [
   {
-    id: 4,
-    title: "Inscripción Gratis",
-    price: "$0",
-    priceDetail: "de costo de inscripción",
-    savings: "¡Ahorras $200!",
-    icon: "🎁",
+    id: 1,
+    title: "Dúo",
+    subtitle: "Van en pareja o 2 amigos",
+    price: "$450",
+    priceDetail: "por persona / mes",
+    icon: "🚴‍♀️🚴",
+    badge: "Pareja",
+    highlight: false,
     features: [
-      "Sin costo de inscripción",
-      "Válido todo el año",
-      "Para cualquier plan",
-      "Solo pagas tu mensualidad",
-      "Sin letra pequeña",
+      "Inscripción sin costo",
+      "2 personas inscritas juntas",
+      "Clase de Spinning completa",
+      "Acceso al área de spinning",
+      "Horarios flexibles",
     ],
-    badge: "Siempre",
-    isPermanent: true,
+    savings: "Ahorra vs precio individual",
   },
   {
-    id: 5,
-    title: "Cumpleaños 10% Off",
-    price: "$342",
-    priceDetail: "en tu mes de cumpleaños",
-    icon: "🎂",
+    id: 2,
+    title: "Grupo",
+    subtitle: "3 o más personas",
+    price: "$420",
+    priceDetail: "por persona / mes",
+    icon: "🚴‍♂️🚴‍♀️🚴",
+    badge: "Mejor Precio",
+    highlight: true,
     features: [
-      "10% de descuento",
-      "Válido todo tu mes de cumpleaños",
-      "Presenta identificación oficial",
-      "Aplica a plan mensual",
-      "Renovable cada año",
+      "Inscripción sin costo",
+      "3 o más personas juntas",
+      "Clase de Spinning completa",
+      "Acceso al área de spinning",
+      "Horarios flexibles",
     ],
-    badge: "Especial",
-    isPermanent: true,
+    savings: "Máximo ahorro del mes",
   },
 ];
 
-// FAQ sobre promociones
+// ═══════════════════════════════════════════════════════════════
+//  PROMOCIONES PERMANENTES
+// ═══════════════════════════════════════════════════════════════
+const promosPermanentes = [
+  {
+    id: 1,
+    icon: "🎁",
+    title: "Inscripción Gratis",
+    description:
+      "Sin costo de inscripción todo el año, para cualquier plan que elijas. Sin letra pequeña, solo pagas tu mensualidad.",
+    badge: "Todo el Año",
+    detail: "¡Ahorras $200!",
+  },
+  {
+    id: 2,
+    icon: "🎂",
+    title: "Cumpleaños 10% Off",
+    description:
+      "Descuento del 10% en tu mensualidad durante todo tu mes de cumpleaños. Presenta identificación oficial y disfruta tu beneficio anual.",
+    badge: "Especial",
+    detail: "Cada año, tu mes",
+  },
+];
+
+// ═══════════════════════════════════════════════════════════════
+//  FAQ
+// ═══════════════════════════════════════════════════════════════
 const faqItems = [
   {
-    question: "¿Hasta cuándo son válidas las promos de enero?",
+    question: "¿Hasta cuándo es válida la promo de Spinning de Marzo?",
     answer:
-      "Las promos de Pareja, Amigos 3+ y Paquete Familiar están disponibles durante febrero 2026. Debes inscribirte antes del 28 de febrero para aprovechar los precios especiales.",
+      "La promo de Spinning de Marzo está disponible durante todo el mes de marzo 2026. Debes inscribirte antes del 31 de marzo para aprovechar los precios especiales.",
   },
   {
-    question: "¿Quiénes pueden participar?",
+    question: "¿Quiénes pueden participar en la promo de grupo?",
     answer:
-      "Pueden inscribirse parejas, amigos o familiares. Lo importante es que se inscriban al mismo tiempo para aplicar la promo.",
+      "Pueden inscribirse parejas, amigos o cualquier grupo de 2 o más personas. Lo importante es que se inscriban al mismo tiempo para aplicar la promo correspondiente.",
   },
   {
-    question: "¿Puedo combinar promociones?",
+    question: "¿Cuál es la diferencia entre la promo Dúo y Grupo?",
     answer:
-      "Las promociones de febrero (Pareja, Amigos 3+, Familiar 3+) no son acumulables entre sí. Sin embargo, todas incluyen la inscripción gratis que es permanente. El descuento de cumpleaños tampoco se puede combinar con estas promos.",
+      "La promo Dúo aplica cuando se inscriben exactamente 2 personas juntas ($450 c/u). La promo Grupo aplica con 3 o más personas inscritas al mismo tiempo ($420 c/u), ofreciendo el mayor ahorro.",
+  },
+  {
+    question: "¿Puedo combinar la promo de Spinning con el descuento de cumpleaños?",
+    answer:
+      "Las promociones temporales de Spinning de Marzo no son acumulables con el descuento de cumpleaños. Sin embargo, la inscripción gratis está siempre incluida en todos los planes.",
   },
   {
     question: "¿La inscripción siempre es gratis?",
     answer:
-      "¡Sí! La inscripción es completamente gratis durante todo el año, sin importar qué plan elijas. Es nuestro compromiso para que inicies tu transformación sin costos ocultos.",
+      "¡Sí! La inscripción es completamente gratis durante todo el año, sin importar el plan que elijas. Es nuestro compromiso para que inicies sin costos ocultos.",
   },
   {
-    question: "¿Cómo funciona el descuento de cumpleaños?",
+    question: "¿Qué incluye el plan de Spinning?",
     answer:
-      "Durante todo tu mes de cumpleaños obtienes 10% de descuento en tu mensualidad. Solo necesitas presentar una identificación oficial que confirme tu fecha de nacimiento. Puedes renovar este beneficio cada año en tu mes.",
+      "Incluye acceso completo a las clases de Spinning, asesoría en técnica y postura, horarios flexibles (Lun-Vie 5am-10pm, Sáb 6:30am-5pm, Dom 12pm-4pm) y todos los beneficios del gimnasio.",
   },
   {
-    question: "¿La promoción de pareja aplica para cualquier tipo de relación?",
+    question: "¿Necesito llevar algo especial a las clases de Spinning?",
     answer:
-      "¡Sí! La promo de pareja aplica para parejas, amigos, hermanos o cualquier dupla que quiera entrenar junta. Lo importante es que se inscriban al mismo tiempo.",
-  },
-  {
-    question: "¿Qué incluye la membresía mensual?",
-    answer:
-      "Incluye acceso completo al área de pesas, asesoría personalizada en rutinas, horarios flexibles (Lun-Vie 5am-10pm, Sáb 6:30am-5pm, Dom 12pm-4pm) y todos los beneficios del gimnasio.",
+      "Recomendamos ropa cómoda para ejercicio, zapatos deportivos con suela firme, toalla y botella de agua. En el gym encontrarás bicicletas de spinning disponibles para tus sesiones.",
   },
 ];
 
-// Pasos para aprovechar
+// ═══════════════════════════════════════════════════════════════
+//  PASOS
+// ═══════════════════════════════════════════════════════════════
 const steps = [
   {
     number: 1,
     title: "Reúne a tu grupo",
     description:
-      "Junta a tu pareja, amigos o familia que quieran empezar a entrenar contigo.",
+      "Invita a tu pareja, amigo o arma un grupo de 3 o más para pedalear juntos y ahorrar más.",
   },
   {
     number: 2,
     title: "Contáctanos",
     description:
-      "Escríbenos por redes o visítanos en el gimnasio antes del 28 de febrero.",
+      "Escríbenos por redes o visítanos antes del 31 de marzo. Te confirmamos disponibilidad de horarios.",
   },
   {
     number: 3,
     title: "Inscríbanse juntos",
     description:
-      "Completen su inscripción al mismo tiempo y aprovechen el precio especial.",
+      "Completen su inscripción al mismo tiempo y disfruten el precio de grupo desde el primer día.",
   },
 ];
 
-// Configuración de navegación móvil
+// ═══════════════════════════════════════════════════════════════
+//  NAV MÓVIL
+// ═══════════════════════════════════════════════════════════════
 const mobileNavItems = [
   {
-    id: "promos-febrero",
-    label: "Febrero",
-    href: "#promociones-febrero",
+    id: "promo-spinning",
+    label: "Spinning",
+    href: "#promo-spinning",
     icon: "clock" as const,
   },
   {
@@ -201,138 +238,197 @@ const mobileNavItems = [
 ---
 
 <Layout
-  title="Promociones y Ofertas | Gym Trasciende - Descuentos Especiales Ocotlán"
-  description="Aprovecha nuestras promociones en Trasciende Gym Ocotlán. Inscripción gratis todo el año y promos de enero disponibles durante febrero 2026. Inscríbete en pareja, con amigos o en familia y ahorra."
-  keywords="promociones gym, descuentos gimnasio ocotlán, ofertas gym 2026, promo pareja gym, gym familiar descuento, inscripción gratis gym"
+  title="Promociones Marzo 2026 | Gym Trasciende — Spinning en Grupo Ocotlán"
+  description="Promo Spinning Marzo 2026 en Trasciende Gym Ocotlán. Ven en pareja por $450 c/u o en grupo de 3+ por $420 c/u. Inscripción gratis siempre."
+  keywords="promociones spinning gym, descuento spinning ocotlán, promo grupo spinning 2026, gym spinning oferta, inscripción gratis gym trasciende"
   type="website"
 >
-  <!-- 1. Hero Promo Febrero -->
-  <HeroClipped
-    img="/imagenfondo5.webp"
-    alt="Promociones especiales Trasciende Gym"
-    minHeight="min-h-screen"
-    overlayOpacity="70"
+  {/* ═══════════════════════════════════════════════════════
+      SECCIÓN 1 — HERO (gradiente direccional)
+      ═══════════════════════════════════════════════════════ */}
+  <section
+    class="bg-background relative min-h-screen overflow-hidden"
+    aria-label="Promo Spinning Marzo 2026"
   >
-    <div class="mx-auto w-full max-w-7xl px-4">
-      <div class="flex w-full flex-col gap-8">
-        {/* Badge minimalista con animación */}
-        <div class="inline-flex items-center gap-2">
-          <div class="bg-primary h-px w-12 animate-pulse"></div>
-          <span
-            class="text-primary animate-pulse text-sm font-semibold tracking-widest uppercase"
+    {/* Imagen de fondo */}
+    <img
+      src="/spining1.webp"
+      alt=""
+      class="absolute inset-0 h-full w-full object-cover object-center"
+      loading="eager"
+      aria-hidden="true"
+    />
+
+    {/* Mobile: overlay sólido oscuro sobre toda la imagen */}
+    <div class="from-background/95 via-background/85 absolute inset-0 bg-linear-to-t to-background/40 lg:hidden">
+    </div>
+
+    {/* Desktop: gradiente de izquierda (oscuro) a derecha (transparente) */}
+    <div class="from-background via-background/90 absolute inset-0 hidden bg-linear-to-r to-transparent lg:block">
+    </div>
+
+    {/* Fade inferior en ambos breakpoints */}
+    <div class="from-background absolute inset-x-0 bottom-0 h-32 bg-linear-to-t to-transparent">
+    </div>
+
+    {/* Contenido */}
+    <div class="relative z-10 flex min-h-screen items-center">
+      <div class="mx-auto w-full max-w-7xl px-4 py-28 lg:py-0">
+        <div class="flex max-w-2xl flex-col gap-7">
+          {/* Badge */}
+          <div class="inline-flex items-center gap-3">
+            <div class="bg-primary h-px w-10 animate-pulse"></div>
+            <span
+              class="border-primary/40 bg-primary/10 text-primary rounded-full border px-4 py-1.5 text-xs font-semibold tracking-widest uppercase"
+            >
+              Promoción · Marzo 2026
+            </span>
+          </div>
+
+          {/* Título */}
+          <h1
+            class="text-5xl leading-[1.05] font-black tracking-tight text-white md:text-7xl lg:text-8xl"
           >
-            🔥 Promos de Enero Extendidas a Febrero 2026
-          </span>
-        </div>
+            Spinning
+            <span
+              class="from-primary to-primary/60 block bg-linear-to-r bg-clip-text text-transparent"
+            >
+              en Grupo
+            </span>
+          </h1>
 
-        {/* Título */}
-        <h1
-          class="text-secondary text-5xl leading-tight font-bold tracking-wide md:text-7xl lg:text-8xl"
-        >
-          Promociones de Grupo + Beneficios Todo el Año
-        </h1>
+          {/* Eslogan */}
+          <p class="max-w-xl text-lg leading-relaxed text-zinc-300 md:text-xl">
+            Este marzo pedalea acompañado y paga menos. Trae a tu pareja o arma
+            un grupo y aprovecha el precio especial de temporada.
+          </p>
 
-        {/* Subtítulo */}
-        <p
-          class="text-secondary text-semibold max-w-2xl text-lg leading-relaxed md:text-xl"
-        >
-          Inscripción gratis siempre + Promociones de enero disponibles durante
-          febrero. ¡No dejes pasar estas ofertas!
-        </p>
+          {/* CTAs */}
+          <div class="flex flex-col gap-4 pt-2 sm:flex-row">
+            <a
+              href="#promo-spinning"
+              class="group border-primary text-primary hover:bg-primary/20 inline-flex items-center justify-center gap-2 rounded-xl border-2 px-6 py-3.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
+            >
+              <span class="text-base font-semibold">Ver Promoción</span>
+              <ButtonAnimation
+                width={22}
+                height={22}
+                class="transition-transform group-hover:scale-110"
+              />
+            </a>
 
-        {/* CTAs con estilo consistente */}
-        <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-          <a
-            href="#promociones-febrero"
-            class="group border-primary text-primary hover:bg-primary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
-          >
-            <span class="text-base font-semibold">Ver Promociones</span>
-            <ButtonAnimation
-              width={24}
-              height={24}
-              class="transition-transform group-hover:scale-110"
-            />
-          </a>
-
-          <a
-            href="/contacto"
-            class="group border-secondary text-secondary hover:bg-secondary/50 inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5 py-2.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
-          >
-            <span class="text-base font-semibold">Inscribirme ahora</span>
-            <ArrowAnimation class="size-5" />
-          </a>
+            <a
+              href="/contacto"
+              class="group border-secondary text-secondary hover:bg-secondary/10 inline-flex items-center justify-center gap-2 rounded-xl border-2 px-6 py-3.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
+            >
+              <span class="text-base font-semibold">Inscribirme ahora</span>
+              <ArrowAnimation class="size-5" />
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </HeroClipped>
+  </section>
 
-  <!-- 2. Promoción Temporal de Febrero -->
-  <SectionContainer class="py-16 md:py-24">
-    <div id="promociones-febrero">
-      <Subtitle>Promociones de Febrero</Subtitle>
+  {/* ═══════════════════════════════════════════════════════
+      SECCIÓN 2 — PROMO SPINNING MARZO
+      ═══════════════════════════════════════════════════════ */}
+  <SectionContainer class="py-20 md:py-28">
+    <div id="promo-spinning" class="mx-auto max-w-7xl">
+      {/* Header */}
+      <div class="mb-14 text-center">
+        <span
+          class="border-primary/30 bg-primary/10 text-primary mb-4 inline-block rounded-full border px-4 py-1 text-xs font-semibold tracking-widest uppercase"
+        >
+          Promo del Mes
+        </span>
+        <h2 class="text-3xl font-black text-white md:text-5xl">
+          Spinning de{" "}
+          <span class="text-primary">Marzo</span>
+        </h2>
+        <p class="mx-auto mt-4 max-w-xl text-zinc-400">
+          Inscríbanse juntos y pedaleen con más motivación — y mejor precio.
+          Todas las promos incluyen inscripción gratis.
+        </p>
+      </div>
 
-      <div class="mt-8 flex justify-center">
+      {/* Countdown */}
+      <div class="mb-12 flex justify-center">
         <div
-          class="rounded-xl border border-orange-500/20 bg-gray-900/50 p-6 backdrop-blur-sm"
+          class="border-primary/20 bg-zinc-900/60 rounded-2xl border px-8 py-5 backdrop-blur-sm"
         >
           <p
-            class="text-primary mb-4 text-center text-sm font-semibold tracking-wide uppercase"
+            class="text-primary mb-4 text-center text-xs font-semibold tracking-widest uppercase"
           >
-            ⏰ Tiempo restante de las promos:
+            Tiempo restante de la promo
           </p>
-          <CountdownTimer client:load targetDate="2026-02-28T23:59:59" />
+          <CountdownTimer client:load targetDate="2026-03-31T23:59:59" />
         </div>
       </div>
 
-      <p
-        class="text-secondary mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed"
-      >
-        Inscríbete en grupo y ahorra. Todas incluyen inscripción gratis y acceso
-        completo.
-      </p>
-
-      <div class="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
+      {/* Tarjetas */}
+      <div class="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
         {
-          promosFebrero.map((promo) => (
-            <div class="group relative flex flex-col overflow-hidden rounded-2xl border-2 border-orange-500/30 bg-gray-900/50 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-orange-500/60 hover:shadow-2xl hover:shadow-orange-500/20">
+          promosMarzoPlan.map((plan) => (
+            <article
+              class:list={[
+                "group relative flex flex-col overflow-hidden rounded-3xl border backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl",
+                plan.highlight
+                  ? "border-primary bg-zinc-900/80 hover:border-primary hover:shadow-primary/20"
+                  : "border-primary/20 bg-zinc-900/60 hover:border-primary/50 hover:shadow-primary/10",
+              ]}
+            >
               {/* Badge */}
-              <div class="absolute top-4 right-4 z-10 rounded-full bg-linear-to-r from-orange-500 to-red-500 px-3 py-1 shadow-lg">
-                <span class="text-xs font-bold text-white uppercase">
-                  {promo.badge}
+              <div class="absolute top-5 right-5 z-10">
+                <span
+                  class:list={[
+                    "rounded-full px-3 py-1 text-xs font-black tracking-widest uppercase",
+                    plan.highlight
+                      ? "bg-primary text-black"
+                      : "border-primary/50 border bg-primary/10 text-primary",
+                  ]}
+                >
+                  {plan.badge}
                 </span>
               </div>
 
               <div class="p-8">
                 {/* Icono */}
-                <div class="mb-4 text-6xl transition-transform duration-300 group-hover:scale-110">
-                  {promo.icon}
+                <div class="mb-5 text-4xl transition-transform duration-300 group-hover:scale-110">
+                  {plan.icon}
                 </div>
 
-                {/* Título */}
-                <h3 class="mb-3 text-2xl font-bold text-white">
-                  {promo.title}
-                </h3>
+                {/* Título + subtítulo */}
+                <h3 class="mb-1 text-2xl font-black text-white">{plan.title}</h3>
+                <p class="text-primary mb-5 text-sm font-semibold">
+                  {plan.subtitle}
+                </p>
 
-                {/* Precios */}
-                <div class="mb-6">
-                  <div class="flex items-baseline gap-2">
-                    <span class="text-primary text-5xl font-bold tabular-nums">
-                      {promo.price}
-                    </span>
-                    <span class="text-secondary text-sm">
-                      {promo.priceDetail}
-                    </span>
-                  </div>
+                {/* Precio */}
+                <div class="mb-1 flex items-baseline gap-2">
+                  <span
+                    class:list={[
+                      "text-5xl font-black tabular-nums",
+                      plan.highlight ? "text-primary" : "text-white",
+                    ]}
+                  >
+                    {plan.price}
+                  </span>
                 </div>
+                <p class="mb-6 text-sm text-zinc-500">{plan.priceDetail}</p>
+
+                {/* Separador */}
+                <div class="border-primary/20 mb-6 border-t border-dashed" />
 
                 {/* Features */}
                 <ul class="mb-8 space-y-3">
-                  {promo.features.map((feature) => (
-                    <li class="flex items-start gap-2">
+                  {plan.features.map((feature) => (
+                    <li class="flex items-center gap-3">
                       <svg
-                        class="text-primary mt-1 h-5 w-5 shrink-0 transition-colors group-hover:text-orange-400"
+                        class="text-primary h-4 w-4 shrink-0"
                         fill="currentColor"
                         viewBox="0 0 20 20"
+                        aria-hidden="true"
                       >
                         <path
                           fill-rule="evenodd"
@@ -340,123 +436,119 @@ const mobileNavItems = [
                           clip-rule="evenodd"
                         />
                       </svg>
-                      <span class="text-secondary text-sm">{feature}</span>
+                      <span class="text-sm text-zinc-300">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
+                {/* Nota de ahorro */}
+                <p class="text-primary/70 mb-5 text-xs font-semibold tracking-wide">
+                  ✦ {plan.savings}
+                </p>
+
                 {/* CTA */}
                 <a
                   href="/contacto"
-                  class="block w-full rounded-lg border-2 border-orange-500 bg-orange-500/10 px-6 py-3 text-center font-bold text-white transition-all duration-300 hover:bg-orange-500 hover:text-black hover:shadow-lg hover:shadow-orange-500/50"
+                  class:list={[
+                    "block w-full rounded-xl py-3.5 text-center text-sm font-bold transition-all duration-300 hover:scale-[1.02]",
+                    plan.highlight
+                      ? "bg-primary text-black hover:bg-[#c5eb00]"
+                      : "border-primary/50 text-primary border bg-primary/10 hover:bg-primary/20",
+                  ]}
                 >
-                  Aprovechar Ahora
+                  Inscribirme con este plan
                 </a>
               </div>
-            </div>
+            </article>
           ))
         }
       </div>
     </div>
   </SectionContainer>
 
-  <!-- 3. Promociones Permanentes -->
-  <SectionContainer class="py-16 md:py-24">
-    <div id="promociones-permanentes">
-      <Subtitle>Disponibles Todo el Año</Subtitle>
+  {/* ═══════════════════════════════════════════════════════
+      SECCIÓN 3 — PROMOCIONES PERMANENTES
+      ═══════════════════════════════════════════════════════ */}
+  <SectionContainer class="py-20 md:py-28">
+    <div id="promociones-permanentes" class="mx-auto max-w-7xl">
+      {/* Header */}
+      <div class="mb-14 text-center">
+        <span
+          class="mb-4 inline-block rounded-full border border-zinc-700 bg-zinc-800/60 px-4 py-1 text-xs font-semibold tracking-widest text-zinc-400 uppercase"
+        >
+          Sin Fecha Límite
+        </span>
+        <h2 class="text-3xl font-black text-white md:text-5xl">
+          Disponibles <span class="text-zinc-400">Todo el Año</span>
+        </h2>
+        <p class="mx-auto mt-4 max-w-xl text-zinc-400">
+          Sin trucos, sin letra pequeña. Estas promociones siempre están activas
+          para ti.
+        </p>
+      </div>
 
-      <p
-        class="text-secondary mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed"
-      >
-        Sin fechas límite, sin trucos. Estas promociones siempre están
-        disponibles.
-      </p>
-
-      <div class="mx-auto grid max-w-6xl gap-8 md:grid-cols-2 lg:max-w-4xl">
+      <div class="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
         {
           promosPermanentes.map((promo) => (
-            <div class="group relative flex flex-col overflow-hidden rounded-2xl border-2 border-emerald-500/30 bg-gray-900/50 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-emerald-500/60 hover:shadow-2xl hover:shadow-emerald-500/20">
+            <article class="group border-zinc-800 hover:border-primary/30 hover:shadow-primary/5 relative overflow-hidden rounded-3xl border bg-zinc-900/60 p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-zinc-900/80 hover:shadow-xl">
               {/* Badge */}
-              <div class="absolute top-4 right-4 z-10 rounded-full bg-linear-to-r from-emerald-500 to-teal-500 px-3 py-1 shadow-lg">
-                <span class="text-xs font-bold text-white uppercase">
+              <div class="absolute top-5 right-5">
+                <span class="rounded-full border border-zinc-700 bg-zinc-800 px-3 py-1 text-xs font-semibold tracking-wide text-zinc-400 uppercase">
                   {promo.badge}
                 </span>
               </div>
 
-              <div class="p-8 text-center">
-                {/* Icono */}
-                <div class="mb-4 text-7xl transition-transform duration-300 group-hover:scale-110">
-                  {promo.icon}
-                </div>
-
-                {/* Título */}
-                <h3 class="mb-2 text-3xl font-bold text-white">
-                  {promo.title}
-                </h3>
-
-                {/* Precios */}
-                <div class="mb-6">
-                  <div class="flex items-baseline justify-center gap-2" />
-                  <span class="text-secondary mt-2 block text-lg">
-                    {promo.priceDetail}
-                  </span>
-                </div>
-
-                {/* Features */}
-                <ul class="mb-8 space-y-3">
-                  {promo.features.map((feature) => (
-                    <li class="flex items-center justify-center gap-2">
-                      <svg
-                        class="text-primary h-5 w-5 shrink-0 transition-colors group-hover:text-emerald-400"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
-                      <span class="text-secondary text-sm font-medium">
-                        {feature}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* CTA */}
-                <a
-                  href="/contacto"
-                  class="block w-full rounded-lg border-2 border-emerald-500 bg-emerald-500/10 px-6 py-3 text-center font-bold text-white transition-all duration-300 hover:bg-emerald-500 hover:text-black hover:shadow-lg hover:shadow-emerald-500/50"
-                >
-                  Inscribirme Ahora
-                </a>
+              {/* Icono */}
+              <div class="bg-primary/10 mb-5 flex h-14 w-14 items-center justify-center rounded-2xl text-2xl transition-transform duration-300 group-hover:scale-110">
+                {promo.icon}
               </div>
-            </div>
+
+              <h3 class="mb-3 text-xl font-black text-white">{promo.title}</h3>
+              <p class="mb-5 leading-relaxed text-zinc-400">{promo.description}</p>
+
+              {/* Detail tag */}
+              <div class="inline-flex items-center gap-2">
+                <div class="bg-primary h-px w-6 transition-all duration-300 group-hover:w-10" />
+                <span class="text-primary text-xs font-bold tracking-wide uppercase">
+                  {promo.detail}
+                </span>
+              </div>
+            </article>
           ))
         }
       </div>
     </div>
   </SectionContainer>
 
-  <!-- 4. Cómo Aprovechar -->
+  {/* ═══════════════════════════════════════════════════════
+      SECCIÓN 4 — CÓMO APROVECHAR
+      ═══════════════════════════════════════════════════════ */}
   <SectionContainer
-    backgroundImage="linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/fondofijo.webp')"
+    backgroundImage="linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.82)), url('/fondofijo.webp')"
     fixedBackground={true}
-    class="py-16 md:py-20"
+    class="py-20 md:py-24"
   >
-    <Subtitle>¿Cómo Aprovechar las Promociones?</Subtitle>
+    <div class="mx-auto max-w-7xl">
+      <div class="mb-14 text-center">
+        <span
+          class="border-primary/30 bg-primary/10 text-primary mb-4 inline-block rounded-full border px-4 py-1 text-xs font-semibold tracking-widest uppercase"
+        >
+          Es muy sencillo
+        </span>
+        <h2 class="text-3xl font-black text-white md:text-5xl">
+          ¿Cómo Aprovechar la Promo?
+        </h2>
+      </div>
 
-    <div class="mx-auto max-w-5xl">
-      <div class="grid gap-8 md:grid-cols-3">
+      <div class="grid gap-10 md:grid-cols-3">
         {
           steps.map((step) => (
             <div class="group text-center transition-transform duration-300 hover:-translate-y-2">
-              <div class="bg-primary mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-emerald-500/50">
-                <span class="text-3xl font-bold text-black">{step.number}</span>
+              <div class="bg-primary mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-primary/40">
+                <span class="text-3xl font-black text-black">{step.number}</span>
               </div>
-              <h3 class="mb-3 text-xl font-bold text-white">{step.title}</h3>
-              <p class="text-secondary leading-relaxed">{step.description}</p>
+              <h3 class="mb-3 text-lg font-black text-white">{step.title}</h3>
+              <p class="leading-relaxed text-zinc-400">{step.description}</p>
             </div>
           ))
         }
@@ -464,51 +556,79 @@ const mobileNavItems = [
     </div>
   </SectionContainer>
 
-  <!-- 5. FAQ -->
+  {/* ═══════════════════════════════════════════════════════
+      SECCIÓN 5 — FAQ
+      ═══════════════════════════════════════════════════════ */}
   <div id="faq">
     <FAQ items={faqItems} />
   </div>
 
-  <!-- 6. CTA Final Urgente -->
-  <SectionContainer class="py-16 md:py-20">
-    <div
-      class="mx-auto max-w-4xl rounded-2xl border-2 border-orange-500/30 bg-linear-to-br from-gray-900/80 to-orange-900/20 p-8 text-center shadow-xl backdrop-blur-sm md:p-12"
-    >
-      <div
-        class="mb-4 inline-block rounded-full bg-linear-to-r from-orange-500 to-red-500 px-6 py-2 shadow-lg"
-      >
-        <span class="text-sm font-bold tracking-wide text-white uppercase">
-          ⏰ ¡Promos de Enero Disponibles en Febrero!
-        </span>
-      </div>
-
-      <h2 class="text-secondary mb-4 text-3xl font-bold md:text-4xl">
-        No Dejes Pasar Esta Oportunidad
-      </h2>
-
-      <p class="text-secondary mb-8 text-lg leading-relaxed">
-        Inscríbete en pareja, con amigos o en familia. Las promos de enero
-        siguen activas durante febrero y la inscripción es gratis.
-      </p>
-
-      <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-        <a
-          href="/contacto"
-          class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-500 px-8 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-emerald-400 hover:shadow-xl hover:shadow-emerald-500/50 sm:w-auto"
+  {/* ═══════════════════════════════════════════════════════
+      SECCIÓN 6 — CTA FINAL
+      ═══════════════════════════════════════════════════════ */}
+  <SectionContainer class="py-20 md:py-28">
+    <div class="mx-auto max-w-4xl">
+      <div class="relative overflow-hidden rounded-3xl">
+        {/* Imagen de fondo */}
+        <img
+          src="/soinning2.webp"
+          alt=""
+          class="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+          aria-hidden="true"
+        />
+        <div
+          class="from-background/97 via-background/90 absolute inset-0 bg-linear-to-br to-[#1a2500]/88"
         >
-          Inscribirme Ahora
-        </a>
-        <a
-          href="/reviews"
-          class="inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-emerald-500 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-emerald-500/10 sm:w-auto"
-        >
-          Lo que dicen de nosotros
-        </a>
-      </div>
+        </div>
 
-      <p class="text-secondary mt-6 text-sm">
-        💚 Inscripción gratis todo el año • Promos válidas hasta el 28/02/2026
-      </p>
+        <div
+          class="border-primary/25 relative z-10 rounded-3xl border p-10 text-center md:p-16"
+        >
+          {/* Ícono */}
+          <div
+            class="bg-primary/15 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl"
+          >
+            <span class="text-3xl">🚴‍♀️</span>
+          </div>
+
+          <p
+            class="text-primary mb-2 text-xs font-semibold tracking-widest uppercase"
+          >
+            Solo en Marzo 2026
+          </p>
+          <h2 class="mb-4 text-3xl font-black text-white md:text-5xl">
+            Pedalea Juntos,<br />
+            <span class="text-primary">Pagan Menos</span>
+          </h2>
+          <p class="mx-auto mb-8 max-w-xl text-lg leading-relaxed text-zinc-300">
+            La promo de Spinning de Marzo vence el 31 de marzo. Inscríbete con
+            tu grupo antes de que termine y aprovecha el mejor precio del mes.
+          </p>
+
+          <div
+            class="flex flex-col items-center justify-center gap-4 sm:flex-row"
+          >
+            <a
+              href="/contacto"
+              class="bg-primary hover:bg-[#c5eb00] inline-flex w-full items-center justify-center gap-2 rounded-xl px-8 py-4 text-lg font-black text-black shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-primary/30 sm:w-auto"
+            >
+              Inscribirme en Spinning
+            </a>
+            <a
+              href="/reviews"
+              class="border-primary/50 text-primary hover:bg-primary/10 inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 px-8 py-4 text-lg font-bold transition-all duration-300 hover:scale-105 sm:w-auto"
+            >
+              Lo que dicen de nosotros
+            </a>
+          </div>
+
+          <p class="mt-6 text-sm text-zinc-500">
+            ✦ Inscripción gratis siempre &nbsp;·&nbsp; Promo válida hasta el
+            31/03/2026
+          </p>
+        </div>
+      </div>
     </div>
   </SectionContainer>
 
