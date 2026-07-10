@@ -15,7 +15,6 @@
 import Layout from "@layouts/Layout.astro";
 import SectionContainer from "@components/layout/SectionContainer.astro";
 import FAQ from "@components/sections/FAQ.astro";
-import CountdownTimer from "@components/ui/CountdownTimer";
 import ButtonAnimation from "@components/icons/ButtonAnimation.astro";
 import ArrowAnimation from "@components/icons/ArrowAnimation.astro";
 import MobileBottomNav from "@components/layout/MobileBottomNav.tsx";
@@ -212,29 +211,24 @@ const promosPermanentes = [
 // ═══════════════════════════════════════════════════════════════
 const faqItems = [
   {
-    question: "¿Quiénes pueden aprovechar esta promo?",
+    question: "¿Sigue disponible la promo de Día del Padre?",
     answer:
-      "Es exclusiva para papás. Solo necesitas mostrar una foto tuya con tu hijo o hija — con eso acreditamos que eres papá y aplicamos el descuento.",
+      "No. Fue exclusiva para papás durante junio de 2026 y ya finalizó el 30 de junio. Los precios especiales de esa promo ya no aplican.",
   },
   {
-    question: "¿Aplica para nuevas inscripciones y renovaciones?",
+    question: "¿Puedo pedir el precio de la promo aunque ya haya terminado?",
     answer:
-      "Sí, el 20 % de descuento aplica tanto si te inscribes por primera vez como si eres miembro vigente que renueva su mensualidad durante el mes de junio.",
+      "No, el precio con 20 % de descuento solo aplicó a inscripciones y renovaciones realizadas dentro de junio de 2026. Consulta nuestros precios vigentes en la sección de Servicios.",
   },
   {
-    question: "¿Puedo combinar esta promo con el descuento de cumpleaños?",
+    question: "¿Hay alguna promoción activa ahora mismo?",
     answer:
-      "Las promociones temporales no son acumulables entre sí. Sin embargo, la inscripción siempre es gratis sin importar el plan que elijas.",
+      "La inscripción gratis está disponible todo el año, y el 10 % de descuento de cumpleaños aplica durante tu mes de cumpleaños. Revisa esta página o nuestras redes para futuras promociones temporales.",
   },
   {
-    question: "¿Hasta cuándo está disponible?",
+    question: "¿Cuándo estuvo vigente la promo de Día del Padre?",
     answer:
-      "La promo de Día del Padre está disponible del 1 al 30 de junio de 2026. Debes inscribirte o renovar dentro de ese período para aprovechar el precio especial.",
-  },
-  {
-    question: "¿Puedo elegir entre Pesas y Spinning?",
-    answer:
-      "Sí, el 20 % aplica en la mensualidad de Pesas ($380 → $304, ahorras $76) o de Spinning ($500 → $400, ahorras $100). Elige el área que más se ajuste a tus metas.",
+      "Estuvo disponible del 1 al 30 de junio de 2026. Fuera de ese período, incluido ahora, no se aplica el precio especial.",
   },
   {
     question: "¿Qué incluye la mensualidad de Pesas?",
@@ -275,9 +269,9 @@ const mobileNavItems = [
 ---
 
 <Layout
-  title="Promo Día del Padre Junio 2026 | Gym Trasciende — 20% Descuento Pesas y Spinning"
-  description="Promo Día del Padre en Gym Trasciende Ocotlán. 20% de descuento en mensualidades de Pesas ($304) y Spinning ($400) durante todo junio 2026. Solo para papás con identificación."
-  keywords="promo día del padre gym ocotlán, descuento papás junio 2026, pesas descuento ocotlán, spinning precio especial papás, gym trasciende junio, mensualidad gym papá"
+  title="Promociones | Gym Trasciende — Promo Día del Padre finalizada"
+  description="La promo de Día del Padre (20% de descuento en Pesas y Spinning) fue exclusiva de junio 2026 y ya finalizó. Consulta los precios vigentes de Gym Trasciende Ocotlán."
+  keywords="promociones gym ocotlán, precios gym trasciende, mensualidad gym ocotlán"
   type="website"
 >
   {
@@ -338,13 +332,23 @@ const mobileNavItems = [
     <div class="relative z-10 flex min-h-screen items-center">
       <div class="mx-auto w-full max-w-7xl px-4 py-28 lg:pt-36 lg:pb-16">
         <div class="flex max-w-2xl flex-col gap-7">
-          {/* Badge dorado — evoca el Día del Padre */}
+          {/* Aviso — la promo ya terminó, debe ser lo primero que se vea */}
+          <div
+            class="inline-flex w-fit items-center gap-2.5 rounded-xl border-2 border-red-500/70 bg-red-950/90 px-4 py-2.5 shadow-lg backdrop-blur-sm"
+          >
+            <span class="text-lg" aria-hidden="true">⛔</span>
+            <p class="text-sm font-bold text-red-100">
+              Promoción finalizada — fue válida del 1 al 30 de junio de 2026
+            </p>
+          </div>
+
+          {/* Badge dorado — evoca el Día del Padre (promo ya pasada) */}
           <div class="inline-flex items-center gap-3">
-            <div class="h-px w-10 animate-pulse bg-amber-400"></div>
+            <div class="h-px w-10 bg-zinc-500"></div>
             <span
-              class="rounded-full border border-amber-400/40 bg-amber-400/10 px-4 py-1.5 text-xs font-semibold tracking-widest text-amber-300 uppercase"
+              class="rounded-full border border-zinc-600 bg-zinc-800/60 px-4 py-1.5 text-xs font-semibold tracking-widest text-zinc-400 uppercase"
             >
-              Día del Padre · Junio 2026
+              Día del Padre · Junio 2026 (finalizada)
             </span>
           </div>
 
@@ -369,8 +373,8 @@ const mobileNavItems = [
             junio, solo para papás.
           </p>
 
-          {/* Precios rápidos — vista previa del ahorro antes de bajar */}
-          <div class="flex flex-wrap gap-3">
+          {/* Precios de la promo — ya no vigentes, se muestran atenuados y tachados */}
+          <div class="flex flex-wrap gap-3 opacity-60">
             {/* Precio Pesas */}
             <div
               class="rounded-xl border border-zinc-700 bg-zinc-900/70 px-4 py-3 backdrop-blur-sm"
@@ -381,8 +385,9 @@ const mobileNavItems = [
                 Pesas
               </p>
               <div class="mt-1 flex items-baseline gap-2">
-                <span class="text-sm text-zinc-500 line-through">$380</span>
-                <span class="text-primary text-xl font-black">$304</span>
+                <span class="text-xl font-black text-zinc-500 line-through"
+                  >$304</span
+                >
               </div>
             </div>
 
@@ -396,29 +401,24 @@ const mobileNavItems = [
                 Spinning
               </p>
               <div class="mt-1 flex items-baseline gap-2">
-                <span class="text-sm text-zinc-500 line-through">$500</span>
-                <span class="text-primary text-xl font-black">$400</span>
+                <span class="text-xl font-black text-zinc-500 line-through"
+                  >$400</span
+                >
               </div>
             </div>
-
-            {/* Pill de inscripción gratis */}
-            <div
-              class="flex items-center rounded-xl border border-zinc-700 bg-zinc-900/70 px-4 py-3 backdrop-blur-sm"
-            >
-              <p class="text-xs font-semibold text-zinc-400">
-                🎁 Inscripción <span class="text-white">gratis</span>
-              </p>
-            </div>
           </div>
+          <p class="-mt-4 text-xs font-semibold text-red-300">
+            Estos precios ya no están disponibles.
+          </p>
 
           {/* CTAs */}
           <div class="flex flex-col gap-4 pt-2 sm:flex-row">
-            {/* CTA principal — baja a las tarjetas */}
+            {/* CTA principal — baja al detalle de la promo finalizada */}
             <a
               href="#planes-papa"
               class="group border-primary text-primary hover:bg-primary/20 inline-flex items-center justify-center gap-2 rounded-xl border-2 px-6 py-3.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
             >
-              <span class="text-base font-semibold">Ver Planes</span>
+              <span class="text-base font-semibold">Ver detalle</span>
               <ButtonAnimation
                 width={22}
                 height={22}
@@ -426,12 +426,12 @@ const mobileNavItems = [
               />
             </a>
 
-            {/* CTA secundario — ir a contacto */}
+            {/* CTA secundario — ir a precios vigentes */}
             <a
-              href="/contacto"
+              href="/servicios"
               class="group border-secondary text-secondary hover:bg-secondary/10 inline-flex items-center justify-center gap-2 rounded-xl border-2 px-6 py-3.5 font-bold transition-all duration-300 hover:scale-105 active:scale-95"
             >
-              <span class="text-base font-semibold">Inscribirme ahora</span>
+              <span class="text-base font-semibold">Ver precios actuales</span>
               <ArrowAnimation class="size-5" />
             </a>
           </div>
@@ -526,31 +526,37 @@ const mobileNavItems = [
       {/* Encabezado de sección */}
       <div class="mb-14 text-center">
         <span
-          class="border-primary/30 bg-primary/10 text-primary mb-4 inline-block rounded-full border px-4 py-1 text-xs font-semibold tracking-widest uppercase"
+          class="mb-4 inline-block rounded-full border border-red-500/40 bg-red-950/60 px-4 py-1 text-xs font-semibold tracking-widest text-red-300 uppercase"
         >
-          Promo del Mes
+          Promo Finalizada
         </span>
         <h2 class="text-3xl font-black text-white md:text-5xl">
-          Tu Mensualidad con{" "}
-          <span class="text-primary">20 % Off</span>
+          Esta Promo con{" "}
+          <span class="text-zinc-500 line-through">20 % Off</span> Ya Terminó
         </h2>
         <p class="mx-auto mt-4 max-w-xl text-zinc-400">
-          Elige el área que más te guste. Ambas promos incluyen inscripción
-          gratis y un mes completo de entrenamiento al mejor precio.
+          Estos precios especiales fueron exclusivos de junio 2026 y ya no
+          están disponibles. Consulta nuestros precios vigentes en{" "}
+          <a href="/servicios" class="text-primary underline"
+            >Servicios</a
+          >.
         </p>
       </div>
 
-      {/* Countdown hasta el 30 de junio */}
+      {/* Aviso de cierre — reemplaza al countdown, que ya llegó a cero */}
       <div class="mb-12 flex justify-center">
         <div
-          class="border-primary/20 rounded-2xl border bg-zinc-900/60 px-8 py-5 backdrop-blur-sm"
+          class="rounded-2xl border border-red-500/30 bg-zinc-900/60 px-8 py-5 text-center backdrop-blur-sm"
         >
           <p
-            class="text-primary mb-4 text-center text-xs font-semibold tracking-widest uppercase"
+            class="mb-1 text-xs font-semibold tracking-widest text-red-300 uppercase"
           >
-            Tiempo restante de la promo
+            ⛔ Promoción cerrada
           </p>
-          <CountdownTimer client:load targetDate="2026-06-30T23:59:59" />
+          <p class="text-sm text-zinc-400">
+            Finalizó el 30 de junio de 2026. Ya no se aceptan inscripciones ni
+            renovaciones con este precio.
+          </p>
         </div>
       </div>
 
@@ -558,29 +564,22 @@ const mobileNavItems = [
       <div class="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
         {
           promosJunio.map((plan) => (
-            <article
-              class:list={[
-                "group relative flex flex-col overflow-hidden rounded-3xl border backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl",
-                plan.highlight
-                  ? "border-primary hover:shadow-primary/20 bg-zinc-900/80"
-                  : "hover:border-primary/50 hover:shadow-primary/10 border-zinc-700/60 bg-zinc-900/60",
-              ]}
-            >
+            <article class="group relative flex flex-col overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-900/60 opacity-70 backdrop-blur-sm grayscale">
               {/* Imagen del área del gym con overlay degradado */}
               <div class="relative h-44 w-full overflow-hidden">
                 <img
                   src={plan.imagen}
                   alt={plan.servicio}
-                  class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  class="h-full w-full object-cover"
                   loading="lazy"
                 />
                 {/* Degradado que funde la imagen con el cuerpo de la tarjeta */}
                 <div class="absolute inset-0 bg-linear-to-t from-zinc-900 via-zinc-900/30 to-transparent" />
 
-                {/* Badge "20% OFF" fijo sobre la imagen */}
+                {/* Badge "PROMO FINALIZADA" fijo sobre la imagen */}
                 <div class="absolute top-4 right-4 z-10">
-                  <span class="bg-primary rounded-full px-3 py-1.5 text-xs font-black tracking-widest text-black uppercase shadow-lg">
-                    20 % OFF
+                  <span class="rounded-full bg-red-600 px-3 py-1.5 text-xs font-black tracking-widest text-white uppercase shadow-lg">
+                    Promo finalizada
                   </span>
                 </div>
 
@@ -596,68 +595,29 @@ const mobileNavItems = [
                 <h3 class="mb-1 text-2xl font-black text-white">
                   {plan.servicio}
                 </h3>
-                <p class="text-primary mb-5 text-sm font-semibold">
+                <p class="mb-5 text-sm font-semibold text-zinc-500">
                   {plan.subtitulo}
                 </p>
 
-                {/* Comparación de precios: tachado + nuevo */}
+                {/* Precio tachado — ya no vigente */}
                 <div class="mb-1 flex items-baseline gap-3">
-                  <span class="text-lg text-zinc-500 line-through">
-                    {plan.precioOriginal}
-                  </span>
-                  <span
-                    class:list={[
-                      "text-5xl font-black tabular-nums",
-                      plan.highlight ? "text-primary" : "text-white",
-                    ]}
-                  >
+                  <span class="text-4xl font-black text-zinc-500 line-through tabular-nums">
                     {plan.precioPromo}
                   </span>
                 </div>
-                <p class="mb-4 text-sm text-zinc-500">por persona / mes</p>
-
-                {/* Pill de ahorro */}
-                <div class="border-primary/30 bg-primary/10 mb-6 inline-flex w-fit items-center gap-1.5 rounded-full border px-3 py-1">
-                  <span class="text-primary text-xs font-bold">
-                    ✦ Ahorras {plan.ahorro} este mes
-                  </span>
-                </div>
+                <p class="mb-6 text-sm font-semibold text-red-300">
+                  Este precio especial ya no está disponible.
+                </p>
 
                 {/* Separador punteado */}
-                <div class="border-primary/20 mb-6 border-t border-dashed" />
+                <div class="mb-6 border-t border-dashed border-zinc-700" />
 
-                {/* Lista de beneficios */}
-                <ul class="mb-8 flex-1 space-y-3">
-                  {plan.features.map((feature) => (
-                    <li class="flex items-center gap-3">
-                      <svg
-                        class="text-primary h-4 w-4 shrink-0"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
-                      <span class="text-sm text-zinc-300">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* CTA de la tarjeta */}
+                {/* CTA de la tarjeta — redirige a precios vigentes */}
                 <a
-                  href="/contacto"
-                  class:list={[
-                    "block w-full rounded-xl py-3.5 text-center text-sm font-bold transition-all duration-300 hover:scale-[1.02]",
-                    plan.highlight
-                      ? "bg-primary text-black hover:bg-[#c5eb00]"
-                      : "border-primary/50 text-primary bg-primary/10 hover:bg-primary/20 border",
-                  ]}
+                  href="/servicios"
+                  class="block w-full rounded-xl border border-zinc-700 bg-zinc-800/60 py-3.5 text-center text-sm font-bold text-zinc-300 transition-all duration-300 hover:scale-[1.02] hover:bg-zinc-800"
                 >
-                  Inscribirme con este plan
+                  Ver precio vigente de {plan.servicio}
                 </a>
               </div>
             </article>
@@ -667,9 +627,10 @@ const mobileNavItems = [
 
       {/* Nota legal / condiciones resumidas */}
       <p class="mt-8 text-center text-xs text-zinc-600">
-        ✦ Inscripción gratis siempre &nbsp;·&nbsp; Válido al presentar
-        identificación oficial &nbsp;·&nbsp; Promo hasta el 30/06/2026
-        &nbsp;·&nbsp; Solo para papás
+        ⛔ Promoción finalizada el 30/06/2026 &nbsp;·&nbsp; Ya no se aceptan
+        inscripciones ni renovaciones con estos precios &nbsp;·&nbsp; La
+        inscripción gratis y el descuento de cumpleaños siguen vigentes todo
+        el año
       </p>
     </div>
   </SectionContainer>
@@ -826,26 +787,26 @@ const mobileNavItems = [
             <span class="text-3xl">💪</span>
           </div>
 
-          {/* Badge temporal en dorado */}
+          {/* Badge — deja claro que la promo ya cerró */}
           <p
-            class="mb-2 text-xs font-semibold tracking-widest text-amber-400 uppercase"
+            class="mb-2 text-xs font-semibold tracking-widest text-red-400 uppercase"
           >
-            Solo en Junio 2026
+            Promoción finalizada · Solo estuvo vigente en junio 2026
           </p>
 
-          {/* Headline emocional */}
+          {/* Headline */}
           <h2 class="mb-4 text-3xl font-black text-white md:text-5xl">
-            Papá, este es<br />
-            <span class="text-primary">tu momento.</span>
+            Papá, esta promo<br />
+            <span class="text-zinc-400">ya terminó.</span>
           </h2>
 
           {/* Descripción */}
           <p
             class="mx-auto mb-8 max-w-xl text-lg leading-relaxed text-zinc-300"
           >
-            20 % de descuento en Pesas o Spinning durante todo el mes.
-            Inscríbete antes del 30 de junio y empieza a entrenar al mejor
-            precio.
+            El 20 % de descuento en Pesas y Spinning fue exclusivo del 1 al 30
+            de junio y ya no está disponible. Consulta nuestros precios
+            vigentes y entrena con nosotros.
           </p>
 
           {/* Botones de acción */}
@@ -854,10 +815,10 @@ const mobileNavItems = [
           >
             {/* CTA primario */}
             <a
-              href="/contacto"
+              href="/servicios"
               class="bg-primary hover:shadow-primary/30 inline-flex w-full items-center justify-center gap-2 rounded-xl px-8 py-4 text-lg font-black text-black shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#c5eb00] hover:shadow-xl sm:w-auto"
             >
-              Aprovechar el Descuento
+              Ver Precios Vigentes
             </a>
 
             {/* CTA secundario */}
@@ -871,8 +832,8 @@ const mobileNavItems = [
 
           {/* Condiciones resumidas al pie */}
           <p class="mt-6 text-sm text-zinc-500">
-            ✦ Inscripción gratis siempre &nbsp;·&nbsp; Promo válida hasta el
-            30/06/2026 &nbsp;·&nbsp; Solo para papás
+            ⛔ Promo cerrada el 30/06/2026 &nbsp;·&nbsp; ✦ Inscripción gratis
+            siempre vigente &nbsp;·&nbsp; Cumpleaños 10 % off todo el año
           </p>
         </div>
       </div>

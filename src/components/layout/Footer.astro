@@ -2,9 +2,10 @@
 import Facebook from "@components/icons/Facebook.astro";
 import Instagram from "@components/icons/Instagram.astro";
 import Tiktok from "@components/icons/Tiktok.astro";
+import Credits from "@components/layout/Credits.astro";
 ---
 
-<footer class="bg-gray-900">
+<footer class="bg-gray-900 pb-[calc(4rem+env(safe-area-inset-bottom,0px))] md:pb-0">
   <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
     <div class="flex justify-center">
       <img src="/logo2.svg" alt="Gym Trasciende Logo" class="h-20 w-auto" />
@@ -89,4 +90,6 @@ import Tiktok from "@components/icons/Tiktok.astro";
       </a>
     </div>
   </div>
+
+  <Credits owner="Gym Trasciende" />
 </footer>

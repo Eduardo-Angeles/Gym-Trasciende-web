@@ -17,6 +17,7 @@ Deployment is to Cloudflare Workers via `wrangler.jsonc`. The site is always bui
 - Do **not** add a `main` field. This is an assets-only deployment — no worker code runs. `@cloudflare/vite-plugin` only auto-detects "assets-only" mode (skipping its own file-existence check) when `main` is absent; if `main` is set, it eagerly checks that the file exists *before* Astro has built it, which breaks both `pnpm dev` and `pnpm build`.
 - `assets.directory` must be `./dist/client`, not `./dist`. The Cloudflare adapter splits build output into `dist/client` (the actual static site) and `dist/server` (empty for this static site).
 - `wrangler` must satisfy the peer dependency `@cloudflare/vite-plugin` requires (check with `pnpm build` after any Astro/Cloudflare adapter upgrade — a stale `wrangler` version throws `Unable to load your Astro config`).
+- `astro.config.mjs`'s `cloudflare()` adapter must set `prerenderEnvironment: "node"`. The adapter's default (`"workerd"`) prerenders static pages inside a real Miniflare/workerd runtime during build; in this Astro 7 / adapter 14 combo that runtime returns a `Response` whose body has been coerced to the string `"[object Object]"` instead of the actual HTML — for every route. **`pnpm build` still exits 0 and logs no errors**, so this only surfaces as a blank white page showing literally `[object Object]` after deploying. Always spot-check `dist/client/index.html` actually contains real HTML after touching this adapter's config, not just that the build succeeded.
 
 ## Architecture
 
