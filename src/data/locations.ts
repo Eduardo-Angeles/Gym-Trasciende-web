@@ -27,7 +27,7 @@ export const branches: Branch[] = [
     phoneDisplay: "951 498 0492",
     schedule: [
       { days: "Lunes – Viernes", hours: "5:00am – 10:00pm" },
-      { days: "Sábado", hours: "7:00am – 9:00pm" },
+      { days: "Sábado", hours: "5:00am – 5:00pm" },
       { days: "Domingo", hours: "12:00pm – 4:00pm" },
     ],
     mapQuery: "TRASCIENDE GYM, Ocotlán de Morelos, Oaxaca",
@@ -40,7 +40,7 @@ export const branches: Branch[] = [
     phoneDisplay: "951 498 0492",
     schedule: [
       { days: "Lunes – Viernes", hours: "6:00am – 10:00pm" },
-      { days: "Sábado", hours: "7:00am – 9:00pm" },
+      { days: "Sábado", hours: "5:00am – 5:00pm" },
       { days: "Domingo", hours: "12:00pm – 4:00pm" },
     ],
     mapQuery: "TRASCIENDE GYM San Antonino Castillo Velasco",
